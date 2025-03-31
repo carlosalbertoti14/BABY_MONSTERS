@@ -1,0 +1,319 @@
+
+:root {
+    --cor0: #eac5eb;
+    --cor1: #e183dc;
+    --cor2: #dc3ddc;
+    --cor3: #a82f9e;
+    --cor4: #5c1a51;
+    --cor5: #3d061d;
+    --cor6: #dd32aa;
+    --cor7: rgb(228, 25, 218);
+
+    --fonte-padrao: Arial, Verdana, Helvetica, sans-serif;
+    --fonte-destaque: "Bebas Neue", cursive;
+    --fonte-android: "Android", cursive;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+   /*  box-sizing: border-box; */
+}
+
+.album img {
+    width: 100%; /* Faz a imagem ocupar 100% da largura do container */
+    height: auto; /* Mantém a proporção da imagem */
+    max-width: 100%; /* Garante que a imagem não ultrapasse o tamanho do container */
+    display: block; /* Remove possíveis espaçamentos causados por inline elements */
+}
+
+.lista{
+    padding-top: 20px;
+}
+
+.coluna li a {
+    color: white;
+
+}
+
+.textoalbum {
+    color: var(--cor3);
+
+}   
+
+
+.video-container {
+    position: relative;
+    width: 100%; /* Ajusta ao tamanho da tela */
+    max-width: 900px; /* Define uma largura máxima */
+    margin: 0 auto; /* Centraliza o vídeo */
+    
+}
+
+
+video {
+    width: 100%; /* Faz com que o vídeo acompanhe a largura da tela */
+    height: auto; /* Mantém a proporção do vídeo */
+    max-width: 900px; /* Limita a largura máxima do vídeo, se necessário */
+
+  
+}
+/**********************CONFIG BOTÃO************************************/
+.sound-button {
+    position: absolute;
+    top: 10px; /* Posiciona o botão no canto do vídeo */
+    right: 10px;
+    background-color: rgba(0, 0, 0, 0.6); /* Fundo semitransparente */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    padding: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    z-index: 10;
+    outline: none;
+}
+
+.sound-button:hover {
+    background-color: rgba(0, 0, 0, 0.8); /* Fundo mais escuro ao passar o mouse */
+}
+
+/**********************FIM CONFIG BOTÃO************************************/
+
+img#substitute-image {
+    display: none;
+     width: 100%;  /* A imagem também será responsiva */
+    height: auto; /* Mantém a proporção da imagem */
+
+    
+
+   /* width: 100vw; /* Garante que ocupe toda a largura da tela */ 
+   background-size: cover;
+   background-position: center;
+   z-index: -1;
+}
+
+
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: lightgrey;
+    height: 100vh;
+    width: 100%;
+
+}
+
+header {
+    background-color: rgb(255, 255, 255);
+    color: white;
+    padding: 0px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+header > h1 {
+    border: 1px dotted black;
+    text-shadow: 2px 2px 0px black;
+
+    flex: 0 0 200px;
+    
+
+}
+/**********************CONFIG MENU************************************/
+
+
+div#menu {
+    background-color: black;
+    
+    display: flex;
+    justify-content: center;
+}
+
+div#menu  > nav {
+    border: 1px dotted black;
+    width: 800px;
+    display: flex;
+    justify-content: space-around;
+
+}
+
+div#menu > nav a {
+    background-color: rgb(231, 37, 183);
+    color: white;
+    padding: 10px;
+    width: auto; /* Mantém o ajuste da largura */
+   /*  margin: 5px; */
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+
+}
+
+/* Ajuste para telas menores (até 600px) */
+@media (max-width: 600px) {
+
+    div#menu  > nav {
+        border: 1px dotted black;
+    
+        display: flex;
+        justify-content: space-around;
+
+    
+    }
+
+
+    div#menu  > nav a {
+       width: auto; /* Mantém o ajuste da largura */
+       
+        padding: 5px 10px 5px 10px; /* Reduz o espaçamento */
+       /*  margin-left: 1px; */
+        font-size: 0.6em; /* Reduz o tamanho da fonte */
+
+        /* text-align: center; */
+
+        
+    }
+}
+
+
+div#menu  > nav a:hover {
+    background-color: white;
+    color: var(--cor6);
+   /*  font-weight: bolder; */
+    transition: 0.5s;
+    
+}
+
+/* PARA QUANDO O SCRIPT DO MENU FOR ATIVADO */
+
+#fixo {
+    background-color: black;
+    width: 100%; /* Garante que a largura seja responsiva */
+    /* max-width: 800px; */ /* Define o limite máximo */
+   /*  text-align: center;  */
+}
+
+#fixo nav {
+    display: flex; /* Organiza os links horizontalmente */
+    justify-content: space-around; /* Espaçamento uniforme entre os links */
+}
+
+#fixo a {
+    width: auto; /* Ajusta a largura automaticamente */
+    max-width: 150px; /* Limita os links responsivamente */
+    text-align: center; /* Centraliza o texto */
+}
+
+
+/**********************FIM CONFIG MENU************************************/
+div#centro{
+    display: flex;
+    justify-content: center;
+
+}
+main {
+    
+    background-color: rgb(221, 143, 217);
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 2px 3px 3px rgba(0, 0, 0, 0.397);
+    max-width: 800px;
+    
+}
+
+/**********************CONFIG LISTA************************************/
+
+ul > li > ul {
+    display: none; /* Esconde inicialmente */
+    margin-top: 10px; /* Dá um espaço entre os itens */
+    padding: 10px;
+    background-color: var(--cor6);
+    color: white;
+    border-radius: 5px; /* Apenas para visual mais agradável */
+    
+    
+}
+
+ul > li > ul a{
+    margin: 5px 0; /* Adiciona espaçamento vertical entre os itens */
+    background-color: var(--cor7); /* Cor de fundo para destacar */
+    color: rgb(230, 220, 220); /* Cor do texto */
+    padding: 10px; /* Espaçamento interno */
+   
+    border-radius: 5px; /* Borda arredondada */
+    text-align: left; /* Centraliza o texto */
+    text-shadow: 2px 2px 2px solid black;
+    width: 100%;
+
+}
+
+ul > li > ul.show {
+    display: block; /* Faz com que a lista apareça */
+}
+
+ul > li {
+    margin-bottom: 10px; /* Espaçamento entre os elementos principais */
+}
+
+
+
+
+.listas {
+    display: flex; /* Torna o container flexível */
+    gap: 20px; /* Espaçamento entre as colunas */
+}
+
+.coluna {
+    list-style: none; /* Remove os marcadores padrão */
+    padding: 0; /* Remove o espaçamento interno */
+    width: 100%; /* Divide o espaço igualmente entre as colunas */
+}
+
+
+.coluna li {
+    margin: 5px 0; /* Adiciona espaçamento vertical entre os itens */
+    background-color: var(--cor6); /* Cor de fundo para destacar */
+    color: rgb(230, 220, 220); /* Cor do texto */
+    padding: 10px; /* Espaçamento interno */
+    border-radius: 5px; /* Borda arredondada */
+    text-align: left; /* Centraliza o texto */
+    text-shadow: 2px 2px 2px solid black;
+   
+}
+
+li  a {
+    text-decoration: none;
+}
+
+/* li a::before {
+    content: "";
+    background-image: url("../midia/YOUTUBE_LOGO_ROUND.png");
+    background-size: contain;
+    display: inline-block;
+    width: 30px; /* ajuste o tamanho conforme necessário */
+    height: 30px; /* ajuste o tamanho conforme necessário */
+    margin-right: 0px; espaçamento entre o ícone e o texto 
+} 
+*/
+
+
+/**********************FIM CONFIG LISTA************************************/
+
+/* @media screen and (max-width: 580px) {
+    header, header > nav {
+        flex-flow: column nowrap;
+    }
+
+    header > h1 {
+        flex-basis: 50px
+    }
+
+    header > nav > a {
+        width: 60vw;
+    }
+
+} */
