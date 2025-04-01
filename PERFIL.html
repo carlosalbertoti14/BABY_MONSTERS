@@ -51,8 +51,8 @@
         <div id="fixo">
             <div id="menu">
                 <nav>
-                    <a href="#">TOPO</a>
-                    <a href="index.html">ALBUM</a>
+                    <a href="index.html">HOME</a>
+                    <a href="album.html">ALBUM</a>
                     <a href="PERFIL.html">PERFIL</a>
                     <a
                         href="https://br.pinterest.com/search/pins/?q=%22BABYMONSTER%22%20GRUPO&rs=typed"
@@ -307,112 +307,70 @@
         </div>
 
         <script>
-            const video = document.getElementById("intro-video");
-            const image = document.getElementById("substitute-image");
-            const homeButton = document.querySelector("nav a:first-child"); // Primeiro botão, que é "HOME"
-
-            video.addEventListener("ended", () => {
-                video.style.display = "none";
-                image.style.display = "flex";
+            const video = document.getElementById('intro-video');
+            const image = document.getElementById('substitute-image');
+            const homeButton = document.querySelector('nav a:first-child'); // Primeiro botão, que é "HOME"
+        
+            video.addEventListener('ended', () => {
+                video.style.display = 'none';
+                image.style.display = 'flex';
             });
-
-            const soundButton = document.getElementById("sound-toggle");
-            soundButton.addEventListener("click", () => {
+        
+            const soundButton = document.getElementById('sound-toggle');
+            soundButton.addEventListener('click', () => {
                 if (video.muted) {
                     video.muted = false; // Ativar som
-                    soundButton.textContent = "🔊"; // Ícone de som ligado
+                    soundButton.textContent = ''; // Ícone de som ligado
                 } else {
                     video.muted = true; // Desativar som
-                    soundButton.textContent = "🔇"; // Ícone de som desligado
+                    soundButton.textContent = ''; // Ícone de som desligado
                 }
             });
-
+        
             // Função para ativar som, reproduzir vídeo e ir ao topo rapidamente ao clicar em "HOME"
-            homeButton.addEventListener("click", (event) => {
-                event.preventDefault(); // Evitar comportamento padrão do link
+            homeButton.addEventListener('click', (event) => {
+                // event.preventDefault(); // Remova ou comente esta linha para permitir o link funcionar
                 video.muted = false; // Ativar som
-                soundButton.textContent = "🔊"; // Ícone de som ligado
-                video.style.display = "block"; // Exibir vídeo
-                image.style.display = "none"; // Ocultar imagem substituta
+                soundButton.textContent = ''; // Ícone de som ligado
+                video.style.display = 'block'; // Exibir vídeo
+                image.style.display = 'none'; // Ocultar imagem substituta
                 video.play(); // Reproduzir o vídeo
-
+        
                 // Ir para o topo da página rapidamente
                 window.scrollTo(0, 0); // Rola imediatamente para o topo
+        
+                // window.location.href = homeButton.href; // Adicione esta linha se quiser redirecionar para o link
             });
-
+        
             // Função para segurar a barra de menus no topo.
             window.addEventListener("scroll", function () {
                 const menu = document.getElementById("fixo");
                 const container = document.querySelector(".video-container");
-                const containerBottom =
-                    container.offsetTop + container.offsetHeight;
-
+                const containerBottom = container.offsetTop + container.offsetHeight;
+        
                 if (window.scrollY >= containerBottom) {
                     menu.style.position = "fixed";
                     menu.style.top = "0"; // Fixa no topo
-                    menu.style.zIndex = "1000"; // Adiciona z-index alto
                 } else {
                     menu.style.position = "relative";
                     menu.style.top = "auto"; // Volta à posição inicial
-                    menu.style.zIndex = "auto"; // Reseta z-index
                 }
             });
-
-            //FUNÇÃO PARA APARECER A LISTA
-
-            document.querySelectorAll("ul > li > p").forEach((item) => {
-                item.addEventListener("click", function () {
+        
+            // FUNÇÃO PARA APARECER A LISTA
+            document.querySelectorAll('ul > li > p').forEach(item => {
+                item.addEventListener('click', function () {
                     const subList = this.nextElementSibling;
-                    if (subList.style.display === "block") {
-                        subList.style.display = "none"; // Oculta se já está visível
+                    if (subList.style.display === 'block') {
+                        subList.style.display = 'none'; // Oculta se já está visível
                     } else {
-                        subList.style.display = "block"; // Exibe ao clicar
+                        subList.style.display = 'block'; // Exibe ao clicar
                     }
                 });
             });
-
-            /* 
-        // Seleciona o item "FOTOS" e a lista
-        const fotosMenu = document.getElementById('fotos');
-        const listaFotos = document.getElementById('lista-fotos');
-
-        // Adiciona o evento de clique
-        fotosMenu.addEventListener('click', (event) => {
-        event.preventDefault(); // Evita que o link padrão seja seguido
-        // Alterna a visibilidade da lista
-        if (listaFotos.style.display === 'none' || listaFotos.style.display === '') {
-            listaFotos.style.display = 'block';
-        } else {
-            listaFotos.style.display = 'none';
-        }
-        }); */
-
-            //CALCULO DA IDADE
-
-            // Pega a data de nascimento a partir do elemento HTML
-            const nasc = document
-                .getElementById("ahyeon_nasc")
-                .textContent.trim(); // Certifique-se de que está capturando corretamente
-            const partes = nasc.split("/");
-            const dia = parseInt(partes[0], 10);
-            const mes = parseInt(partes[1], 10);
-            const ano = parseInt(partes[2], 10);
-
-            // Cria um objeto com a data atual
-            const hoje = new Date();
-            let idade = hoje.getFullYear() - ano;
-
-            // Ajusta a idade se o aniversário ainda não tiver ocorrido no ano atual
-            const mesAtual = hoje.getMonth() + 1; // Os meses começam do índice 0
-            const diaAtual = hoje.getDate();
-
-            if (mesAtual < mes || (mesAtual === mes && diaAtual < dia)) {
-                idade--;
-            }
-
-            // Insere a idade no parágrafo HTML
-            document.getElementById("idade").textContent += idade;
         </script>
+
+        
     </body>
 
     <footer>

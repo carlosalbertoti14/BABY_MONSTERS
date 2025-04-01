@@ -42,6 +42,9 @@ h5{
 
 .textoalbum {
     color: var(--cor3);
+    font-weight: bolder;
+    text-align: center;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.466);
 
 }   
 
@@ -128,6 +131,70 @@ header > h1 {
     
 
 }
+
+/*********************** configuração do HOME ***********************/
+
+article {
+    background-color: rgba(255, 255, 255, 0.250);
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.534);
+    }
+
+div#artigo{
+    padding: 10px;
+    }
+
+div#artigo > p{
+    line-height: 1.5;
+    
+    
+    
+    
+}
+div#artigo > h2 {
+    
+    text-align: center;
+    color: black;
+    font-weight: bolder;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.418);
+}
+
+section.normal{
+    background-color: rgb(124, 12, 124);
+    color: white;
+    padding: 10px;
+    font-weight: bolder;
+    border-radius: 10px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.534);
+}
+
+
+picture.poster {
+    width: 300px; /* Defina a largura desejada */
+    height: 200px; /* Defina a altura desejada */
+  }
+
+ picture.poster img {
+     width: 100%;
+     height: auto;
+     object-fit: cover; /* Ou contain, fill, etc. */
+     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.550);
+     border-radius: 10px;
+  }
+
+a.fonte {
+    display: block;
+    text-align: right;
+    color: #a82f9e;
+    
+}
+
+audio {
+    margin-top: 10px;
+    width: 100%;
+  }
+
 /**********************CONFIG MENU************************************/
 
 
@@ -207,7 +274,7 @@ div#menu > nav a {
        
         padding: 5px 10px 5px 10px; /* Reduz o espaçamento */
        /*  margin-left: 1px; */
-        font-size: 0.6em; /* Reduz o tamanho da fonte */
+        font-size: 0.8em; /* Reduz o tamanho da fonte */
 
         /* text-align: center; */
 
@@ -251,8 +318,15 @@ div#centro{
     justify-content: center;
 
 }
+
+div#artigo{
+    background-color: rgba(255, 255, 255, 0.466);
+    border-radius: 10px;
+    box-shadow: 2px 3px 3px rgba(0, 0, 0, 0.397);
+}
+
 main {
-    background-color: rgb(221, 143, 217);
+    background-color: rgba(221, 143, 217, 0.774);
     margin: 10px;
     padding: 10px;
     border-radius: 10px;
@@ -263,6 +337,10 @@ main {
     justify-content: center;
     justify-content: space-around; /* Alinha os itens no início */
     gap: 10px; /* Adiciona espaçamento entre os itens */
+}
+
+main.homemain {
+    background-color: rgba(221, 143, 217, 0.682);
 }
 
 
