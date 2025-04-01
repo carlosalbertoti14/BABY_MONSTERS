@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+            rel="stylesheet"
+        />
+
+        <link
+            rel="shortcut icon"
+            href="midia/favicon_bm.png"
+            type="image/x-icon"
+        />
+        <link rel="stylesheet" href="estilos/style.css" />
+
+        <title>BABYMONSTER BRASIL</title>
+
+        <style></style>
+    </head>
+
+    <body>
+        <header>
+            <div class="video-container">
+                <video id="intro-video" autoplay muted>
+                    <source
+                        src="midia/BABYMONSTER_HEADER.webm"
+                        type="video/webm"
+                    />
+                    Seu navegador não suporta o elemento de vídeo.
+                </video>
+                <button
+                    id="sound-toggle"
+                    class="sound-button"
+                    title="Ativar/Desativar som"
+                >
+                    🔇
+                </button>
+
+                <img
+                    id="substitute-image"
+                    src="midia/BABYMONSTER_HEADER_BRASIL.png"
+                    alt="Imagem substituta"
+                />
+            </div>
+        </header>
+
+        <!-- <div id="scriptmenu"> -->
+        <div id="fixo">
+            <div id="menu">
+                <nav>
+                    <a href="#">TOPO</a>
+                    <a href="index.html">ALBUM</a>
+                    <a href="PERFIL.html">PERFIL</a>
+                    <a
+                        href="https://br.pinterest.com/search/pins/?q=%22BABYMONSTER%22%20GRUPO&rs=typed"
+                        id="fotos"
+                        target="_blank"
+                    >
+                        FOTOS
+                    </a>
+                    <a
+                        href="https://www.ygfamily.com/en/artists/babymonster/concert"
+                        target="_blank"
+                    >
+                        EVENTOS
+                    </a>
+                    <a href="#">PRODUTOS</a>
+                </nav>
+            </div>
+        </div>
+        <!--  </div> -->
+
+        <!-- Lista escondida inicialmente -->
+        <ul id="lista-fotos" style="display: none">
+            <li>
+                <a href="https://link-externo-ahyeon.com" target="_blank">
+                    AHYEON
+                </a>
+            </li>
+            <li>
+                <a href="https://link-externo-asa.com" target="_blank">ASA</a>
+            </li>
+            <li>
+                <a href="https://link-externo-chiquita.com" target="_blank">
+                    CHIQUITA
+                </a>
+            </li>
+            <li>
+                <a href="https://link-externo-pharita.com" target="_blank">
+                    PHARITA
+                </a>
+            </li>
+            <li>
+                <a href="https://link-externo-rami.com" target="_blank">RAMI</a>
+            </li>
+            <li>
+                <a href="https://link-externo-rora.com" target="_blank">RORA</a>
+            </li>
+            <li>
+                <a href="https://link-externo-ruka.com" target="_blank">RUKA</a>
+            </li>
+        </ul>
+
+        <div id="centro">
+            <main>
+                <section id="perfil">
+                    <div class="perfil ahyeon">
+                        <h2>AHYEON</h2>
+                        <p class="brasil">Br => aioonm</p>
+
+                        <div id="ahyeon" class="grupo">
+                            <p>Nome: Jung Ahyeon</p>
+                            <p>Nascimento: 11/4/2007</p>
+                            <p>Idade: 17 anos</p>
+                            <p>Aniversário: 11 de Abril</p>
+                            <p>Origem: Coreia do Sul</p>
+                            <p>
+                                Carreira: É considerada a mais importante para o
+                                grupo, por ser a mais versáteil, com habilidades
+                                em canto, rap e dança. Ficou fora dos lançamento
+                                dos singles
+                                <a
+                                    href="https://www.youtube.com/watch?v=olDWm2veCrM"
+                                    target="_blank"
+                                >
+                                    "Batter Up"
+                                </a>
+                                e
+                                <a
+                                    href="https://www.youtube.com/watch?v=GsV1i0QHi-o"
+                                    target="_blank"
+                                >
+                                    "Stuck in the Middle"
+                                </a>
+                                , por problemas de saúde, mas etornou ao grupo
+                                para o lançamento do Mini-Album BABYMONS7ER, e
+                                continua até hoje.
+                            </p>
+                            <a
+                                href="https://www.instagram.com/ahyeon.babymonster/"
+                                target="_blank"
+                             class="insta">
+                                INSTAGRAM NÃO OFICIAL
+                            </a>
+                        </div>
+                    </div>
+                </section>
+                <section id="perfil">
+                    <div class="perfil asa">
+                        <h2>ASA</h2>
+                        <p class="brasil">Br => éssaa</p>
+
+                        <div id="asa" class="grupo">
+                            <p>Nome: Enami Asa</p>
+                            <p>Nascimento: 17/04/2006</p>
+                            <p>Idade: 18 anos</p>
+                            <p>Aniversário: 17 de Abril</p>
+                            <p>Origem: Japonesa</p>
+                            <p>
+                                Carreira: Antes de entrar no grupo, costumava
+                                fazer teatro musical. Tem experiência com
+                                composição e escrita de letras. Entrou para a YG
+                                no final de 2016 e começo logo em 2017 atuando
+                                como, rapper e dançarina do grupo BabyMonster.
+                            </p>
+                            <a
+                                href="https://www.instagram.com/asa.babymonster/"
+                                target="_blank"
+                             class="insta">
+                                INSTAGRAM NÃO OFICIAL
+                            </a>
+                        </div>
+                    </div>
+                </section>
+                <section id="perfil">
+                    <div class="perfil chiquita">
+                        <h2>CHIQUITA</h2>
+                        <p class="brasil">Br => tchikita</p>
+
+                        <div id="chiquita" class="grupo">
+                            <p>Nome: Riracha Phondechaphiphat</p>
+                            <p>Nascimento: 17/02/2009</p>
+                            <p>Idade: 15 anos</p>
+                            <p>Aniversário: 17 de Fevereiro</p>
+                            <p>Origem: Tailandesa</p>
+                            <p>
+                                Carreira: É a integrante mais jovem do grupo
+                                (maknae). É vocalista e dançarina do
+                                BabyMonster.
+                            </p>
+                            <a
+                                href="https://www.instagram.com/chiquita_babymonster/"
+                                target="_blank"
+                             class="insta">
+                                INSTAGRAM NÃO OFICIAL
+                            </a>
+                        </div>
+                    </div>
+                </section>
+                <section id="perfil">
+                    <div class="perfil pharita">
+                        <h2>PHARITA</h2>
+                        <p class="brasil">Br => faritáa</p>
+
+                        <div id="pharita" class="grupo">
+                            <p>Nome: Pharita Chaikong</p>
+                            <p>Nascimento: 26/08/2005</p>
+                            <p>Idade: 18 anos</p>
+                            <p>Aniversário: 26 de Agosto</p>
+                            <p>Origem: Tailandesa</p>
+                            <p>
+                                Carreira: Antes de entrar para a YG, venceu o
+                                primeiro lugar no Inter Model Thailand. Foi
+                                aceita nas audições da YG em julho de 2020 e
+                                agora é vocalista líder e dançarina do
+                                BabyMonster.
+                            </p>
+                            <a
+                                href="https://www.instagram.com/pharita.bbymonster/"
+                                target="_blank"
+                             class="insta">
+                                INSTAGRAM NÃO OFICIAL
+                            </a>
+                        </div>
+                    </div>
+                </section>
+                <section id="perfil">
+                    <div class="perfil rami">
+                        <h2>RAMI</h2>
+                        <p class="brasil">Br => rhêmii</p>
+
+                        <div id="rami" class="grupo">
+                            <p>Nome: Shin Ha-ram</p>
+                            <p>Nascimento: 17/04/2007</p>
+                            <p>Idade: 17 anos</p>
+                            <p>Aniversário: 17 de Abril</p>
+                            <p>Origem: Coreia do Sul</p>
+                            <p>
+                                Carreira: Rami ja foi uma modelo infantil e
+                                atriz, agora é vocalista do BabyMonster.
+                            </p>
+                            <a
+                                href="https://www.instagram.com/_rami.babymonster_/"
+                                target="_blank"
+                             class="insta">
+                                INSTAGRAM NÃO OFICIAL
+                            </a>
+                        </div>
+                    </div>
+                </section>
+                <section id="perfil">
+                    <div class="perfil rora">
+                        <h2>RORA</h2>
+                        <p class="brasil">Br => rloora</p>
+
+                        <div id="rora" class="grupo">
+                            <p>Nome: Lee Da-in</p>
+                            <p>Nascimento: 14/08/2008</p>
+                            <p>Idade: 16 anos</p>
+                            <p>Aniversário: 14 de Agosto</p>
+                            <p>Origem: Coreia do Sul</p>
+                            <p>
+                                Carreira: Rora ja fez parte de um grupo infantil
+                                chamado U.Ha-U e agora é vocalista do
+                                BabyMonster.
+                            </p>
+                            <a
+                                href="https://www.instagram.com/rora_nation/"
+                                target="_blank"
+                             class="insta">
+                                INSTAGRAM NÃO OFICIAL
+                            </a>
+                        </div>
+                    </div>
+                </section>
+                <section id="perfil">
+                    <div class="perfil ruka">
+                        <h2>RUKA</h2>
+                        <p class="brasil">Br => lucáa</p>
+
+                        <div id="ruka" class="grupo">
+                            <p>Nome: Kawai Ruka</p>
+                            <p>Nascimento: 20/03/2002</p>
+                            <p>Idade: 22 anos</p>
+                            <p>Aniversário: 20 de Março</p>
+                            <p>Origem: Japonesa</p>
+                            <p>
+                                Carreira: Antes de se juntar à YG Entertainment
+                                em 2018, Ruka fez parte do grupo japonês Shibu3
+                                Project. É a dançarina principal e rapper do
+                                BabyMonster. Junto com Asa, é uma das primeiras
+                                idols japonesas a debutar pela YG Entertainment.
+                            </p>
+                            <a
+                                href="https://www.instagram.com/rukababymonsters/"
+                                target="_blank"
+                             class="insta">
+                                INSTAGRAM NÃO OFICIAL
+                            </a>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+
+        <script>
+            const video = document.getElementById("intro-video");
+            const image = document.getElementById("substitute-image");
+            const homeButton = document.querySelector("nav a:first-child"); // Primeiro botão, que é "HOME"
+
+            video.addEventListener("ended", () => {
+                video.style.display = "none";
+                image.style.display = "flex";
+            });
+
+            const soundButton = document.getElementById("sound-toggle");
+            soundButton.addEventListener("click", () => {
+                if (video.muted) {
+                    video.muted = false; // Ativar som
+                    soundButton.textContent = "🔊"; // Ícone de som ligado
+                } else {
+                    video.muted = true; // Desativar som
+                    soundButton.textContent = "🔇"; // Ícone de som desligado
+                }
+            });
+
+            // Função para ativar som, reproduzir vídeo e ir ao topo rapidamente ao clicar em "HOME"
+            homeButton.addEventListener("click", (event) => {
+                event.preventDefault(); // Evitar comportamento padrão do link
+                video.muted = false; // Ativar som
+                soundButton.textContent = "🔊"; // Ícone de som ligado
+                video.style.display = "block"; // Exibir vídeo
+                image.style.display = "none"; // Ocultar imagem substituta
+                video.play(); // Reproduzir o vídeo
+
+                // Ir para o topo da página rapidamente
+                window.scrollTo(0, 0); // Rola imediatamente para o topo
+            });
+
+            // Função para segurar a barra de menus no topo.
+            window.addEventListener("scroll", function () {
+                const menu = document.getElementById("fixo");
+                const container = document.querySelector(".video-container");
+                const containerBottom =
+                    container.offsetTop + container.offsetHeight;
+
+                if (window.scrollY >= containerBottom) {
+                    menu.style.position = "fixed";
+                    menu.style.top = "0"; // Fixa no topo
+                    menu.style.zIndex = "1000"; // Adiciona z-index alto
+                } else {
+                    menu.style.position = "relative";
+                    menu.style.top = "auto"; // Volta à posição inicial
+                    menu.style.zIndex = "auto"; // Reseta z-index
+                }
+            });
+
+            //FUNÇÃO PARA APARECER A LISTA
+
+            document.querySelectorAll("ul > li > p").forEach((item) => {
+                item.addEventListener("click", function () {
+                    const subList = this.nextElementSibling;
+                    if (subList.style.display === "block") {
+                        subList.style.display = "none"; // Oculta se já está visível
+                    } else {
+                        subList.style.display = "block"; // Exibe ao clicar
+                    }
+                });
+            });
+
+            /* 
+        // Seleciona o item "FOTOS" e a lista
+        const fotosMenu = document.getElementById('fotos');
+        const listaFotos = document.getElementById('lista-fotos');
+
+        // Adiciona o evento de clique
+        fotosMenu.addEventListener('click', (event) => {
+        event.preventDefault(); // Evita que o link padrão seja seguido
+        // Alterna a visibilidade da lista
+        if (listaFotos.style.display === 'none' || listaFotos.style.display === '') {
+            listaFotos.style.display = 'block';
+        } else {
+            listaFotos.style.display = 'none';
+        }
+        }); */
+
+            //CALCULO DA IDADE
+
+            // Pega a data de nascimento a partir do elemento HTML
+            const nasc = document
+                .getElementById("ahyeon_nasc")
+                .textContent.trim(); // Certifique-se de que está capturando corretamente
+            const partes = nasc.split("/");
+            const dia = parseInt(partes[0], 10);
+            const mes = parseInt(partes[1], 10);
+            const ano = parseInt(partes[2], 10);
+
+            // Cria um objeto com a data atual
+            const hoje = new Date();
+            let idade = hoje.getFullYear() - ano;
+
+            // Ajusta a idade se o aniversário ainda não tiver ocorrido no ano atual
+            const mesAtual = hoje.getMonth() + 1; // Os meses começam do índice 0
+            const diaAtual = hoje.getDate();
+
+            if (mesAtual < mes || (mesAtual === mes && diaAtual < dia)) {
+                idade--;
+            }
+
+            // Insere a idade no parágrafo HTML
+            document.getElementById("idade").textContent += idade;
+        </script>
+    </body>
+
+    <footer>
+        <a
+            href="https://www.youtube.com/@BABYMONSTER"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            <img
+                src="https://yg-babymonster-official.jp/wp/wp-content/themes/babymonster/dist/images/common/icon/youtube.svg"
+                alt="YouTube"
+                width="41"
+                height="40"
+                loading="lazy"
+            />
+        </a>
+
+        <a
+            href="https://www.instagram.com/babymonster_ygofficial/"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            <img
+                src="https://yg-babymonster-official.jp/wp/wp-content/themes/babymonster/dist/images/common/icon/instagram.svg"
+                alt="Instagram"
+                width="41"
+                height="40"
+                loading="lazy"
+            />
+        </a>
+
+        <a
+            href="https://www.tiktok.com/@babymonster_yg_tiktok"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            <img
+                src="https://yg-babymonster-official.jp/wp/wp-content/themes/babymonster/dist/images/common/icon/tiktok.svg"
+                alt="TikTok"
+                width="41"
+                height="40"
+                loading="lazy"
+            />
+        </a>
+
+        <a
+            href="https://www.facebook.com/BABYMONSTER.ygofficial/"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            <img
+                src="https://yg-babymonster-official.jp/wp/wp-content/themes/babymonster/dist/images/common/icon/facebook.svg"
+                alt="Facebook"
+                width="41"
+                height="40"
+                loading="lazy"
+            />
+        </a>
+
+        <a
+            href="https://x.com/YGBABYMONSTER_"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            <img
+                src="https://yg-babymonster-official.jp/wp/wp-content/themes/babymonster/dist/images/common/icon/x.svg"
+                alt="X"
+                width="41"
+                height="40"
+                loading="lazy"
+            />
+        </a>
+
+        <h5>
+            <p>
+                Site Oficial:
+                <a
+                    href="https://www.ygfamily.com/en/artists/babymonster/main"
+                    target="_blank"
+                >
+                    YG Entertainment
+                </a>
+            </p>
+
+            <p>
+                Site Oficial JAPONÊS:
+                <a href="https://yg-babymonster-official.jp/" target="_blank">
+                    BABYMONSTER
+                </a>
+            </p>
+            <p>SITE CRIADO POR: C. A. L. PINHEIRO.</p>
+        </h5>
+    </footer>
+</html>

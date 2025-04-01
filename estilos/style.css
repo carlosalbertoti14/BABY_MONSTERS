@@ -19,6 +19,11 @@
    text-decoration: none;
 }
 
+h5{
+    color: var(--cor4);
+    text-shadow: 3px 3px 3px solid black;
+}
+
 .album img {
     width: 100%; /* Faz a imagem ocupar 100% da largura do container */
     height: auto; /* Mantém a proporção da imagem */
@@ -96,14 +101,16 @@ img#substitute-image {
 
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background-color: lightgrey;
+    background-image: url('../midia/bg_babymonster_logo50.png');
+    background-size: 100px 100px;
     height: 100vh;
     width: 100%;
+    background-attachment: fixed;
 
 }
 
 header {
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(0, 0, 0);
     color: white;
     padding: 0px;
     display: flex;
@@ -150,6 +157,37 @@ div#menu > nav a {
     text-align: center;
 
 }
+
+/* configuração da lista fotos do menu */
+#menu {
+    position: relative; /* Para permitir o posicionamento relativo */
+}
+
+#lista-fotos {
+    position: absolute; /* Torna a lista uma posição fixa em relação ao menu */
+    top: 100%; /* Coloca a lista logo abaixo do menu "FOTOS" */
+    left: 0; /* Alinha a lista com o início do menu */
+    display: none; /* Continua escondida por padrão */
+    background-color: white; /* Pode personalizar o fundo */
+    border: 1px solid #ccc; /* Adiciona uma borda para separar */
+    padding: 10px;
+    z-index: 1000; /* Garante que a lista fique sobre outros elementos */
+}
+
+#lista-fotos li {
+    list-style-type: none; /* Remove os marcadores da lista */
+    margin: 5px 0;
+}
+
+#lista-fotos li a {
+    text-decoration: none; 
+    color: darkblue;
+}
+
+#lista-fotos li a:hover {
+    color: darkred;
+}
+/* fim da configuração da lista fotos do menu */
 
 /* Ajuste para telas menores (até 600px) */
 @media (max-width: 600px) {
@@ -214,15 +252,20 @@ div#centro{
 
 }
 main {
-    
     background-color: rgb(221, 143, 217);
     margin: 10px;
     padding: 10px;
     border-radius: 10px;
     box-shadow: 2px 3px 3px rgba(0, 0, 0, 0.397);
     max-width: 800px;
-    
+    display: flex; /* Adiciona flexbox ao main */
+    flex-wrap: wrap; /* Permite que os itens quebrem para a próxima linha */
+    justify-content: center;
+    justify-content: space-around; /* Alinha os itens no início */
+    gap: 10px; /* Adiciona espaçamento entre os itens */
 }
+
+
 
 /**********************CONFIG LISTA************************************/
 /* confi sub item */
@@ -265,7 +308,7 @@ ul > li > ul.show {
     padding: 10px; /* Espaçamento interno */
     border-radius: 5px; /* Borda arredondada */
     text-align: left; /* Centraliza o texto */
-    text-shadow: 2px 2px 2px solid black;
+    text-shadow: 2px 2px 2px black;
    
 }
 
@@ -277,6 +320,7 @@ ul > li > ul.show {
 .coluna li > ul > li:hover {
     background-color: black;
     color: white;
+    transition: 0.5s;
 
 }
 
@@ -284,6 +328,8 @@ ul > li > ul.show {
 .coluna > li:hover {
     background-color: white;
     color: #dc3ddc;
+    transition: 0.5s;
+
 
 }
 
@@ -291,16 +337,98 @@ li  a {
     text-decoration: none;
 }
 
-/* li a::before {
-    content: "";
-    background-image: url("../midia/YOUTUBE_LOGO_ROUND.png");
-    background-size: contain;
-    display: inline-block;
-    width: 30px; /* ajuste o tamanho conforme necessário */
-    height: 30px; /* ajuste o tamanho conforme necessário */
-    margin-right: 0px; espaçamento entre o ícone e o texto 
-} 
-*/
+footer, footer a {
+    text-align: center;
+    color: #dc3ddc;
+    text-shadow: 1px 1px 3px black;
+}
+
+/****************************** CONFIGURAÇÃO DO PERFIL********************************/
+
+div.grupo p{
+    margin: 5px;
+/*     text-shadow: 0px 0px 3px rgb(0, 0, 0); */
+    font-weight: bolder;
+   /*  color: var(--cor2); */
+   color: white;
+    
+}
+
+div > h2{
+    margin: 5px;
+    font-size: 3em;
+/*     text-shadow: 0px 0px 3px rgb(0, 0, 0); */
+    font-weight: bolder;
+   /*  color: var(--cor2); */
+   color: var(--cor3);
+    
+}
+
+
+p.brasil{
+    color: green;
+    font-weight: bolder;
+    background-color: rgba(255, 255, 255, 0.541);
+    width: fit-content;
+    padding: 5px;
+    border-radius: 10px;
+    margin-left: 5px;
+    
+}
+
+ a.insta {
+    display: block;
+    color: #a82f9e;
+    /* width: 100%; */
+    text-align: right;
+   
+    font-weight: bolder;
+}
+
+
+section#perfil{
+   
+
+}
+
+div.ahyeon { background-image: url('../midia/BABYMONSTERS_PERFIL_BG_AHYEON.png');}
+div.asa { background-image: url('../midia/BABYMONSTERS_PERFIL_BG_ASA.png');}
+div.chiquita { background-image: url('../midia/BABYMONSTERS_PERFIL_BG_CHIQUITA.png');}
+div.pharita { background-image: url('../midia/BABYMONSTERS_PERFIL_BG_PHARITA.png');}
+div.rami { background-image: url('../midia/BABYMONSTERS_PERFIL_BG_RAMI.png');}
+div.rora { background-image: url('../midia/BABYMONSTERS_PERFIL_BG_RORA.png');}
+div.ruka { background-image: url('../midia/BABYMONSTERS_PERFIL_BG_RUKA.png');}
+
+
+
+
+
+div.perfil {
+    width: 375px;
+    height: 600px;
+    border-radius: 10px;
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: auto;
+    background-attachment: scroll;
+    position: relative; /* Adicionado */
+    /* margin: 10px; */
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.452);
+}
+
+div#ahyeon a{color: #a82f9e;}
+div#ahyeon a:hover{color: var(--cor1)}
+
+div#ahyeon, div#asa, div#chiquita, div#pharita, div#rami, div#rora, div#ruka{
+    background-color: rgba(0, 0, 0, 0.459);
+    position: absolute; /* Adicionado */
+    bottom: 0; /* Adicionado */
+    left: 0; /* Adicionado */
+    margin: 10px;
+    border-radius: 10px;
+    width: 355px;
+
+}
 
 
 /**********************FIM CONFIG LISTA************************************/
