@@ -200,9 +200,9 @@ audio {
 
 div#menu {
     background-color: black;
-    
     display: flex;
     justify-content: center;
+    
 }
 
 div#menu  > nav {
@@ -210,6 +210,7 @@ div#menu  > nav {
     width: 800px;
     display: flex;
     justify-content: space-around;
+    
 
 }
 
@@ -223,38 +224,10 @@ div#menu > nav a {
     text-decoration: none;
     text-align: center;
 
+
 }
 
-/* configuração da lista fotos do menu */
-#menu {
-    position: relative; /* Para permitir o posicionamento relativo */
-}
 
-#lista-fotos {
-    position: absolute; /* Torna a lista uma posição fixa em relação ao menu */
-    top: 100%; /* Coloca a lista logo abaixo do menu "FOTOS" */
-    left: 0; /* Alinha a lista com o início do menu */
-    display: none; /* Continua escondida por padrão */
-    background-color: white; /* Pode personalizar o fundo */
-    border: 1px solid #ccc; /* Adiciona uma borda para separar */
-    padding: 10px;
-    z-index: 1000; /* Garante que a lista fique sobre outros elementos */
-}
-
-#lista-fotos li {
-    list-style-type: none; /* Remove os marcadores da lista */
-    margin: 5px 0;
-}
-
-#lista-fotos li a {
-    text-decoration: none; 
-    color: darkblue;
-}
-
-#lista-fotos li a:hover {
-    color: darkred;
-}
-/* fim da configuração da lista fotos do menu */
 
 /* Ajuste para telas menores (até 600px) */
 @media (max-width: 600px) {
@@ -298,6 +271,8 @@ div#menu  > nav a:hover {
     width: 100%; /* Garante que a largura seja responsiva */
     /* max-width: 800px; */ /* Define o limite máximo */
    /*  text-align: center;  */
+   z-index: 1000;
+
 }
 
 #fixo nav {
@@ -491,6 +466,7 @@ div.perfil {
     position: relative; /* Adicionado */
     /* margin: 10px; */
     box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.452);
+    z-index: 1;
 }
 
 div#ahyeon a{color: #a82f9e;}
@@ -504,6 +480,7 @@ div#ahyeon, div#asa, div#chiquita, div#pharita, div#rami, div#rora, div#ruka{
     margin: 10px;
     border-radius: 10px;
     width: 355px;
+    z-index: 1;
 
 }
 
