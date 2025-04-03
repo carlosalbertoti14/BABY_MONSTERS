@@ -1,0 +1,16 @@
+            // Função para ativar som, reproduzir vídeo e ir ao topo rapidamente ao clicar em "HOME"
+            homeButton.addEventListener('click', (event) => {
+                event.preventDefault(); // Evitar comportamento padrão do link
+                video.muted = false; // Ativar som
+                soundButton.textContent = '🔊'; // Ícone de som ligado
+                video.style.display = 'block'; // Exibir vídeo
+                image.style.display = 'none'; // Ocultar imagem substituta
+                video.play(); // Reproduzir o vídeo
+                
+                // Ir para o topo da página rapidamente
+                window.scrollTo(0, 0); // Rola imediatamente para o topo
+                // Novo comando para acessar o link do HOME
+                const homeLink = homeButton.getAttribute('href'); // Obtém o valor do atributo href
+                if (homeLink) {
+                    window.location.href = homeLink; // Redireciona para o link
+  }

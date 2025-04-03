@@ -106,7 +106,7 @@
                                         <abbr title="ASSISTIR NO YOUTUBE">
                                             <a href="https://www.youtube.com/watch?v=2wA_b6YHjqQ" class="linkyt" target="_blank">
                                                 <img src="midia/YOUTUBE_LOGO_ORIGINAL.png" alt="YOUTUBE" class="youtube-icon">
-                                                    "SHEESH"</strong> - M/V
+                                                    "SHEESH"</strong> - MOVIE
                                             </a>
                                         </abbr>
                                     </li>
@@ -152,7 +152,7 @@
                                         <abbr title="ASSISTIR NO YOUTUBE">
                                             <a href="https://www.youtube.com/watch?v=GsV1i0QHi-o" class="linkyt" target="_blank">
                                                 <img src="midia/YOUTUBE_LOGO_ORIGINAL.png" alt="YOUTUBE" class="youtube-icon">
-                                                <strong> "Stuck In The Middle"</strong> - M/V
+                                                <strong> "Stuck In The Middle"</strong> - MOVIE
                                             </a>
                                         </abbr>
                                     </li>
@@ -183,7 +183,7 @@
                                         <abbr title="ASSISTIR NO YOUTUBE">
                                             <a href="https://www.youtube.com/watch?v=olDWm2veCrM" class="linkyt" target="_blank">
                                                 <img src="midia/YOUTUBE_LOGO_ORIGINAL.png" alt="YOUTUBE" class="youtube-icon">
-                                                <strong> "BATTER UP"</strong> - M/V
+                                                <strong> "BATTER UP"</strong> - MOVIE
                                             </a>
                                         </abbr>
                                     </li>
@@ -282,7 +282,7 @@
                                     <abbr title="ASSISTIR NO YOUTUBE">
                                         <a href="https://www.youtube.com/watch?v=o0oW3lPoOXM" class="linkyt" target="_blank">
                                             <img src="midia/YOUTUBE_LOGO_ORIGINAL.png" alt="YOUTUBE" class="youtube-icon">
-                                            <strong> "CLIK CLAK"</strong> - M/V
+                                            <strong> "CLIK CLAK"</strong> - MOVIE
                                         </a>
                                     </abbr>
                                 </li>
@@ -321,7 +321,7 @@
                                     <abbr title="ASSISTIR NO YOUTUBE">
                                         <a href="https://www.youtube.com/watch?v=Zp-Jhuhq0bQ" class="linkyt" target="_blank">
                                             <img src="midia/YOUTUBE_LOGO_ORIGINAL.png" alt="YOUTUBE" class="youtube-icon">
-                                            <strong> "DRIP"</strong> - M/V
+                                            <strong> "DRIP"</strong> - MOVIE
                                         </a>
                                     </abbr>
                                 </li>
@@ -382,7 +382,7 @@
                                     <abbr title="ASSISTIR NO YOUTUBE">
                                         <a href="https://www.youtube.com/watch?v=XShaIZs7J7M" class="linkyt" target="_blank">
                                             <img src="midia/YOUTUBE_LOGO_ORIGINAL.png" alt="YOUTUBE" class="youtube-icon">
-                                            <strong>"Really Like You"</strong> - M/V
+                                            <strong>"Really Like You"</strong> - MOVIE
                                         </a>
                                     </abbr>
                                 </li>
@@ -426,7 +426,7 @@
                                     <abbr title="ASSISTIR NO YOUTUBE">
                                         <a href="https://www.youtube.com/watch?v=1kXLsrun51s" class="linkyt" target="_blank">
                                             <img src="midia/YOUTUBE_LOGO_ORIGINAL.png" alt="YOUTUBE" class="youtube-icon">
-                                            <strong>"Love In My Heart"</strong> - M/V
+                                            <strong>"Love In My Heart"</strong> - MOVIE
                                         </a>
                                     </abbr>
                                 </li>
@@ -455,7 +455,7 @@
                                     <abbr title="ASSISTIR NO YOUTUBE">
                                         <a href="https://www.youtube.com/watch?v=eJCHKjt0MPw" class="linkyt" target="_blank">
                                             <img src="midia/YOUTUBE_LOGO_ORIGINAL.png" alt="YOUTUBE" class="youtube-icon">
-                                            <strong> "FOREVER"</strong> - M/V
+                                            <strong> "FOREVER"</strong> - MOVIE
                                         </a>
                                     </abbr>
                                 </li>
@@ -531,68 +531,10 @@
 
         </div>
 
+
+        <script src="script/babymonster.js"></script>
         <script>
-            const video = document.getElementById('intro-video');
-            const image = document.getElementById('substitute-image');
-            const homeButton = document.querySelector('nav a:first-child'); // Primeiro botão, que é "HOME"
-        
-            video.addEventListener('ended', () => {
-                video.style.display = 'none';
-                image.style.display = 'flex';
-            });
-        
-            const soundButton = document.getElementById('sound-toggle');
-            soundButton.addEventListener('click', () => {
-                if (video.muted) {
-                    video.muted = false; // Ativar som
-                    soundButton.textContent = ''; // Ícone de som ligado
-                } else {
-                    video.muted = true; // Desativar som
-                    soundButton.textContent = ''; // Ícone de som desligado
-                }
-            });
-        
-            // Função para ativar som, reproduzir vídeo e ir ao topo rapidamente ao clicar em "HOME"
-            homeButton.addEventListener('click', (event) => {
-                // event.preventDefault(); // Remova ou comente esta linha para permitir o link funcionar
-                video.muted = false; // Ativar som
-                soundButton.textContent = ''; // Ícone de som ligado
-                video.style.display = 'block'; // Exibir vídeo
-                image.style.display = 'none'; // Ocultar imagem substituta
-                video.play(); // Reproduzir o vídeo
-        
-                // Ir para o topo da página rapidamente
-                window.scrollTo(0, 0); // Rola imediatamente para o topo
-        
-                // window.location.href = homeButton.href; // Adicione esta linha se quiser redirecionar para o link
-            });
-        
-            // Função para segurar a barra de menus no topo.
-            window.addEventListener("scroll", function () {
-                const menu = document.getElementById("fixo");
-                const container = document.querySelector(".video-container");
-                const containerBottom = container.offsetTop + container.offsetHeight;
-        
-                if (window.scrollY >= containerBottom) {
-                    menu.style.position = "fixed";
-                    menu.style.top = "0"; // Fixa no topo
-                } else {
-                    menu.style.position = "relative";
-                    menu.style.top = "auto"; // Volta à posição inicial
-                }
-            });
-        
-            // FUNÇÃO PARA APARECER A LISTA
-            document.querySelectorAll('ul > li > p').forEach(item => {
-                item.addEventListener('click', function () {
-                    const subList = this.nextElementSibling;
-                    if (subList.style.display === 'block') {
-                        subList.style.display = 'none'; // Oculta se já está visível
-                    } else {
-                        subList.style.display = 'block'; // Exibe ao clicar
-                    }
-                });
-            });
+
         </script>
 
 
