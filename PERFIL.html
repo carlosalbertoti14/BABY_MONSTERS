@@ -113,8 +113,8 @@
 
                         <div id="ahyeon" class="grupo">
                             <p>Nome: Jung Ahyeon</p>
-                            <p>Nascimento: 11/4/2007</p>
-                            <p>Idade: 17 anos</p>
+                            <p>Nascimento: <span id="dataNascimento">11/04/2007</sapan></p>
+                            <p>Idade: <span id="idade">17</span> anos</p>
                             <p>Aniversário: 11 de Abril</p>
                             <p>Origem: Coreia do Sul</p>
                             <p>
@@ -155,8 +155,8 @@
 
                         <div id="asa" class="grupo">
                             <p>Nome: Enami Asa</p>
-                            <p>Nascimento: 17/04/2006</p>
-                            <p>Idade: 18 anos</p>
+                            <p>Nascimento: <span id="dataNascimento">17/04/2006</sapan></p>
+                            <p>Idade: <span id="idade">18</span> anos</p>
                             <p>Aniversário: 17 de Abril</p>
                             <p>Origem: Japonesa</p>
                             <p>
@@ -182,8 +182,8 @@
 
                         <div id="chiquita" class="grupo">
                             <p>Nome: Riracha Phondechaphiphat</p>
-                            <p>Nascimento: 17/02/2009</p>
-                            <p>Idade: 15 anos</p>
+                            <p>Nascimento: <span id="dataNascimento">17/02/2009</sapan></p>
+                            <p>Idade: <span id="idade">15</span> anos</p>
                             <p>Aniversário: 17 de Fevereiro</p>
                             <p>Origem: Tailandesa</p>
                             <p>
@@ -207,8 +207,8 @@
 
                         <div id="pharita" class="grupo">
                             <p>Nome: Pharita Chaikong</p>
-                            <p>Nascimento: 26/08/2005</p>
-                            <p>Idade: 18 anos</p>
+                            <p>Nascimento: <span id="dataNascimento">26/08/2005</sapan></p>
+                            <p>Idade: <span id="idade">18</span> anos</p>
                             <p>Aniversário: 26 de Agosto</p>
                             <p>Origem: Tailandesa</p>
                             <p>
@@ -234,8 +234,8 @@
 
                         <div id="rami" class="grupo">
                             <p>Nome: Shin Ha-ram</p>
-                            <p>Nascimento: 17/04/2007</p>
-                            <p>Idade: 17 anos</p>
+                            <p>Nascimento: <span id="dataNascimento">17/04/2007</sapan></p>
+                            <p>Idade: <span id="idade">17</span> anos</p>
                             <p>Aniversário: 17 de Abril</p>
                             <p>Origem: Coreia do Sul</p>
                             <p>
@@ -258,8 +258,8 @@
 
                         <div id="rora" class="grupo">
                             <p>Nome: Lee Da-in</p>
-                            <p>Nascimento: 14/08/2008</p>
-                            <p>Idade: 16 anos</p>
+                            <p>Nascimento: <span id="dataNascimento">14/08/2008</sapan></p>
+                            <p>Idade: <span id="idade">16</span> anos</p>
                             <p>Aniversário: 14 de Agosto</p>
                             <p>Origem: Coreia do Sul</p>
                             <p>
@@ -283,8 +283,8 @@
 
                         <div id="ruka" class="grupo">
                             <p>Nome: Kawai Ruka</p>
-                            <p>Nascimento: 20/03/2002</p>
-                            <p>Idade: 22 anos</p>
+                            <p>Nascimento: <span id="dataNascimento">20/03/2002</sapan></p>
+                            <p>Idade: <span id="idade">22</span> anos</p>
                             <p>Aniversário: 20 de Março</p>
                             <p>Origem: Japonesa</p>
                             <p>
@@ -308,6 +308,34 @@
 
         <script src="script/babymonster.js"></script>   
         <script>
+
+
+
+            //CALCULA IDADE**************
+        function calcularEAtualizarIdade() {    
+        const dataNascimentoTexto = document.getElementById('dataNascimento').textContent;
+        const [dia, mes, ano] = dataNascimentoTexto.split('/').map(Number);
+        const dataNascimento = new Date(ano, mes - 1, dia); // Meses em JavaScript começam do 0
+
+        const hoje = new Date();
+        let idade = hoje.getFullYear() - dataNascimento.getFullYear();
+        const mesAtual = hoje.getMonth();
+        const diaAtual = hoje.getDate();
+
+        if (mesAtual < dataNascimento.getMonth() || (mesAtual === dataNascimento.getMonth() && diaAtual < dataNascimento.getDate())) {
+            idade--;
+        }
+
+        document.getElementById('idade').textContent = idade;
+        }
+
+        // Chama a função quando a página carregar
+        window.onload = calcularEAtualizarIdade;
+
+
+        // FIM DE CALCULA IDADE**************
+
+
 
         </script>
 
