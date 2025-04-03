@@ -78,7 +78,7 @@ span.infoboxshow {
     padding: 7px;
     border-radius: 10px;
     width: 300px;
-    margin-left: -100px;
+    margin-left: -50px;
     font-weight: normal;
     text-align: start;
     z-index: 100; /* Garante que o parágrafo apareça acima de outros elementos */
