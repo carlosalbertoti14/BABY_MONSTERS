@@ -57,6 +57,36 @@ h5{
     
 }
 
+/***************CONFIGURAÇÃO DA CAIXA DE EXPLICAÇÃO*************/
+
+
+span.infoboxshow {
+    display: inline;
+    position: relative; /* Define o contêiner como relativo */
+    color: var(--cor3);
+    font-weight: bolder;
+    
+}
+
+    span.infoboxhiden {
+    display: none; /* Esconde o parágrafo inicialmente */
+    position: absolute; /* Posiciona o parágrafo de forma absoluta */
+    top: 0; /* Ajusta a posição do parágrafo */
+    left: 0;
+    color: white;
+    background-color: rgb(235, 12, 186);
+    padding: 7px;
+    border-radius: 10px;
+    width: 300px;
+    margin-left: -100px;
+    font-weight: normal;
+    text-align: start;
+    z-index: 100; /* Garante que o parágrafo apareça acima de outros elementos */
+}
+
+
+/*************** FIM DA CONFIGURAÇÃO DA CAIXA DE EXPLICAÇÃO*************/
+
 
 video {
     width: 100%; /* Faz com que o vídeo acompanhe a largura da tela */
@@ -271,7 +301,7 @@ div#menu  > nav a:hover {
     width: 100%; /* Garante que a largura seja responsiva */
     /* max-width: 800px; */ /* Define o limite máximo */
    /*  text-align: center;  */
-   z-index: 1000;
+   z-index: 10;
 
 }
 
@@ -443,7 +473,7 @@ section#perfil{
 
 }
 
-div.ahyeon { background-image: url('../midia/BABYMONSTERS_PERFIL_BG_AHYEON.png');}
+div.ahyeon { background-image: url('../midia/BABYMONSTERS_PERFIL_BG_AHYEON3.jpg');}
 div.asa { background-image: url('../midia/BABYMONSTERS_PERFIL_BG_ASA.png');}
 div.chiquita { background-image: url('../midia/BABYMONSTERS_PERFIL_BG_CHIQUITA.png');}
 div.pharita { background-image: url('../midia/BABYMONSTERS_PERFIL_BG_PHARITA.png');}
@@ -467,6 +497,7 @@ div.perfil {
     /* margin: 10px; */
     box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.452);
     z-index: 1;
+    
 }
 
 div#ahyeon a{color: #a82f9e;}
@@ -475,11 +506,14 @@ div#ahyeon a:hover{color: var(--cor1)}
 div#ahyeon, div#asa, div#chiquita, div#pharita, div#rami, div#rora, div#ruka{
     background-color: rgba(0, 0, 0, 0.459);
     position: absolute; /* Adicionado */
-    bottom: 0; /* Adicionado */
-    left: 0; /* Adicionado */
-    margin: 10px;
     border-radius: 10px;
-    width: 355px;
+    bottom: 10px; /* Alinha a parte inferior com a parte inferior do pai (perfil) */
+    left: 50%; /* Move o início da div para o centro horizontal do pai */
+    transform: translateX(-50%); /* Desloca a div metade de sua própria largura para a esquerda, centralizando-a */
+    width: 95%; /* Ajuste a largura conforme necessário */
+    /* Outros estilos como background-color, padding, etc. */
+    text-align: left;
+    transform: translateX(-50%);
     z-index: 1;
 
 }
