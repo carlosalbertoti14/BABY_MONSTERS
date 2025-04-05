@@ -8,7 +8,7 @@
     --cor5: #3d061d;
 
     --fonte-padrao: Arial, Verdana, Helvetica, sans-serif;
-    --fonte-destaque: "Arial Black", cursive;
+    --fonte-destaque: "Bebas Neue", cursive;
     --fonte-android: "Android", cursive;
 }
 
@@ -24,7 +24,7 @@ h1{
 }
 
 h2{
-    font-family: var(--fonte-destaque);
+    font-family: var(--fonte-padrao);
     color: var(--cor2);
     text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.644);
     font-size: 2em;
@@ -52,6 +52,10 @@ picture img {
     max-width: 100%;
     height: auto; /* Mantém a proporção da imagem */
     display: block; /* Evita espaços extras abaixo da imagem */
+  }
+
+  .cnn img{
+    margin-top: 20px;
   }
 
 .album img {
