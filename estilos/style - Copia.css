@@ -8,7 +8,7 @@
     --cor5: #3d061d;
 
     --fonte-padrao: Arial, Verdana, Helvetica, sans-serif;
-    --fonte-destaque: "Bebas Neue", cursive;
+    --fonte-destaque: "Arial Black", cursive;
     --fonte-android: "Android", cursive;
 }
 
@@ -19,10 +19,40 @@
    text-decoration: none;
 }
 
+h1{
+
+}
+
+h2{
+    font-family: var(--fonte-destaque);
+    color: var(--cor3);
+    text-shadow: 3px 3px 3px black;
+    font-size: 2em;
+    text-align: center;
+}
+
+h3{
+    color: var(--cor2);
+    text-align: center;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.575);
+
+
+}
+
+h4{
+
+}
+
 h5{
     color: var(--cor4);
     text-shadow: 3px 3px 3px solid black;
 }
+
+picture img {
+    max-width: 100%;
+    height: auto; /* Mantém a proporção da imagem */
+    display: block; /* Evita espaços extras abaixo da imagem */
+  }
 
 .album img {
     width: 100%; /* Faz a imagem ocupar 100% da largura do container */
@@ -42,6 +72,9 @@ h5{
 
 .textoalbum {
     color: var(--cor3);
+    font-weight: bolder;
+    text-align: center;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.466);
 
 }   
 
@@ -54,6 +87,168 @@ h5{
     
 }
 
+/***************CONFIGURAÇÃO DA CAIXA DE EXPLICAÇÃO*************/
+
+
+span.infoboxshow {
+    display: inline;
+    position: relative; /* Define o contêiner como relativo */
+    color: var(--cor3);
+    font-weight: bolder;
+    
+}
+
+    span.infoboxhiden {
+    display: none; /* Esconde o parágrafo inicialmente */
+    position: absolute; /* Posiciona o parágrafo de forma absoluta */
+    top: 0; /* Ajusta a posição do parágrafo */
+    left: 0;
+    color: white;
+    background-color: rgb(235, 12, 186);
+    padding: 7px;
+    border-radius: 10px;
+    width: 300px;
+    margin-left: -50px;
+    font-weight: normal;
+    text-align: start;
+    z-index: 100; /* Garante que o parágrafo apareça acima de outros elementos */
+}
+
+/****************************CONFIG CARROCEL*************************/
+
+
+div#mascara_carrocel{
+    background-color: black;
+    overflow: hidden;
+    width: 100%; 
+}
+
+.swiper-container {
+    width: 340px; /* Ajuste a largura conforme necessário */
+    margin: 0 auto;
+    position: relative;
+    
+    
+}
+
+div.carrocel_bg {
+    background-color: black;
+    width: 100vwpx;
+    height: auto;
+    padding: 30px;
+ 
+   
+}
+
+/* configurando os botões do carrocel*/
+
+.swiper-pagination {
+    position: absolute;
+    bottom: 10px; /* Posiciona a paginação na parte inferior do carrossel */
+    left: 50%; /* Centraliza a paginação horizontalmente */
+    transform: translateX(-50%); /* Ajusta a posição para que o centro da paginação coincida com o centro do carrossel */
+  }
+  
+  .swiper-button-prev,
+  .swiper-button-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px; /* Largura dos botões */
+    height: 30px; /* Altura dos botões */
+    background-color: #fff; /* Cor de fundo dos botões */
+    border-radius: 50%; /* Arredonda os cantos dos botões */
+    color: #000; /* Cor do texto dos botões */
+    font-size: 30px; /* Tamanho da fonte dos botões */
+    text-align: center; /* Centraliza o texto nos botões */
+    cursor: pointer; /* Muda o cursor para mão ao passar o mouse sobre os botões */
+  }
+  
+  .swiper-button-prev {
+    left: calc(100%); /* Posiciona o botão à esquerda do carrossel, com uma margem de 10px e 50% da largura do carrossel */
+  }
+  
+  .swiper-button-next {
+    right: calc(100%); /* Posiciona o botão à direita do carrossel, com uma margem de 10px e 50% da largura do carrossel */
+  }
+
+/* fim de configurar os botões */
+
+div.swiper-wrapper {
+    display: flex;
+    flex-direction: row; 
+}
+
+.swiper-slide {
+    background: #000000; /* Apenas para visualização */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+
+/* inicio da config transição */
+.swiper-slide a img {
+display: inline;
+width: auto;
+height: 300px;
+transition: transform 0.3s ease-in-out;
+padding: 10px;
+}
+
+/* configuraçõao do link do carrocel */
+.swiper-slide a {
+    display: block; /* Faz o link ocupar todo o espaço do slide */
+    width: 100%;
+    height: 100%;
+    
+  }
+  
+  .swiper-slide img {
+    display: block; /* Garante que a imagem também se comporte como bloco dentro do link */
+    width: 100%; /* Faz a imagem ocupar a largura do link */
+    height: auto; /* Mantém a proporção */
+    object-fit: cover; /* Garante que a imagem cubra o espaço sem deformar (pode variar dependendo do seu layout) */
+  }
+
+  /*fim configuraçõao do link do carrocel*/
+
+/* configura quando esta em foco */
+.swiper-slide-scaled img {
+transform: scale(1.3); /* irá aumentar o tamanho da imagem ativa */
+opacity: 1; /* Garante que a imagem ativa tenha opacidade total de 100% */
+
+
+    }
+/* configura quando NÃO esta em foco */
+.swiper-slide:not(.swiper-slide-scaled) img {
+opacity: 0.30; /* Diminui a opacidade para 60% */
+transform 0.3s ease-in-out;
+transition: opacity 0.5s ease-in-out; /* Adiciona uma transição suave para a opacidade */
+
+}
+
+
+.swiper-slide-scaled {
+ z-index: 10; /* Define um z-index GARANTE QUE A IMAGEM FIQUE POR CIMA DAS OUTRAS*/
+}
+
+/* fin da config transição */
+.swiper-pagination {
+    position: absolute;
+   
+
+ }
+
+
+
+
+
+
+
+/*************** FIM DA CONFIGURAÇÃO DA CAIXA DE EXPLICAÇÃO*************/
+
 
 video {
     width: 100%; /* Faz com que o vídeo acompanhe a largura da tela */
@@ -62,7 +257,7 @@ video {
 
   
 }
-/**********************CONFIG BOTÃO************************************/
+/**********************CONFIG BOTÃO DO SOM************************************/
 .sound-button {
     position: absolute;
     top: 10px; /* Posiciona o botão no canto do vídeo */
@@ -82,7 +277,7 @@ video {
     background-color: rgba(0, 0, 0, 0.8); /* Fundo mais escuro ao passar o mouse */
 }
 
-/**********************FIM CONFIG BOTÃO************************************/
+/**********************FIM CONFIG BOTÃO DO SOM************************************/
 
 img#substitute-image {
     display: none;
@@ -128,14 +323,78 @@ header > h1 {
     
 
 }
+
+/*********************** configuração do HOME ***********************/
+
+article {
+    background-color: rgba(255, 255, 255, 0.250);
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.534);
+    }
+
+div#artigo{
+    padding: 10px;
+    }
+
+div#artigo > p{
+    line-height: 1.5;
+    
+    
+    
+    
+}
+div#artigo > h2 {
+    
+    text-align: center;
+    color: black;
+    font-weight: bolder;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.418);
+}
+
+section.normal{
+    background-color: rgb(124, 12, 124);
+    color: white;
+    padding: 10px;
+    font-weight: bolder;
+    border-radius: 10px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.534);
+}
+
+
+picture.poster {
+    width: 300px; /* Defina a largura desejada */
+    height: 200px; /* Defina a altura desejada */
+  }
+
+ picture.poster img {
+     width: 100%;
+     height: auto;
+     object-fit: cover; /* Ou contain, fill, etc. */
+     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.550);
+     border-radius: 10px;
+  }
+
+a.fonte {
+    display: block;
+    text-align: right;
+    color: #a82f9e;
+    
+}
+
+audio {
+    margin-top: 10px;
+    width: 100%;
+  }
+
 /**********************CONFIG MENU************************************/
 
 
 div#menu {
     background-color: black;
-    
     display: flex;
     justify-content: center;
+    
 }
 
 div#menu  > nav {
@@ -143,6 +402,7 @@ div#menu  > nav {
     width: 800px;
     display: flex;
     justify-content: space-around;
+    
 
 }
 
@@ -156,38 +416,10 @@ div#menu > nav a {
     text-decoration: none;
     text-align: center;
 
+
 }
 
-/* configuração da lista fotos do menu */
-#menu {
-    position: relative; /* Para permitir o posicionamento relativo */
-}
 
-#lista-fotos {
-    position: absolute; /* Torna a lista uma posição fixa em relação ao menu */
-    top: 100%; /* Coloca a lista logo abaixo do menu "FOTOS" */
-    left: 0; /* Alinha a lista com o início do menu */
-    display: none; /* Continua escondida por padrão */
-    background-color: white; /* Pode personalizar o fundo */
-    border: 1px solid #ccc; /* Adiciona uma borda para separar */
-    padding: 10px;
-    z-index: 10; /* Garante que a lista fique sobre outros elementos */
-}
-
-#lista-fotos li {
-    list-style-type: none; /* Remove os marcadores da lista */
-    margin: 5px 0;
-}
-
-#lista-fotos li a {
-    text-decoration: none; 
-    color: darkblue;
-}
-
-#lista-fotos li a:hover {
-    color: darkred;
-}
-/* fim da configuração da lista fotos do menu */
 
 /* Ajuste para telas menores (até 600px) */
 @media (max-width: 600px) {
@@ -207,7 +439,7 @@ div#menu > nav a {
        
         padding: 5px 10px 5px 10px; /* Reduz o espaçamento */
        /*  margin-left: 1px; */
-        font-size: 0.6em; /* Reduz o tamanho da fonte */
+        font-size: 0.8em; /* Reduz o tamanho da fonte */
 
         /* text-align: center; */
 
@@ -231,6 +463,8 @@ div#menu  > nav a:hover {
     width: 100%; /* Garante que a largura seja responsiva */
     /* max-width: 800px; */ /* Define o limite máximo */
    /*  text-align: center;  */
+   z-index: 10;
+
 }
 
 #fixo nav {
@@ -251,8 +485,15 @@ div#centro{
     justify-content: center;
 
 }
+
+div#artigo{
+    background-color: rgba(255, 255, 255, 0.466);
+    border-radius: 10px;
+    box-shadow: 2px 3px 3px rgba(0, 0, 0, 0.397);
+}
+
 main {
-    background-color: rgb(221, 143, 217);
+    background-color: rgba(221, 143, 217, 0.774);
     margin: 10px;
     padding: 10px;
     border-radius: 10px;
@@ -260,8 +501,13 @@ main {
     max-width: 800px;
     display: flex; /* Adiciona flexbox ao main */
     flex-wrap: wrap; /* Permite que os itens quebrem para a próxima linha */
-    justify-content: flex-start; /* Alinha os itens no início */
+    justify-content: center;
+    justify-content: space-around; /* Alinha os itens no início */
     gap: 10px; /* Adiciona espaçamento entre os itens */
+}
+
+main.homemain {
+    background-color: rgba(221, 143, 217, 0.682);
 }
 
 
@@ -328,8 +574,7 @@ ul > li > ul.show {
     background-color: white;
     color: #dc3ddc;
     transition: 0.5s;
-
-
+    text-shadow: 1px 1px 2px rgb(255, 255, 255);
 }
 
 li  a {
@@ -344,7 +589,7 @@ footer, footer a {
 
 /****************************** CONFIGURAÇÃO DO PERFIL********************************/
 
-div > p, h2{
+div.grupo p{
     margin: 5px;
 /*     text-shadow: 0px 0px 3px rgb(0, 0, 0); */
     font-weight: bolder;
@@ -363,7 +608,34 @@ div > h2{
     
 }
 
-div.ahyeon { background-image: url('../midia/BABYMONSTERS_PERFIL_BG_AHYEON.png');}
+
+p.brasil{
+    color: green;
+    font-weight: bolder;
+    background-color: rgba(255, 255, 255, 0.541);
+    width: fit-content;
+    padding: 5px;
+    border-radius: 10px;
+    margin-left: 5px;
+    
+}
+
+ a.insta {
+    display: block;
+    color: #a82f9e;
+    /* width: 100%; */
+    text-align: right;
+   
+    font-weight: bolder;
+}
+
+
+section#perfil{
+   
+
+}
+
+div.ahyeon { background-image: url('../midia/BABYMONSTERS_PERFIL_BG_AHYEON3.jpg');}
 div.asa { background-image: url('../midia/BABYMONSTERS_PERFIL_BG_ASA.png');}
 div.chiquita { background-image: url('../midia/BABYMONSTERS_PERFIL_BG_CHIQUITA.png');}
 div.pharita { background-image: url('../midia/BABYMONSTERS_PERFIL_BG_PHARITA.png');}
@@ -384,20 +656,27 @@ div.perfil {
     background-size: auto;
     background-attachment: scroll;
     position: relative; /* Adicionado */
-    margin: 10px;
+    /* margin: 10px; */
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.452);
+    z-index: 1;
+    
 }
 
 div#ahyeon a{color: #a82f9e;}
 div#ahyeon a:hover{color: var(--cor1)}
 
-div#ahyeon, div#asa, div#chiquita, div#pharita, div#rami, div#rora, div#ruka {
+div#ahyeon, div#asa, div#chiquita, div#pharita, div#rami, div#rora, div#ruka{
     background-color: rgba(0, 0, 0, 0.459);
     position: absolute; /* Adicionado */
-    bottom: 0; /* Adicionado */
-    left: 0; /* Adicionado */
-    margin: 10px;
     border-radius: 10px;
-    width: 355px;
+    bottom: 10px; /* Alinha a parte inferior com a parte inferior do pai (perfil) */
+    left: 50%; /* Move o início da div para o centro horizontal do pai */
+    transform: translateX(-50%); /* Desloca a div metade de sua própria largura para a esquerda, centralizando-a */
+    width: 95%; /* Ajuste a largura conforme necessário */
+    /* Outros estilos como background-color, padding, etc. */
+    text-align: left;
+    transform: translateX(-50%);
+    z-index: 1;
 
 }
 

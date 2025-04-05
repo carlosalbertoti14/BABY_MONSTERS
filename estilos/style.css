@@ -8,7 +8,7 @@
     --cor5: #3d061d;
 
     --fonte-padrao: Arial, Verdana, Helvetica, sans-serif;
-    --fonte-destaque: "Bebas Neue", cursive;
+    --fonte-destaque: "Arial Black", cursive;
     --fonte-android: "Android", cursive;
 }
 
@@ -19,10 +19,40 @@
    text-decoration: none;
 }
 
+h1{
+
+}
+
+h2{
+    font-family: var(--fonte-destaque);
+    color: var(--cor2);
+    text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.644);
+    font-size: 2em;
+    text-align: center;
+}
+
+h3{
+    color: var(--cor2);
+    text-align: center;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.575);
+
+
+}
+
+h4{
+
+}
+
 h5{
     color: var(--cor4);
     text-shadow: 3px 3px 3px solid black;
 }
+
+picture img {
+    max-width: 100%;
+    height: auto; /* Mantém a proporção da imagem */
+    display: block; /* Evita espaços extras abaixo da imagem */
+  }
 
 .album img {
     width: 100%; /* Faz a imagem ocupar 100% da largura do container */
@@ -84,6 +114,139 @@ span.infoboxshow {
     z-index: 100; /* Garante que o parágrafo apareça acima de outros elementos */
 }
 
+/****************************CONFIG CARROCEL*************************/
+
+
+div#mascara_carrocel{
+    background-color: black;
+    overflow: hidden;
+    width: 100%; 
+    padding: 10px 0 10px 0;
+}
+
+.swiper-container {
+    width: 340px; /* Ajuste a largura conforme necessário */
+    margin: 0 auto;
+    position: relative;
+    
+    
+}
+
+div.carrocel_bg {
+    background-color: black;
+    width: 100vwpx;
+    height: auto;
+    padding: 30px;
+ 
+   
+}
+
+/* configurando os botões do carrocel*/
+
+.swiper-pagination {
+    position: absolute;
+    bottom: 10px; /* Posiciona a paginação na parte inferior do carrossel */
+    left: 50%; /* Centraliza a paginação horizontalmente */
+    transform: translateX(-50%); /* Ajusta a posição para que o centro da paginação coincida com o centro do carrossel */
+  }
+  
+  .swiper-button-prev,
+  .swiper-button-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px; /* Largura dos botões */
+    height: 30px; /* Altura dos botões */
+    background-color: #ffffff8a; /* Cor de fundo dos botões */
+    border-radius: 50%; /* Arredonda os cantos dos botões */
+    color: #000; /* Cor do texto dos botões */
+    font-size: 30px; /* Tamanho da fonte dos botões */
+    text-align: center; /* Centraliza o texto nos botões */
+    cursor: pointer; /* Muda o cursor para mão ao passar o mouse sobre os botões */
+  }
+  
+  .swiper-button-prev {
+    right: calc(100%); /* Posiciona o botão à esquerda do carrossel, com uma margem de 10px e 50% da largura do carrossel */
+  }
+  
+  .swiper-button-next {
+    left: calc(100%); /* Posiciona o botão à direita do carrossel, com uma margem de 10px e 50% da largura do carrossel */
+  }
+
+/* fim de configurar os botões */
+
+div.swiper-wrapper {
+    display: flex;
+    flex-direction: row; 
+}
+
+.swiper-slide {
+    background: #000000; /* Apenas para visualização */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+
+/* inicio da config transição */
+.swiper-slide a img {
+display: inline;
+width: auto;
+height: 300px;
+transition: transform 0.3s ease-in-out;
+padding: 10px;
+}
+
+/* configuraçõao do link do carrocel */
+.swiper-slide a {
+    display: block; /* Faz o link ocupar todo o espaço do slide */
+    width: 100%;
+    height: 100%;
+    
+  }
+  
+  .swiper-slide img {
+    display: block; /* Garante que a imagem também se comporte como bloco dentro do link */
+    width: 100%; /* Faz a imagem ocupar a largura do link */
+    height: auto; /* Mantém a proporção */
+    object-fit: cover; /* Garante que a imagem cubra o espaço sem deformar (pode variar dependendo do seu layout) */
+  }
+
+  /*fim configuraçõao do link do carrocel*/
+
+/* configura quando esta em foco */
+.swiper-slide-scaled img {
+transform: scale(1.3); /* irá aumentar o tamanho da imagem ativa */
+opacity: 1; /* Garante que a imagem ativa tenha opacidade total de 100% */
+
+
+    }
+/* configura quando NÃO esta em foco */
+.swiper-slide:not(.swiper-slide-scaled) img {
+opacity: 0.30; /* Diminui a opacidade para 60% */
+transform 0.3s ease-in-out;
+transition: opacity 0.5s ease-in-out; /* Adiciona uma transição suave para a opacidade */
+
+}
+
+
+.swiper-slide-scaled {
+ z-index: 10; /* Define um z-index GARANTE QUE A IMAGEM FIQUE POR CIMA DAS OUTRAS*/
+}
+
+/* fin da config transição */
+.swiper-pagination {
+    position: absolute;
+   
+
+ }
+
+/****************************FIM DA CONFIG CARROCEL*************************/
+
+
+
+
 
 /*************** FIM DA CONFIGURAÇÃO DA CAIXA DE EXPLICAÇÃO*************/
 
@@ -95,7 +258,7 @@ video {
 
   
 }
-/**********************CONFIG BOTÃO************************************/
+/**********************CONFIG BOTÃO DO SOM************************************/
 .sound-button {
     position: absolute;
     top: 10px; /* Posiciona o botão no canto do vídeo */
@@ -115,7 +278,7 @@ video {
     background-color: rgba(0, 0, 0, 0.8); /* Fundo mais escuro ao passar o mouse */
 }
 
-/**********************FIM CONFIG BOTÃO************************************/
+/**********************FIM CONFIG BOTÃO DO SOM************************************/
 
 img#substitute-image {
     display: none;

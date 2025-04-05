@@ -104,4 +104,36 @@
             });
         });
 
+        //SCRIPT DO CARROCEL
+
+    
+        const swiper = new Swiper('.js-banner-swiper', {
+            loop: true,
+            slidesPerView: 'auto',
+            centeredSlides: true,
+            spaceBetween: 20,
+            pagination: {
+              el: '.swiper-pagination',
+              clickable: true,
+            },
+            navigation: {
+              nextEl: '.swiper-button-next',
+              prevEl: '.swiper-button-prev',
+            },
+            autoplay: {
+              delay: 3000,
+              disableOnInteraction: false, // Opcional: impede que o autoplay pare ao interagir com o carrossel
+            },
+            on: {
+              slideChangeTransitionStart: function () {
+                swiper.slides.forEach(slide => {
+                  slide.classList.remove('swiper-slide-scaled');
+                });
+                swiper.slides[swiper.activeIndex].classList.add('swiper-slide-scaled');
+              },
+            },
+          });
+
+        //FIN DO SCRIPT CARROCEL
+
         // 
