@@ -122,8 +122,9 @@
             },
             autoplay: {
               delay: 3000,
-              disableOnInteraction: false, // Opcional: impede que o autoplay pare ao interagir com o carrossel
+              disableOnInteraction: false,
             },
+            speed: 900, // <---- Adicione esta linha para definir a velocidade da transição em 800ms (0.8 segundos)
             on: {
               slideChangeTransitionStart: function () {
                 swiper.slides.forEach(slide => {

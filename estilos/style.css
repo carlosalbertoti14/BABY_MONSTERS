@@ -8,6 +8,10 @@
     --cor5: #3d061d;
 
     --fonte-padrao: Arial, Verdana, Helvetica, sans-serif;
+    --fonte-strong: Anton, Boldonse, Rowdies, Alfa Slab One, Archivo Black,;
+    --fonte-mega-strong: Rubik Mono One, Bungee, Rammetto One, Holtwood One SC, Bowl One SC Bowlby One, Sigmar, Erica One, Seymour One;
+    --fonte-manuscrito: Pinyon Script, Herr Von Muellerhoff, Monsieur La Doulaise, Tilt Warp;
+    --fonte-hand-made: Rochester,  Playwrite Chile Guides, Playwrite España Guides, Playwrite Italia Tradizionale Guides, Plawrite Cuba, Stalemate, Playwrite Brasil;
     --fonte-destaque: "Bebas Neue", cursive;
     --fonte-android: "Android", cursive;
 }
@@ -34,7 +38,8 @@ h2{
 h3{
     color: var(--cor2);
     text-align: center;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.575);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.411);
+    font-weight: lighter;
 
 
 }
@@ -116,7 +121,14 @@ span.infoboxshow {
     font-weight: normal;
     text-align: start;
     z-index: 100; /* Garante que o parágrafo apareça acima de outros elementos */
+
+
 }
+
+
+
+/*************** FIM DA CONFIGURAÇÃO DA CAIXA DE EXPLICAÇÃO*************/
+
 
 /****************************CONFIG CARROCEL*************************/
 
@@ -198,7 +210,8 @@ div.swiper-wrapper {
 display: inline;
 width: auto;
 height: 300px;
-transition: transform 0.3s ease-in-out;
+
+transition: transform 0.9s ease-in-out;
 padding: 10px;
 }
 
@@ -229,14 +242,16 @@ opacity: 1; /* Garante que a imagem ativa tenha opacidade total de 100% */
 /* configura quando NÃO esta em foco */
 .swiper-slide:not(.swiper-slide-scaled) img {
 opacity: 0.30; /* Diminui a opacidade para 60% */
-transform 0.3s ease-in-out;
+transform: 0.9s ease-in-out;
 transition: opacity 0.5s ease-in-out; /* Adiciona uma transição suave para a opacidade */
+
 
 }
 
 
 .swiper-slide-scaled {
  z-index: 10; /* Define um z-index GARANTE QUE A IMAGEM FIQUE POR CIMA DAS OUTRAS*/
+ transform: 0.9s ease-in;
 }
 
 /* fin da config transição */
@@ -252,7 +267,6 @@ transition: opacity 0.5s ease-in-out; /* Adiciona uma transição suave para a o
 
 
 
-/*************** FIM DA CONFIGURAÇÃO DA CAIXA DE EXPLICAÇÃO*************/
 
 
 video {
@@ -415,11 +429,12 @@ div#menu > nav a {
     background-color: rgb(231, 37, 183);
     color: white;
     padding: 10px;
-    width: auto; /* Mantém o ajuste da largura */
+    /* width: auto; */ /* Mantém o ajuste da largura */
    /*  margin: 5px; */
     border-radius: 5px;
     text-decoration: none;
     text-align: center;
+    min-width: 70px;
 
 
 }
@@ -440,12 +455,12 @@ div#menu > nav a {
 
 
     div#menu  > nav a {
-       width: auto; /* Mantém o ajuste da largura */
-       
+      /*  width: auto;  *//* Mantém o ajuste da largura */
+       min-width: 40px;
         padding: 5px 10px 5px 10px; /* Reduz o espaçamento */
        /*  margin-left: 1px; */
         font-size: 0.8em; /* Reduz o tamanho da fonte */
-
+     
         /* text-align: center; */
 
         
