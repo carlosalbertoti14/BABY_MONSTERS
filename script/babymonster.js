@@ -137,4 +137,37 @@
 
         //FIN DO SCRIPT CARROCEL
 
+
+          //CLIQUE MAGICO .GIF
+
+          document.addEventListener('click', function(event) {
+            const cliqueX = event.pageX; // Use pageX
+            const cliqueY = event.pageY; // Use pageY
+          
+            const caminhoGif ="midia/clique_magico.gif";
+          
+            const gifElement = document.createElement('img');
+            gifElement.src = caminhoGif;
+            gifElement.style.position = 'absolute';
+            gifElement.style.zIndex = '9999';
+          
+            document.body.appendChild(gifElement);
+          
+            gifElement.onload = function() {
+              const offsetX = gifElement.offsetWidth / 2;
+              const offsetY = gifElement.offsetHeight / 2;
+          
+              gifElement.style.left = `${cliqueX - offsetX}px`;
+              gifElement.style.top = `${cliqueY - offsetY}px`;
+          
+              setTimeout(function() {
+                gifElement.remove();
+              }, 1500);
+            };
+          
+            gifElement.onerror = function() {
+              console.error("Erro ao carregar o GIF:", caminhoGif);
+            };
+          });
+          //FIN CLIQUE MAGICO .GIF
         // 
