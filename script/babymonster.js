@@ -1,28 +1,35 @@
+const video = document.getElementById('intro-video');
+        const image = document.getElementById('substitute-image');
+        const homeButton = document.querySelector('nav a:first-child'); // Primeiro botão, que é "HOME"
+        const soundButton = document.getElementById('sound-toggle');
 
-    //SCRIPT PARA O SITE BABYMONSTER BRASIL
+        //CONFIGURAÇÃO DO VÍDEO QUANDO TERMINA
+        video.addEventListener('ended', () => {
+            video.style.display = 'none';
+            image.style.display = 'flex';
+        });
 
-            const video = document.getElementById('intro-video');
-            const image = document.getElementById('substitute-image');
-            const homeButton = document.querySelector('nav a:first-child'); // Primeiro botão, que é "HOME"
-            
-            //CONFIGURAÇÃO DO VÍDEO QUANDO TERMINA
-            video.addEventListener('ended', () => {
-                video.style.display = 'none';
-                image.style.display = 'flex';
-            });
-            
+        // CONFIGURAÇÃO PARA QUANDO A IMAGEM FOR CLICADA
+        image.addEventListener('click', () => {
+            video.pause(); // Pausa o vídeo antes de voltar ao início
+            video.currentTime = 0; // Define o tempo do vídeo para o início
+            video.muted = false;   // Ativa o som do vídeo
+            video.style.display = 'flex'; // Mostra o vídeo novamente
+            image.style.display = 'none'; // Esconde a imagem
+            soundButton.textContent = '🔊'; // Garante que o ícone de som esteja ligado
+            video.play(); // Inicia a reprodução do vídeo
+        });
 
-            //CONFIGURAÇÃO DO DE ATIVAÇÃO DO ICONE DE SOM
-            const soundButton = document.getElementById('sound-toggle');
-            soundButton.addEventListener('click', () => {
-                if (video.muted) {
-                    video.muted = false; // Ativar som
-                    soundButton.textContent = '🔊'; // Ícone de som ligado
-                } else {
-                    video.muted = true; // Desativar som
-                    soundButton.textContent = '🔇'; // Ícone de som desligado
-                }
-            });
+        //CONFIGURAÇÃO DO DE ATIVAÇÃO DO ICONE DE SOM
+        soundButton.addEventListener('click', () => {
+            if (video.muted) {
+                video.muted = false; // Ativar som
+                soundButton.textContent = '🔊'; // Ícone de som ligado
+            } else {
+                video.muted = true; // Desativar som
+                soundButton.textContent = '🔇'; // Ícone de som desligado
+            }
+        });
 
 
              // Função para segurar a barra de menus no topo.
