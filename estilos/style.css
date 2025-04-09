@@ -265,9 +265,44 @@ transition: opacity 0.5s ease-in-out; /* Adiciona uma transição suave para a o
 
 
 
+/****************************CONFIG ANIVERSARIO*************************/
+
+section#SECniver {
+    display: NONE;
+    background-image: url(../midia/ANIVERSÁRIO_BG.jpg);
+    background-repeat: no-repeat;
+    background-color: black;
+    width: 100%;               /* Agora ocupa 100% da largura da tela */
+    max-width: 800px;          /* Mas nunca passa de 800px */
+    margin: 0 auto;            /* Centraliza horizontalmente */
+}
+
+div#DIVniver {
+    display: flex;
+    flex-flow: column;
+    height: 680px;              /* Deixe a altura se ajustar ao conteúdo */
+    width: 100%;
+    justify-content: center;
+    align-items: flex-end;
+    padding-bottom: 0px;      /* Espaço no fundo para não colar a última img */
+}
+
+div#DIVniver img {
+    display: block;
+    width: 80%;                /* Ocupa 80% da largura da div, se ajusta em telas menores */
+    max-width: 300px;          /* Mas nunca passa de 300px */
+    padding: 5px 0px 5px 5px;
+   /*  box-shadow: 5px 5px 15px rgba(22, 22, 22, 0.5); */
+}
+
+/* Aumenta espaço apenas na última imagem */
+div#DIVniver img:last-child {
+    margin-bottom: 0;
+}
 
 
 
+/****************************FIM DA CONFIG ANIVERSARIO*************************/
 
 video {
     width: 100%; /* Faz com que o vídeo acompanhe a largura da tela */

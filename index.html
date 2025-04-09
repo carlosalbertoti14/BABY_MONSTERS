@@ -76,7 +76,7 @@
                 
                         <P style="text-align: center;" ><strong>BABYMONSTER: A Nova Sensação Monstruosa da YG Entertainment:</strong></P><br>
                         
-                        <P>&emsp;&emsp; BABYMONSTER marca o aguardado retorno da YG Entertainment ao cenário de grupos femininos, sendo o primeiro lançamento da agência nesse formato em aproximadamente sete anos. Este grupo multinacional é composto por talentosas integrantes da Coreia do Sul, Tailândia e Japão, trazendo uma diversidade global para o universo do K-pop.</P>
+                        <P>&emsp;&emsp; BABYMONSTER marca o aguardado retorno da <a href="https://www.ygfamily.com/en/artists/babymonster/main" target="_blank">YG Entertainment</a> ao cenário de grupos femininos, sendo o primeiro lançamento da agência nesse formato em aproximadamente sete anos. Este grupo multinacional é composto por talentosas integrantes da Coreia do Sul, Tailândia e Japão, trazendo uma diversidade global para o universo do K-pop.</P>
                         
                         <br><P>&emsp;&emsp;Desde sua estreia, BABYMONSTER tem se destacado como um grupo "versátil", demonstrando excelência em todas as áreas cruciais para um artista completo: vocais poderosos, coreografias impressionantes, raps marcantes e visuais cativantes. Essa combinação de talentos multifacetados rapidamente consolidou sua presença e chamou a atenção do público mundial.</P>
                         
@@ -129,9 +129,30 @@
                     </div>
                     
                     
+                    
+                <section id="SECniver">
+                    <div id="DIVniver">
+                        
+                        <img id="NIVERchiquita" src="midia/CHIQUITA17NIVER.png" alt="chiquita 17/02">
+                        <img id="NIVERluka" src="midia/LUKA20NIVER.png" alt="Ruka 20/03">
+                        <img id="NIVERahyeon" src="midia/AHYEON11NIVER.png" alt="Ahyeon 11/04">
+                        <img id="NIVERasa" src="midia/ASA17NIVER.png" alt="Asa 17/04">
+                        <img id="NIVERrora" src="midia/RORA14NIVER.png" alt="Rora 14/08">
+                        <img id="NIVERpharita" src="midia/PHARITA26NIVER.png" alt="Pharita 26/08">
+                        <img id="NIVERrami" src="midia/RAMI17NIVER.png" alt="Rami 17/10">
+
+
+                    </div>
+
+                </section>
+
+
+
+
 
 
                 <picture class="cnn"><img src="midia/BABYMONSTERS E CNN.png" alt=""></picture>
+
 
 
 
@@ -274,11 +295,58 @@ Vocês podem mandar uma mensagem para os fãs brasileiros?</section>
 
         </div>
 
-        <script>  
-        
-
-          
-          </script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const imagens = document.querySelectorAll('#DIVniver img');
+                const mesAtual = new Date().getMonth() + 1; // mês atual (1 a 12)
+                let encontrouAniversariante = false;
+            
+                imagens.forEach(img => {
+                    const alt = img.alt.trim(); // Ex: "Rami 17/10"
+                    const partes = alt.split(" ");
+                    if (partes.length === 2) {
+                        const data = partes[1].split("/");
+                        const mesAniversario = parseInt(data[1]);
+            
+                        if (mesAniversario === mesAtual) {
+                            img.style.display = "block";
+                            encontrouAniversariante = true;
+                        } else {
+                            img.style.display = "none";
+                        }
+                    } else {
+                        img.style.display = "none";
+                    }
+                });
+            
+                // Só exibe a section se encontrou aniversariante
+                if (encontrouAniversariante) {
+                    document.getElementById("SECniver").style.display = "block";
+                }
+            });
+            
+            // CALCULA IDADE
+            function calcularEAtualizarIdade() {
+                const dataNascimentoTexto = document.getElementById('dataNascimento').textContent;
+                const [dia, mes, ano] = dataNascimentoTexto.split('/').map(Number);
+                const dataNascimento = new Date(ano, mes - 1, dia);
+            
+                const hoje = new Date();
+                let idade = hoje.getFullYear() - dataNascimento.getFullYear();
+                const mesAtual = hoje.getMonth();
+                const diaAtual = hoje.getDate();
+            
+                if (mesAtual < dataNascimento.getMonth() || 
+                   (mesAtual === dataNascimento.getMonth() && diaAtual < dataNascimento.getDate())) {
+                    idade--;
+                }
+            
+                document.getElementById('idade').textContent = idade;
+            }
+            
+            window.onload = calcularEAtualizarIdade;
+            </script>
+            
 
 
 
@@ -327,7 +395,7 @@ Vocês podem mandar uma mensagem para os fãs brasileiros?</section>
             <p>Site Oficial: <a href="https://www.ygfamily.com/en/artists/babymonster/main" target="_blank">YG Entertainment</a></p>
             
             <p>Site Oficial JAPONÊS: <a href="https://yg-babymonster-official.jp/" target="_blank">BABYMONSTER</a></p>
-            <P>SITE CRIADO POR: C. A. L. PINHEIRO, em março de 2025.</P>
+            <P>SITE CRIADO POR: C. A. L. PINHEIRO.</P>
 
 
         </h5>

@@ -145,36 +145,42 @@ const video = document.getElementById('intro-video');
         //FIN DO SCRIPT CARROCEL
 
 
+
           //CLIQUE MAGICO .GIF
 
           document.addEventListener('click', function(event) {
-            const cliqueX = event.pageX; // Use pageX
-            const cliqueY = event.pageY; // Use pageY
-          
-            const caminhoGif ="midia/clique_magico.gif";
-          
+            const cliqueX = event.pageX;
+            const cliqueY = event.pageY;
+
+            // Adiciona um número aleatório para forçar novo carregamento
+            const caminhoGif = "midia/clique_magico.gif?rand=" + Date.now();
+
             const gifElement = document.createElement('img');
             gifElement.src = caminhoGif;
             gifElement.style.position = 'absolute';
             gifElement.style.zIndex = '9999';
-          
+            gifElement.style.pointerEvents = 'none';
+
             document.body.appendChild(gifElement);
-          
+
             gifElement.onload = function() {
-              const offsetX = gifElement.offsetWidth / 2;
-              const offsetY = gifElement.offsetHeight / 2;
-          
-              gifElement.style.left = `${cliqueX - offsetX}px`;
-              gifElement.style.top = `${cliqueY - offsetY}px`;
-          
-              setTimeout(function() {
+                const offsetX = gifElement.offsetWidth / 2;
+                const offsetY = gifElement.offsetHeight / 2;
+
+                gifElement.style.left = `${cliqueX - offsetX}px`;
+                gifElement.style.top = `${cliqueY - offsetY}px`;
+
+                setTimeout(function() {
                 gifElement.remove();
-              }, 1500);
+                }, 1500); // Duração da animação
             };
-          
+
             gifElement.onerror = function() {
-              console.error("Erro ao carregar o GIF:", caminhoGif);
+                console.error("Erro ao carregar o GIF:", caminhoGif);
             };
-          });
+            });
+
+
           //FIN CLIQUE MAGICO .GIF
+  
         // 
