@@ -231,21 +231,25 @@ const video = document.getElementById('intro-video');
 
 let ultimoSomArrastar = null;
 let podeTocarSomArrastar = false;
-let posicaoFixaX = null; // posição horizontal fixa do toque
+let posicaoFixaX = null;
+let ultimaTouchY = null;
+let direcao = 1; // 1 = baixo, -1 = cima
 
-// Ativa o som após qualquer interação
+// Ativa som após qualquer interação
 document.addEventListener('click', () => { podeTocarSomArrastar = true; });
 document.addEventListener('touchstart', (e) => {
   podeTocarSomArrastar = true;
 
-  // Captura a posição X do primeiro toque e fixa
   if (e.touches.length > 0) {
-    posicaoFixaX = e.touches[0].pageX;
+    const touch = e.touches[0];
+    posicaoFixaX = touch.pageX;
+    ultimaTouchY = touch.pageY;
   }
 });
 
 document.addEventListener('touchend', () => {
-  posicaoFixaX = null; // Reseta a posição quando o toque termina
+  posicaoFixaX = null;
+  ultimaTouchY = null;
 });
 
 function criarTrilhaMagica(x, y) {
@@ -261,7 +265,7 @@ function criarTrilhaMagica(x, y) {
 
   document.body.appendChild(gifElement);
 
-  // Som
+  // Toca som (se anterior terminou)
   if (podeTocarSomArrastar && (!ultimoSomArrastar || ultimoSomArrastar.ended)) {
     ultimoSomArrastar = new Audio("sons/ARRASTAR.mp3");
     ultimoSomArrastar.play().catch((e) => {
@@ -284,32 +288,37 @@ function criarTrilhaMagica(x, y) {
   };
 }
 
-// Mouse (normal)
-let ultimaPosicao = 0;
+// === DESKTOP: Mouse move ===
+let ultimaPosicaoMouse = 0;
 document.addEventListener('mousemove', function (e) {
   const distanciaMinima = 30;
   const atual = e.pageY + e.pageX;
 
-  if (Math.abs(atual - ultimaPosicao) > distanciaMinima) {
-    ultimaPosicao = atual;
+  if (Math.abs(atual - ultimaPosicaoMouse) > distanciaMinima) {
+    ultimaPosicaoMouse = atual;
     criarTrilhaMagica(e.pageX, e.pageY);
   }
 });
 
-// Touch (com ponto fixo X)
-let ultimaScrollY = window.scrollY;
-
+// === CELULAR: Touch move ===
 document.addEventListener('touchmove', function (e) {
-  const novoScrollY = window.scrollY;
-  const deltaY = Math.abs(novoScrollY - ultimaScrollY);
+  if (e.touches.length > 0 && posicaoFixaX !== null && ultimaTouchY !== null) {
+    const touch = e.touches[0];
+    const deltaY = touch.pageY - ultimaTouchY;
 
-  if (posicaoFixaX !== null && deltaY > 20) { // Apenas se houver movimento e toque fixado
-    ultimaScrollY = novoScrollY;
+    if (Math.abs(deltaY) > 25) {
+      direcao = deltaY > 0 ? 1 : -1;
 
-    const y = window.scrollY + 50 + Math.random() * 80; // Altura relativa à tela com variação
-    criarTrilhaMagica(posicaoFixaX, y);
+      // Ponto fixo no X, direção vertical baseada no gesto
+      const y = ultimaTouchY + direcao * 50 + Math.random() * 30;
+
+      criarTrilhaMagica(posicaoFixaX, y);
+
+      ultimaTouchY = touch.pageY;
+    }
   }
 });
+
 
     
 
