@@ -345,18 +345,20 @@ document.addEventListener('mousemove', function (e) {
 
 // ** Código para Mobile **
 
-let ultimoSomArrastarMobile = null;
-let podeTocarSomArrastarMobile = false;
+// ** Código para Mobile - Eixo X **
 
-// Ativa o som de arrastar após qualquer toque
-document.addEventListener('touchstart', () => { podeTocarSomArrastarMobile = true; });
+let ultimoSomArrastarX = null;
+let podeTocarSomArrastarX = false;
 
-function criarTrilhaMagicaMobile(x, y) {
+// Ativa o som de arrastar no eixo X após qualquer toque
+document.addEventListener('touchstart', () => { podeTocarSomArrastarX = true; });
+
+function criarTrilhaMagicaX(x) {
   const caminhoGif = "midia/clique_magico.gif?rand=" + Date.now();
 
   const gifElement = document.createElement('img');
   gifElement.src = caminhoGif;
-  gifElement.style.position = 'absolute';
+  gifElement.style.position = 'fixed'; // Usamos 'fixed' para não rolar com a página
   gifElement.style.zIndex = '9999';
   gifElement.style.pointerEvents = 'none';
   gifElement.style.width = '100px';
@@ -364,36 +366,94 @@ function criarTrilhaMagicaMobile(x, y) {
 
   document.body.appendChild(gifElement);
 
-  // Toca o som apenas se permitido e se o som anterior terminou
-  if (podeTocarSomArrastarMobile && (!ultimoSomArrastarMobile || ultimoSomArrastarMobile.ended)) {
-    ultimoSomArrastarMobile = new Audio("sons/ARRASTAR.mp3");
-    ultimoSomArrastarMobile.play().catch((e) => {
-      console.warn("Erro ao tocar som de arrastar (mobile):", e);
+  // Toca o som apenas se permitido e se o som anterior terminou (para o eixo X)
+  if (podeTocarSomArrastarX && (!ultimoSomArrastarX || ultimoSomArrastarX.ended)) {
+    ultimoSomArrastarX = new Audio("sons/ARRASTAR.mp3");
+    ultimoSomArrastarX.play().catch((e) => {
+      console.warn("Erro ao tocar som de arrastar (eixo X):", e);
     });
   }
 
   gifElement.onload = function () {
     const offsetX = gifElement.offsetWidth / 2;
     const offsetY = gifElement.offsetHeight / 2;
+    const y = window.innerHeight / 2; // Mantém o GIF no centro vertical da tela
 
     gifElement.style.left = `${x - offsetX}px`;
+    gifElement.style.top = `${y - offsetY}px`; // Centraliza verticalmente
+
+    setTimeout(() => gifElement.remove(), 1000);
+  };
+
+  gifElement.onerror = function () {
+    console.error("Erro ao carregar o GIF (eixo X):", caminhoGif);
+  };
+}
+
+// Touch - Movimento no Eixo X
+document.addEventListener('touchmove', function (e) {
+  if (e.touches.length > 0) {
+    const touch = e.touches[0];
+    criarTrilhaMagicaX(touch.pageX);
+  }
+});
+
+//******FIM DA CONFIGURAÇÃO DO MAUSE MAGICO (MOBILE - EIXO X)****
+
+// ** Código para Mobile - Scroll Y **
+
+let ultimoSomScrollY = null;
+let podeTocarSomScrollY = false;
+
+// Ativa o som de arrastar no scroll Y após qualquer toque
+document.addEventListener('touchstart', () => { podeTocarSomScrollY = true; });
+
+function criarTrilhaMagicaScrollY(y) {
+  const caminhoGif = "midia/clique_magico.gif?rand=" + Date.now();
+
+  const gifElement = document.createElement('img');
+  gifElement.src = caminhoGif;
+  gifElement.style.position = 'fixed'; // Essencial para não rolar com a página
+  gifElement.style.zIndex = '9999';
+  gifElement.style.pointerEvents = 'none';
+  gifElement.style.width = '100px';
+  gifElement.style.height = '100px';
+
+  document.body.appendChild(gifElement);
+
+  // Toca o som apenas se permitido e se o som anterior terminou (para o scroll Y)
+  if (podeTocarSomScrollY && (!ultimoSomScrollY || ultimoSomScrollY.ended)) {
+    ultimoSomScrollY = new Audio("sons/ARRASTAR.mp3");
+    ultimoSomScrollY.play().catch((e) => {
+      console.warn("Erro ao tocar som de arrastar (scroll Y):", e);
+    });
+  }
+
+  gifElement.onload = function () {
+    const offsetX = gifElement.offsetWidth / 2;
+    const offsetY = gifElement.offsetHeight / 2;
+    const x = window.innerWidth / 2; // Mantém o GIF no centro horizontal da tela
+
+    gifElement.style.left = `${x - offsetX}px`; // Centraliza horizontalmente
     gifElement.style.top = `${y - offsetY}px`;
 
     setTimeout(() => gifElement.remove(), 1000);
   };
 
   gifElement.onerror = function () {
-    console.error("Erro ao carregar o GIF (mobile):", caminhoGif);
+    console.error("Erro ao carregar o GIF (scroll Y):", caminhoGif);
   };
 }
 
-// Touch
+// Touch - Scroll Y
 document.addEventListener('touchmove', function (e) {
   if (e.touches.length > 0) {
     const touch = e.touches[0];
-    criarTrilhaMagicaMobile(touch.pageX, touch.clientY); // <---- AQUI A MUDANÇA!
+    criarTrilhaMagicaScrollY(touch.clientY);
   }
 });
+
+//******FIM DA CONFIGURAÇÃO DO MAUSE MAGICO (MOBILE - SCROLL Y)****
 
 //******FIM DA CONFIGURAÇÃO DO MAUSE MAGICO (MOBILE)****
 
