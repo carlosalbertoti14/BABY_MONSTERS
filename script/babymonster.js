@@ -285,77 +285,155 @@ if (!('ontouchstart' in window)) {
 
 
 
-// Guarda a posição inicial do toque
-let posicaoInicialToque = null;
+// ** Código para Desktop **
 
-// Guarda a última posição de rolagem da tela
-let ultimaPosYScroll = window.scrollY;
+let ultimoSomArrastarDesktop = null;
+let podeTocarSomArrastarDesktop = false;
 
-// Acumula o quanto a rolagem mudou desde o toque
-let acumuladorY = 0;
+// Ativa o som de arrastar após qualquer clique
+document.addEventListener('click', () => { podeTocarSomArrastarDesktop = true; });
 
-// Quando o usuário toca na tela
-document.addEventListener('touchstart', function (e) {
+function criarTrilhaMagicaDesktop(x, y) {
+  const caminhoGif = "midia/clique_magico.gif?rand=" + Date.now();
+
+  const gifElement = document.createElement('img');
+  gifElement.src = caminhoGif;
+  gifElement.style.position = 'absolute';
+  gifElement.style.zIndex = '9999';
+  gifElement.style.pointerEvents = 'none';
+  gifElement.style.width = '100px';
+  gifElement.style.height = '100px';
+
+  document.body.appendChild(gifElement);
+
+  // Toca o som apenas se permitido e se o som anterior terminou
+  if (podeTocarSomArrastarDesktop && (!ultimoSomArrastarDesktop || ultimoSomArrastarDesktop.ended)) {
+    ultimoSomArrastarDesktop = new Audio("sons/ARRASTAR.mp3");
+    ultimoSomArrastarDesktop.play().catch((e) => {
+      console.warn("Erro ao tocar som de arrastar (desktop):", e);
+    });
+  }
+
+  gifElement.onload = function () {
+    const offsetX = gifElement.offsetWidth / 2;
+    const offsetY = gifElement.offsetHeight / 2;
+
+    gifElement.style.left = `${x - offsetX}px`;
+    gifElement.style.top = `${y - offsetY}px`;
+
+    setTimeout(() => gifElement.remove(), 1000);
+  };
+
+  gifElement.onerror = function () {
+    console.error("Erro ao carregar o GIF (desktop):", caminhoGif);
+  };
+}
+
+// Mouse
+let ultimaPosicaoDesktop = 0;
+document.addEventListener('mousemove', function (e) {
+  const distanciaMinima = 30;
+  const atual = e.pageY + e.pageX;
+
+  if (Math.abs(atual - ultimaPosicaoDesktop) > distanciaMinima) {
+    ultimaPosicaoDesktop = atual;
+    criarTrilhaMagicaDesktop(e.pageX, e.pageY);
+  }
+});
+
+//******FIM DA CONFIGURAÇÃO DO MAUSE MAGICO (DESKTOP)****
+
+// ** Código para Mobile **
+
+
+let ultimoSomArrastarMobile = null;
+let podeTocarSomArrastarMobile = false;
+const trilhaMagicaMobile = []; // Array para guardar os elementos GIF da trilha
+const velocidadeDeslocamento = 5; // Ajuste a velocidade do deslocamento dos GIFs antigos
+
+// Ativa o som de arrastar após qualquer toque
+document.addEventListener('touchstart', () => { podeTocarSomArrastarMobile = true; });
+
+function criarTrilhaMagicaMobile(x, y) {
+  const caminhoGif = "midia/clique_magico.gif?rand=" + Date.now();
+
+  const gifElement = document.createElement('img');
+  gifElement.src = caminhoGif;
+  gifElement.style.position = 'absolute';
+  gifElement.style.zIndex = '9999';
+  gifElement.style.pointerEvents = 'none';
+  gifElement.style.width = '100px';
+  gifElement.style.height = '100px';
+  gifElement.style.left = `${x - gifElement.offsetWidth / 2}px`;
+  gifElement.style.top = `${y - gifElement.offsetHeight / 2}px`;
+
+  document.body.appendChild(gifElement);
+  trilhaMagicaMobile.push(gifElement); // Adiciona o novo GIF ao array da trilha
+
+  // Toca o som apenas se permitido e se o som anterior terminou
+  if (podeTocarSomArrastarMobile && (!ultimoSomArrastarMobile || ultimoSomArrastarMobile.ended)) {
+    ultimoSomArrastarMobile = new Audio("sons/ARRASTAR.mp3");
+    ultimoSomArrastarMobile.play().catch((e) => {
+      console.warn("Erro ao tocar som de arrastar (mobile):", e);
+    });
+  }
+
+  gifElement.onerror = function () {
+    console.error("Erro ao carregar o GIF (mobile):", caminhoGif);
+  };
+}
+
+let posicaoYAnterior = null;
+
+document.addEventListener('touchmove', function (e) {
   if (e.touches.length > 0) {
     const touch = e.touches[0];
+    const touchX = touch.pageX;
+    const touchY = touch.pageY;
 
-    // Salva a posição inicial do dedo na tela
-    posicaoInicialToque = {
-      x: touch.pageX,
-      y: touch.pageY
-    };
+    criarTrilhaMagicaMobile(touchX, touchY);
 
-    // Salva a posição atual da rolagem
-    ultimaPosYScroll = window.scrollY;
+    // Atualiza a posição dos GIFs antigos
+    if (posicaoYAnterior !== null) {
+      const deltaY = touchY - posicaoYAnterior;
 
-    // Zera o acumulador de rolagem
-    acumuladorY = 0;
+      trilhaMagicaMobile.forEach(gif => {
+        const currentTop = parseInt(gif.style.top) || 0;
+        gif.style.top = `${currentTop - deltaY * velocidadeDeslocamento}px`;
+
+        // Opcional: Remova os GIFs que saem da tela para otimizar a performance
+        const limiteSuperior = -gif.offsetHeight;
+        const limiteInferior = window.innerHeight + gif.offsetHeight;
+        if (currentTop < limiteSuperior || currentTop > limiteInferior) {
+          gif.remove();
+          const index = trilhaMagicaMobile.indexOf(gif);
+          if (index > -1) {
+            trilhaMagicaMobile.splice(index, 1);
+          }
+        }
+      });
+    }
+    posicaoYAnterior = touchY;
+  } else {
+    posicaoYAnterior = null; // Reseta a posição quando não há toque
   }
 });
 
-// Quando a tela é rolada
-window.addEventListener('scroll', function () {
-  // Se não houve toque, não faz nada
-  if (!posicaoInicialToque) return;
-
-  // Pega a nova posição da rolagem
-  const novaPosYScroll = window.scrollY;
-
-  // Calcula quanto rolou desde a última verificação
-  const delta = novaPosYScroll - ultimaPosYScroll;
-
-  // Só continua se a rolagem foi significativa
-  if (Math.abs(delta) > 5) {
-    // Atualiza a última posição de rolagem
-    ultimaPosYScroll = novaPosYScroll;
-
-    // Define um fator de suavidade para o movimento do efeito
-    const fatorSuavidade = 1; // ajuste esse valor para ficar mais lento ou mais rápido
-
-    // Atualiza o acumulador com base na rolagem
-    acumuladorY += delta * fatorSuavidade;
-
-    // Calcula a posição onde o efeito deve aparecer
-    const x = posicaoInicialToque.x;
-    const y = posicaoInicialToque.y + acumuladorY;
-
-    // Cria o efeito na nova posição
-    criarTrilhaMagica(x, y);
-  }
+document.addEventListener('touchend', () => {
+  posicaoYAnterior = null; // Reseta a posição quando o toque termina
+  // Opcional: Limpar a trilha completamente ao soltar o dedo
+  // trilhaMagicaMobile.forEach(gif => gif.remove());
+  // trilhaMagicaMobile.length = 0;
 });
 
+document.addEventListener('touchcancel', () => {
+  posicaoYAnterior = null; // Reseta a posição em caso de cancelamento do toque
+  // Opcional: Limpar a trilha completamente em caso de cancelamento
+  // trilhaMagicaMobile.forEach(gif => gif.remove());
+  // trilhaMagicaMobile.length = 0;
+});
 
-
-
-
-
-
-
-
-
-
-    
-
+//******FIM DA CONFIGURAÇÃO DO MAUSE MAGICO (MOBILE)****
     
 
 //******FIM DA CONFIGURAÇÃO DO MAUSE MAGICO****

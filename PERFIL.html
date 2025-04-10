@@ -331,58 +331,50 @@
 
 <script>
 
-    //******INICIOM DA CONFIGURAÇÃO DO MAUSE MAGICO****
-    // ============================
-    // CLIQUE MÁGICO (.GIF + SOM)
-    // ============================
-  
-    document.addEventListener('click', function (event) {
-      const cliqueX = event.pageX;
-      const cliqueY = event.pageY;
-  
-      // Caminho aleatório para forçar reload do GIF
-      const caminhoGif = "midia/clique_magico.gif?rand=" + Date.now();
-  
-      // Cria imagem
-      const gifElement = document.createElement('img');
-      gifElement.src = caminhoGif;
-      gifElement.style.position = 'absolute';
-      gifElement.style.zIndex = '9999';
-      gifElement.style.pointerEvents = 'none';
-  
-      document.body.appendChild(gifElement);
-  
-      // Posiciona e remove depois de um tempo
-      gifElement.onload = function () {
-        const offsetX = gifElement.offsetWidth / 2;
-        const offsetY = gifElement.offsetHeight / 2;
-  
-        gifElement.style.left = `${cliqueX - offsetX}px`;
-        gifElement.style.top = `${cliqueY - offsetY}px`;
-  
-        setTimeout(() => gifElement.remove(), 1500);
-      };
-  
-      gifElement.onerror = function () {
-        console.error("Erro ao carregar o GIF:", caminhoGif);
-      };
-  
-      // Toca o som do clique
-      const somClique = new Audio("sons/CLIQUE.mp3");
-      somClique.play().catch((e) => {
-        console.warn("Erro ao tocar som de clique:", e);
-      });
-    });
-  
-  
-    // ============================
-    // ARRASTAR MÁGICO (.GIF + SOM)
-    // ============================
-  
-    let ultimoSomArrastar = null;
+  //******INICIOM DA CONFIGURAÇÃO DO MAUSE MAGICO****
+// ============================
+// CLIQUE MÁGICO (.GIF + SOM)
+// ============================
+document.addEventListener('click', function (event) {
+  const cliqueX = event.pageX;
+  const cliqueY = event.pageY;
+
+  const caminhoGif = "midia/clique_magico.gif?rand=" + Date.now();
+
+  const gifElement = document.createElement('img');
+  gifElement.src = caminhoGif;
+  gifElement.style.position = 'absolute';
+  gifElement.style.zIndex = '9999';
+  gifElement.style.pointerEvents = 'none';
+
+  document.body.appendChild(gifElement);
+
+  gifElement.onload = function () {
+    const offsetX = gifElement.offsetWidth / 2;
+    const offsetY = gifElement.offsetHeight / 2;
+
+    gifElement.style.left = `${cliqueX - offsetX}px`;
+    gifElement.style.top = `${cliqueY - offsetY}px`;
+
+    setTimeout(() => gifElement.remove(), 1500);
+  };
+
+  gifElement.onerror = function () {
+    console.error("Erro ao carregar o GIF:", caminhoGif);
+  };
+
+  const somClique = new Audio("sons/CLIQUE.mp3");
+  somClique.play().catch((e) => {
+    console.warn("Erro ao tocar som de clique:", e);
+  });
+});
+
+// ============================
+// ARRASTAR MÁGICO (DESKTOP)
+// ============================
+let ultimoSomArrastar = null;
 let podeTocarSomArrastar = false;
 
-// Ativa o som de arrastar após qualquer toque ou clique
 document.addEventListener('click', () => { podeTocarSomArrastar = true; });
 document.addEventListener('touchstart', () => { podeTocarSomArrastar = true; });
 
@@ -399,7 +391,6 @@ function criarTrilhaMagica(x, y) {
 
   document.body.appendChild(gifElement);
 
-  // Toca o som apenas se permitido e se o som anterior terminou
   if (podeTocarSomArrastar && (!ultimoSomArrastar || ultimoSomArrastar.ended)) {
     ultimoSomArrastar = new Audio("sons/ARRASTAR.mp3");
     ultimoSomArrastar.play().catch((e) => {
@@ -422,25 +413,143 @@ function criarTrilhaMagica(x, y) {
   };
 }
 
+// ===== DESKTOP - MOUSEMOVE =====
+if (!('ontouchstart' in window)) {
+  let ultimaPosicao = 0;
+  document.addEventListener('mousemove', function (e) {
+    const distanciaMinima = 30;
+    const atual = e.pageY + e.pageX;
+
+    if (Math.abs(atual - ultimaPosicao) > distanciaMinima) {
+      ultimaPosicao = atual;
+      criarTrilhaMagica(e.pageX, e.pageY);
+    }
+  });
+}
+
+
+// ============================
+// ARRASTAR MÁGICO NO MOBILE
+// (com GIFs fixos que acompanham o conteúdo da tela)
+// ============================
+
+
+
+// ** Código para Desktop **
+
+let ultimoSomArrastarDesktop = null;
+let podeTocarSomArrastarDesktop = false;
+
+// Ativa o som de arrastar após qualquer clique
+document.addEventListener('click', () => { podeTocarSomArrastarDesktop = true; });
+
+function criarTrilhaMagicaDesktop(x, y) {
+  const caminhoGif = "midia/clique_magico.gif?rand=" + Date.now();
+
+  const gifElement = document.createElement('img');
+  gifElement.src = caminhoGif;
+  gifElement.style.position = 'absolute';
+  gifElement.style.zIndex = '9999';
+  gifElement.style.pointerEvents = 'none';
+  gifElement.style.width = '100px';
+  gifElement.style.height = '100px';
+
+  document.body.appendChild(gifElement);
+
+  // Toca o som apenas se permitido e se o som anterior terminou
+  if (podeTocarSomArrastarDesktop && (!ultimoSomArrastarDesktop || ultimoSomArrastarDesktop.ended)) {
+    ultimoSomArrastarDesktop = new Audio("sons/ARRASTAR.mp3");
+    ultimoSomArrastarDesktop.play().catch((e) => {
+      console.warn("Erro ao tocar som de arrastar (desktop):", e);
+    });
+  }
+
+  gifElement.onload = function () {
+    const offsetX = gifElement.offsetWidth / 2;
+    const offsetY = gifElement.offsetHeight / 2;
+
+    gifElement.style.left = `${x - offsetX}px`;
+    gifElement.style.top = `${y - offsetY}px`;
+
+    setTimeout(() => gifElement.remove(), 1000);
+  };
+
+  gifElement.onerror = function () {
+    console.error("Erro ao carregar o GIF (desktop):", caminhoGif);
+  };
+}
+
 // Mouse
-let ultimaPosicao = 0;
+let ultimaPosicaoDesktop = 0;
 document.addEventListener('mousemove', function (e) {
   const distanciaMinima = 30;
   const atual = e.pageY + e.pageX;
 
-  if (Math.abs(atual - ultimaPosicao) > distanciaMinima) {
-    ultimaPosicao = atual;
-    criarTrilhaMagica(e.pageX, e.pageY);
+  if (Math.abs(atual - ultimaPosicaoDesktop) > distanciaMinima) {
+    ultimaPosicaoDesktop = atual;
+    criarTrilhaMagicaDesktop(e.pageX, e.pageY);
   }
 });
+
+//******FIM DA CONFIGURAÇÃO DO MAUSE MAGICO (DESKTOP)****
+
+// ** Código para Mobile **
+
+let ultimoSomArrastarMobile = null;
+let podeTocarSomArrastarMobile = false;
+
+// Ativa o som de arrastar após qualquer toque
+document.addEventListener('touchstart', () => { podeTocarSomArrastarMobile = true; });
+
+function criarTrilhaMagicaMobile(x, y) {
+  const caminhoGif = "midia/clique_magico.gif?rand=" + Date.now();
+
+  const gifElement = document.createElement('img');
+  gifElement.src = caminhoGif;
+  gifElement.style.position = 'absolute';
+  gifElement.style.zIndex = '9999';
+  gifElement.style.pointerEvents = 'none';
+  gifElement.style.width = '100px';
+  gifElement.style.height = '100px';
+
+  document.body.appendChild(gifElement);
+
+  // Toca o som apenas se permitido e se o som anterior terminou
+  if (podeTocarSomArrastarMobile && (!ultimoSomArrastarMobile || ultimoSomArrastarMobile.ended)) {
+    ultimoSomArrastarMobile = new Audio("sons/ARRASTAR.mp3");
+    ultimoSomArrastarMobile.play().catch((e) => {
+      console.warn("Erro ao tocar som de arrastar (mobile):", e);
+    });
+  }
+
+  gifElement.onload = function () {
+    const offsetX = gifElement.offsetWidth / 2;
+    const offsetY = gifElement.offsetHeight / 2;
+
+    gifElement.style.left = `${x - offsetX}px`;
+    gifElement.style.top = `${y - offsetY}px`;
+
+    setTimeout(() => gifElement.remove(), 1000);
+  };
+
+  gifElement.onerror = function () {
+    console.error("Erro ao carregar o GIF (mobile):", caminhoGif);
+  };
+}
 
 // Touch
 document.addEventListener('touchmove', function (e) {
   if (e.touches.length > 0) {
     const touch = e.touches[0];
-    criarTrilhaMagica(touch.pageX, touch.pageY);
+    criarTrilhaMagicaMobile(touch.pageX, touch.pageY);
   }
 });
+
+//******FIM DA CONFIGURAÇÃO DO MAUSE MAGICO (MOBILE)****
+
+
+
+    
 
 //******FIM DA CONFIGURAÇÃO DO MAUSE MAGICO****
 
