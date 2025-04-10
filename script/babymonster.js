@@ -1,36 +1,52 @@
+//CONFIGURAÇÃO DA MIDIA DO CABEÇALHO VIDEO IMAGEM E SOM
+
 const video = document.getElementById('intro-video');
-        const image = document.getElementById('substitute-image');
-        const homeButton = document.querySelector('nav a:first-child'); // Primeiro botão, que é "HOME"
-        const soundButton = document.getElementById('sound-toggle');
+const image = document.getElementById('substitute-image');
+const homeButton = document.querySelector('nav a:first-child'); // Primeiro botão, que é "HOME"
+const soundButton = document.getElementById('sound-toggle');
 
-        //CONFIGURAÇÃO DO VÍDEO QUANDO TERMINA
-        video.addEventListener('ended', () => {
-            video.style.display = 'none';
-            image.style.display = 'flex';
-        });
+// Variáveis para controlar o estado de mudo dos sons de clique e arrastar
+let somCliqueMuted = false;
+let somArrastarMuted = false;
 
-        // CONFIGURAÇÃO PARA QUANDO A IMAGEM FOR CLICADA
-        image.addEventListener('click', () => {
-            video.pause(); // Pausa o vídeo antes de voltar ao início
-            video.currentTime = 0; // Define o tempo do vídeo para o início
-            video.muted = false;   // Ativa o som do vídeo
-            video.style.display = 'flex'; // Mostra o vídeo novamente
-            image.style.display = 'none'; // Esconde a imagem
-            soundButton.textContent = '🔊'; // Garante que o ícone de som esteja ligado
-            video.play(); // Inicia a reprodução do vídeo
-        });
+//CONFIGURAÇÃO DO VÍDEO QUANDO TERMINA
+video.addEventListener('ended', () => {
+    video.style.display = 'none';
+    image.style.display = 'flex';
+});
 
-        //CONFIGURAÇÃO DO DE ATIVAÇÃO DO ICONE DE SOM
-        soundButton.addEventListener('click', () => {
-            if (video.muted) {
-                video.muted = false; // Ativar som
-                soundButton.textContent = '🔊'; // Ícone de som ligado
-            } else {
-                video.muted = true; // Desativar som
-                soundButton.textContent = '🔇'; // Ícone de som desligado
-            }
-        });
+// CONFIGURAÇÃO PARA QUANDO A IMAGEM FOR CLICADA
+image.addEventListener('click', () => {
+    video.pause(); // Pausa o vídeo antes de voltar ao início
+    video.currentTime = 0; // Define o tempo do vídeo para o início
+    video.muted = false;    // Ativa o som do vídeo
+    video.style.display = 'flex'; // Mostra o vídeo novamente
+    image.style.display = 'none'; // Esconde a imagem
+    soundButton.textContent = '🔊'; // Garante que o ícone de som esteja ligado
+    somCliqueMuted = false; // Garante que o som de clique esteja ligado
+    somArrastarMuted = false; // Garante que o som de arrastar esteja ligado
+    video.play(); // Inicia a reprodução do vídeo
+});
 
+//CONFIGURAÇÃO DO DE ATIVAÇÃO DO ICONE DE SOM
+soundButton.addEventListener('click', () => {
+    if (video.muted) {
+        video.muted = false; // Ativar som do vídeo
+        soundButton.textContent = '🔊'; // Ícone de som ligado
+        somCliqueMuted = false; // Ativar som de clique
+        somArrastarMuted = false; // Ativar som de arrastar
+    } else {
+        video.muted = true; // Desativar som do vídeo
+        soundButton.textContent = '🔇'; // Ícone de som desligado
+        somCliqueMuted = true; // Desativar som de clique
+        somArrastarMuted = true; // Desativar som de arrastar
+    }
+});
+
+
+// FIM DA CONFIGURAÇÃO DA MIDIA DO CABEÇALHO VIDEO IMAGEM E SOM
+
+//INICIO DA CONFIGURAÇÃO DA BARRA DE MENUS
 
              // Função para segurar a barra de menus no topo.
             window.addEventListener("scroll", function () {
@@ -60,6 +76,8 @@ const video = document.getElementById('intro-video');
         }
         });
         });
+
+        //FIM DA CONFIGURAÇÃO DA BARRA DE MENUS
 
         //CONFIGURA CAIXA DE EXPLICAÇÃO
 
@@ -110,6 +128,10 @@ const video = document.getElementById('intro-video');
                 });
             });
         });
+        
+// FIM DA CAIXA DE EXPLICAÇÃO
+
+
 
         //SCRIPT DO CARROCEL
 
@@ -146,42 +168,7 @@ const video = document.getElementById('intro-video');
 
 
 
-          //CLIQUE MAGICO .GIF
-
-          document.addEventListener('click', function(event) {
-            const cliqueX = event.pageX;
-            const cliqueY = event.pageY;
-
-            // Adiciona um número aleatório para forçar novo carregamento
-            const caminhoGif = "midia/clique_magico.gif?rand=" + Date.now();
-
-            const gifElement = document.createElement('img');
-            gifElement.src = caminhoGif;
-            gifElement.style.position = 'absolute';
-            gifElement.style.zIndex = '9999';
-            gifElement.style.pointerEvents = 'none';
-
-            document.body.appendChild(gifElement);
-
-            gifElement.onload = function() {
-                const offsetX = gifElement.offsetWidth / 2;
-                const offsetY = gifElement.offsetHeight / 2;
-
-                gifElement.style.left = `${cliqueX - offsetX}px`;
-                gifElement.style.top = `${cliqueY - offsetY}px`;
-
-                setTimeout(function() {
-                gifElement.remove();
-                }, 1500); // Duração da animação
-            };
-
-            gifElement.onerror = function() {
-                console.error("Erro ao carregar o GIF:", caminhoGif);
-            };
-            });
-
-
- //******INICIOM DA CONFIGURAÇÃO DO MAUSE MAGICO****
+//******INICIOM DA CONFIGURAÇÃO DO MAUSE MAGICO****
 // ============================
 // CLIQUE MÁGICO (.GIF + SOM)
 // ============================
@@ -213,10 +200,12 @@ document.addEventListener('click', function (event) {
       console.error("Erro ao carregar o GIF:", caminhoGif);
   };
 
-  const somClique = new Audio("sons/CLIQUE.mp3");
-  somClique.play().catch((e) => {
-      console.warn("Erro ao tocar som de clique:", e);
-  });
+  if (!somCliqueMuted) { // Verifica se o som de clique não está mudo
+      const somClique = new Audio("sons/CLIQUE.mp3");
+      somClique.play().catch((e) => {
+          console.warn("Erro ao tocar som de clique:", e);
+      });
+  }
 });
 
 // ============================
@@ -241,10 +230,12 @@ function criarTrilhaMagicaDesktop(x, y) {
   document.body.appendChild(gifElement);
 
   if (podeTocarSomArrastarDesktop && (!ultimoSomArrastarDesktop || ultimoSomArrastarDesktop.ended)) {
-      ultimoSomArrastarDesktop = new Audio("sons/ARRASTAR.mp3");
-      ultimoSomArrastarDesktop.play().catch((e) => {
-          console.warn("Erro ao tocar som de arrastar (desktop):", e);
-      });
+      if (!somArrastarMuted) { // Verifica se o som de arrastar não está mudo
+          ultimoSomArrastarDesktop = new Audio("sons/ARRASTAR.mp3");
+          ultimoSomArrastarDesktop.play().catch((e) => {
+              console.warn("Erro ao tocar som de arrastar (desktop):", e);
+          });
+      }
   }
 
   gifElement.onload = function () {
@@ -319,10 +310,12 @@ function criarTrilhaMagicaMobile(clientX, clientY) {
 
   // Toca o som apenas se permitido e se o som anterior terminou
   if (podeTocarSomArrastarMobile && (!ultimoSomArrastarMobile || ultimoSomArrastarMobile.ended)) {
-      ultimoSomArrastarMobile = new Audio("sons/ARRASTAR.mp3");
-      ultimoSomArrastarMobile.play().catch((e) => {
-          console.warn("Erro ao tocar som de arrastar (mobile):", e);
-      });
+      if (!somArrastarMuted) { // Verifica se o som de arrastar não está mudo
+          ultimoSomArrastarMobile = new Audio("sons/ARRASTAR.mp3");
+          ultimoSomArrastarMobile.play().catch((e) => {
+              console.warn("Erro ao tocar som de arrastar (mobile):", e);
+          });
+      }
   }
 
   gifElement.onload = function () {
