@@ -230,67 +230,56 @@ const video = document.getElementById('intro-video');
     // ============================
   
     let ultimoSomArrastar = null;
-let podeTocarSomArrastar = false;
-
-// Ativa o som de arrastar após qualquer toque ou clique
-document.addEventListener('click', () => { podeTocarSomArrastar = true; });
-document.addEventListener('touchstart', () => { podeTocarSomArrastar = true; });
-
-function criarTrilhaMagica(x, y) {
-  const caminhoGif = "midia/clique_magico.gif?rand=" + Date.now();
-
-  const gifElement = document.createElement('img');
-  gifElement.src = caminhoGif;
-  gifElement.style.position = 'absolute';
-  gifElement.style.zIndex = '9999';
-  gifElement.style.pointerEvents = 'none';
-  gifElement.style.width = '100px';
-  gifElement.style.height = '100px';
-
-  document.body.appendChild(gifElement);
-
-  // Toca o som apenas se permitido e se o som anterior terminou
-  if (podeTocarSomArrastar && (!ultimoSomArrastar || ultimoSomArrastar.ended)) {
-    ultimoSomArrastar = new Audio("sons/ARRASTAR.mp3");
-    ultimoSomArrastar.play().catch((e) => {
-      console.warn("Erro ao tocar som de arrastar:", e);
+    let podeTocarSomArrastar = false;
+    let ultimaPosY = window.scrollY;
+    
+    // Ativa som após qualquer interação
+    document.addEventListener('click', () => { podeTocarSomArrastar = true; });
+    document.addEventListener('touchstart', () => { podeTocarSomArrastar = true; });
+    
+    function criarTrilhaScroll(x) {
+      const caminhoGif = "midia/clique_magico.gif?rand=" + Date.now();
+    
+      const gifElement = document.createElement('img');
+      gifElement.src = caminhoGif;
+      gifElement.style.position = 'absolute';
+      gifElement.style.zIndex = '9999';
+      gifElement.style.pointerEvents = 'none';
+      gifElement.style.width = '100px';
+      gifElement.style.height = '100px';
+    
+      // Adiciona na posição horizontal do dedo, e vertical no topo visível da tela (efeito cascata)
+      const y = window.scrollY + 50 + Math.random() * 100; // varia altura um pouco pra dar um efeito legal
+      gifElement.style.left = `${x}px`;
+      gifElement.style.top = `${y}px`;
+    
+      document.body.appendChild(gifElement);
+    
+      // Toca som se o anterior tiver terminado
+      if (podeTocarSomArrastar && (!ultimoSomArrastar || ultimoSomArrastar.ended)) {
+        ultimoSomArrastar = new Audio("sons/ARRASTAR.mp3");
+        ultimoSomArrastar.play().catch((e) => console.warn("Erro ao tocar som:", e));
+      }
+    
+      setTimeout(() => gifElement.remove(), 1000);
+    }
+    
+    // Detecta rolagem no celular (ou em qualquer lugar)
+    window.addEventListener('scroll', () => {
+      const novaPosY = window.scrollY;
+      const delta = Math.abs(novaPosY - ultimaPosY);
+    
+      if (delta > 20) { // Evita excesso de gifs
+        ultimaPosY = novaPosY;
+    
+        // Cria efeito em várias posições horizontais diferentes (tipo chuvisco mágico)
+        for (let i = 0; i < 3; i++) {
+          const posX = Math.random() * window.innerWidth;
+          criarTrilhaScroll(posX);
+        }
+      }
     });
-  }
-
-  gifElement.onload = function () {
-    const offsetX = gifElement.offsetWidth / 2;
-    const offsetY = gifElement.offsetHeight / 2;
-
-    gifElement.style.left = `${x - offsetX}px`;
-    gifElement.style.top = `${y - offsetY}px`;
-
-    setTimeout(() => gifElement.remove(), 1000);
-  };
-
-  gifElement.onerror = function () {
-    console.error("Erro ao carregar o GIF:", caminhoGif);
-  };
-}
-
-// Mouse
-let ultimaPosicao = 0;
-document.addEventListener('mousemove', function (e) {
-  const distanciaMinima = 30;
-  const atual = e.pageY + e.pageX;
-
-  if (Math.abs(atual - ultimaPosicao) > distanciaMinima) {
-    ultimaPosicao = atual;
-    criarTrilhaMagica(e.pageX, e.pageY);
-  }
-});
-
-// Touch
-document.addEventListener('touchmove', function (e) {
-  if (e.touches.length > 0) {
-    const touch = e.touches[0];
-    criarTrilhaMagica(touch.pageX, touch.pageY);
-  }
-});
+    
 
 //******FIM DA CONFIGURAÇÃO DO MAUSE MAGICO****
   
