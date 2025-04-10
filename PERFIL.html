@@ -331,7 +331,8 @@
 
 <script>
 
-  //******INICIOM DA CONFIGURAÇÃO DO MAUSE MAGICO****
+
+    //******INICIOM DA CONFIGURAÇÃO DO MAUSE MAGICO****
 // ============================
 // CLIQUE MÁGICO (.GIF + SOM)
 // ============================
@@ -501,12 +502,12 @@ let podeTocarSomArrastarMobile = false;
 // Ativa o som de arrastar após qualquer toque
 document.addEventListener('touchstart', () => { podeTocarSomArrastarMobile = true; });
 
-function criarTrilhaMagicaMobile(x, y) {
+function criarTrilhaMagicaMobile(clientX, clientY) { // Usamos clientX e clientY
   const caminhoGif = "midia/clique_magico.gif?rand=" + Date.now();
 
   const gifElement = document.createElement('img');
   gifElement.src = caminhoGif;
-  gifElement.style.position = 'absolute';
+  gifElement.style.position = 'fixed'; // Usamos 'fixed' para ficar na tela
   gifElement.style.zIndex = '9999';
   gifElement.style.pointerEvents = 'none';
   gifElement.style.width = '100px';
@@ -526,8 +527,8 @@ function criarTrilhaMagicaMobile(x, y) {
     const offsetX = gifElement.offsetWidth / 2;
     const offsetY = gifElement.offsetHeight / 2;
 
-    gifElement.style.left = `${x - offsetX}px`;
-    gifElement.style.top = `${y - offsetY}px`;
+    gifElement.style.left = `${clientX - offsetX}px`; // Usamos clientX
+    gifElement.style.top = `${clientY - offsetY}px`;   // Usamos clientY
 
     setTimeout(() => gifElement.remove(), 1000);
   };
@@ -541,17 +542,13 @@ function criarTrilhaMagicaMobile(x, y) {
 document.addEventListener('touchmove', function (e) {
   if (e.touches.length > 0) {
     const touch = e.touches[0];
-    criarTrilhaMagicaMobile(touch.pageX, touch.pageY);
+    criarTrilhaMagicaMobile(touch.clientX, touch.clientY); // Passamos clientX e clientY
   }
 });
 
+
+
 //******FIM DA CONFIGURAÇÃO DO MAUSE MAGICO (MOBILE)****
-
-
-
-    
-
-//******FIM DA CONFIGURAÇÃO DO MAUSE MAGICO****
 
   </script>
   

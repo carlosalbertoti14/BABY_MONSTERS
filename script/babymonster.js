@@ -347,16 +347,26 @@ document.addEventListener('mousemove', function (e) {
 
 let ultimoSomArrastarMobile = null;
 let podeTocarSomArrastarMobile = false;
+let primeiroToque = null;
+const distanciaMinima = 10; // Defina a distância mínima em pixels
 
-// Ativa o som de arrastar após qualquer toque
-document.addEventListener('touchstart', () => { podeTocarSomArrastarMobile = true; });
+// Ativa o som de arrastar após qualquer toque e guarda a posição inicial
+document.addEventListener('touchstart', (e) => {
+  podeTocarSomArrastarMobile = true;
+  if (e.touches.length > 0) {
+    primeiroToque = {
+      clientX: e.touches[0].clientX,
+      clientY: e.touches[0].clientY
+    };
+  }
+});
 
-function criarTrilhaMagicaMobile(clientX, clientY) { // Usamos clientX e clientY
+function criarTrilhaMagicaMobile(clientX, clientY) {
   const caminhoGif = "midia/clique_magico.gif?rand=" + Date.now();
 
   const gifElement = document.createElement('img');
   gifElement.src = caminhoGif;
-  gifElement.style.position = 'fixed'; // Usamos 'fixed' para ficar na tela
+  gifElement.style.position = 'fixed';
   gifElement.style.zIndex = '9999';
   gifElement.style.pointerEvents = 'none';
   gifElement.style.width = '100px';
@@ -376,8 +386,8 @@ function criarTrilhaMagicaMobile(clientX, clientY) { // Usamos clientX e clientY
     const offsetX = gifElement.offsetWidth / 2;
     const offsetY = gifElement.offsetHeight / 2;
 
-    gifElement.style.left = `${clientX - offsetX}px`; // Usamos clientX
-    gifElement.style.top = `${clientY - offsetY}px`;   // Usamos clientY
+    gifElement.style.left = `${clientX - offsetX}px`;
+    gifElement.style.top = `${clientY - offsetY}px`;
 
     setTimeout(() => gifElement.remove(), 1000);
   };
@@ -389,13 +399,29 @@ function criarTrilhaMagicaMobile(clientX, clientY) { // Usamos clientX e clientY
 
 // Touch
 document.addEventListener('touchmove', function (e) {
-  if (e.touches.length > 0) {
+  if (e.touches.length > 0 && primeiroToque) {
     const touch = e.touches[0];
-    criarTrilhaMagicaMobile(touch.clientX, touch.clientY); // Passamos clientX e clientY
+    const deltaX = Math.abs(touch.clientX - primeiroToque.clientX);
+    const deltaY = Math.abs(touch.clientY - primeiroToque.clientY);
+
+    // Verifica se o movimento é maior que a distância mínima em algum dos eixos
+    if (deltaX > distanciaMinima || deltaY > distanciaMinima) {
+      criarTrilhaMagicaMobile(touch.clientX, touch.clientY);
+      primeiroToque = { clientX: touch.clientX, clientY: touch.clientY }; // Atualiza a posição inicial
+    }
   }
 });
 
-//******FIM DA CONFIGURAÇÃO DO MAUSE MAGICO (MOBILE)****
+// Reseta a posição inicial quando o toque termina
+document.addEventListener('touchend', () => {
+  primeiroToque = null;
+});
+
+document.addEventListener('touchcancel', () => {
+  primeiroToque = null;
+});
+
+
 
 //******FIM DA CONFIGURAÇÃO DO MAUSE MAGICO (MOBILE)****
 
