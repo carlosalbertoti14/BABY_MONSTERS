@@ -282,40 +282,84 @@ if (!('ontouchstart' in window)) {
 // ============================
 
 
-let posicaoInicialToque = null;
-let ultimaPosYScroll = window.scrollY;
-let acumuladorY = 0;
+// ============================
+// ARRASTAR MÁGICO - MOBILE
+// ============================
 
+let podeTocarSomArrastar = false;
+let ultimoSomArrastar = null;
+
+document.addEventListener('click', () => { podeTocarSomArrastar = true; });
+document.addEventListener('touchstart', () => { podeTocarSomArrastar = true; });
+
+let pontoInicialX = null;
+let pontoInicialY = null;
+let fatorSuavidade = 0.8; // velocidade do movimento (ajustável)
+
+// Detecta o ponto inicial do toque
 document.addEventListener('touchstart', function (e) {
   if (e.touches.length > 0) {
     const touch = e.touches[0];
-    posicaoInicialToque = {
-      x: touch.pageX,
-      y: touch.pageY
-    };
-    ultimaPosYScroll = window.scrollY;
-    acumuladorY = 0;
+    pontoInicialX = touch.pageX;
+    pontoInicialY = touch.pageY;
   }
 });
 
-window.addEventListener('scroll', function () {
-  if (!posicaoInicialToque) return;
+// Detecta rolagem da tela
+let ultimaPosY = window.scrollY;
+window.addEventListener('scroll', () => {
+  if (pontoInicialX !== null && pontoInicialY !== null) {
+    const novaPosY = window.scrollY;
+    const delta = novaPosY - ultimaPosY;
 
-  const novaPosYScroll = window.scrollY;
-  const delta = novaPosYScroll - ultimaPosYScroll;
+    if (Math.abs(delta) > 5) {
+      // Move o ponto inicial com a rolagem
+      pontoInicialY += delta * fatorSuavidade;
 
-  if (Math.abs(delta) > 5) {
-    ultimaPosYScroll = novaPosYScroll;
+      // Cria o efeito mágico nesse ponto
+      criarTrilhaMagica(pontoInicialX, pontoInicialY);
 
-    const fatorSuavidade = 1; // ajuste conforme necessário
-    acumuladorY -= delta * fatorSuavidade; // Invertido aqui!
+      // Toca som se estiver liberado e não estiver tocando
+      if (podeTocarSomArrastar && (!ultimoSomArrastar || ultimoSomArrastar.ended)) {
+        ultimoSomArrastar = new Audio("sons/ARRASTAR.mp3");
+        ultimoSomArrastar.play().catch((e) => {
+          console.warn("Erro ao tocar som de arrastar:", e);
+        });
+      }
+    }
 
-    const x = posicaoInicialToque.x;
-    const y = posicaoInicialToque.y + acumuladorY;
-
-    criarTrilhaMagica(x, y);
+    ultimaPosY = novaPosY;
   }
 });
+
+function criarTrilhaMagica(x, y) {
+  const caminhoGif = "midia/clique_magico.gif?rand=" + Date.now();
+
+  const gifElement = document.createElement('img');
+  gifElement.src = caminhoGif;
+  gifElement.style.position = 'absolute';
+  gifElement.style.zIndex = '9999';
+  gifElement.style.pointerEvents = 'none';
+  gifElement.style.width = '100px';
+  gifElement.style.height = '100px';
+
+  document.body.appendChild(gifElement);
+
+  gifElement.onload = function () {
+    const offsetX = gifElement.offsetWidth / 2;
+    const offsetY = gifElement.offsetHeight / 2;
+
+    gifElement.style.left = `${x - offsetX}px`;
+    gifElement.style.top = `${y - offsetY}px`;
+
+    setTimeout(() => gifElement.remove(), 1000);
+  };
+
+  gifElement.onerror = function () {
+    console.error("Erro ao carregar o GIF:", caminhoGif);
+  };
+}
+
 
 
 
