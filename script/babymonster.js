@@ -304,13 +304,11 @@ window.addEventListener('scroll', function () {
   const novaPosYScroll = window.scrollY;
   const delta = novaPosYScroll - ultimaPosYScroll;
 
-  // Só age se a rolagem foi significativa
   if (Math.abs(delta) > 5) {
     ultimaPosYScroll = novaPosYScroll;
 
-    // Ajusta suavemente a direção: sobe ou desce dependendo da rolagem
-    const fatorSuavidade = 1; // pode ajustar pra mais ou menos sensível
-    acumuladorY += delta * fatorSuavidade;
+    const fatorSuavidade = 1; // ajuste conforme necessário
+    acumuladorY -= delta * fatorSuavidade; // Invertido aqui!
 
     const x = posicaoInicialToque.x;
     const y = posicaoInicialToque.y + acumuladorY;
@@ -318,6 +316,7 @@ window.addEventListener('scroll', function () {
     criarTrilhaMagica(x, y);
   }
 });
+
 
 
 
