@@ -45,6 +45,10 @@ h3{
 }
 
 h4{
+    color: var(--cor1);
+    text-align: center;
+    text-shadow: 2px 2px 4px rgb(0, 0, 0);
+    font-weight: bolder;
 
 }
 
@@ -267,20 +271,40 @@ transition: opacity 0.5s ease-in-out; /* Adiciona uma transição suave para a o
 
 /****************************CONFIG ANIVERSARIO*************************/
 
+/* ... seu CSS anterior ... */
+
+
+  /* ... seu CSS posterior ... */
+
+
+
 section#SECniver {
-    display: NONE;
+    display: none;
     background-image: url(../midia/ANIVERSÁRIO_BG.jpg);
     background-repeat: no-repeat;
     background-color: black;
-    width: 100%;               /* Agora ocupa 100% da largura da tela */
+    width: 100%;     
+    height: 670px;          /* Agora ocupa 100% da largura da tela */
     max-width: 800px;          /* Mas nunca passa de 800px */
     margin: 0 auto;            /* Centraliza horizontalmente */
+}
+
+div#felizniver {
+    display: none;
+
+
+}
+
+div#felizniver h4 {
+    padding-top: 10px;
+    font-size: 2em;
+
 }
 
 div#DIVniver {
     display: flex;
     flex-flow: column;
-    height: 680px;              /* Deixe a altura se ajustar ao conteúdo */
+    height: 100%;              /* Deixe a altura se ajustar ao conteúdo */
     width: 100%;
     justify-content: center;
     align-items: flex-end;
@@ -288,12 +312,14 @@ div#DIVniver {
 }
 
 div#DIVniver img {
-    display: block;
+    display: none;
     width: 80%;                /* Ocupa 80% da largura da div, se ajusta em telas menores */
     max-width: 300px;          /* Mas nunca passa de 300px */
     padding: 5px 0px 5px 5px;
+    z-index: 200;
    /*  box-shadow: 5px 5px 15px rgba(22, 22, 22, 0.5); */
 }
+
 
 /* Aumenta espaço apenas na última imagem */
 div#DIVniver img:last-child {

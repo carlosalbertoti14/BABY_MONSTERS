@@ -131,9 +131,14 @@
                     
                     
                 <section id="SECniver">
+
+                    <div id="felizniver">
+                        <h4> Feliz aniversário, <script>${nomeAniversariante}</script>! Esse é o seu dia mais FELIZ!!!</h4>
+                    </div>
+
                     <div id="DIVniver">
                         
-                        <img id="NIVERchiquita" src="midia/CHIQUITA17NIVER.png" alt="chiquita 17/02">
+                        <img id="NIVERchiquita" src="midia/CHIQUITA17NIVER.png" alt="Chiquita 17/02">
                         <img id="NIVERluka" src="midia/LUKA20NIVER.png" alt="Ruka 20/03">
                         <img id="NIVERahyeon" src="midia/AHYEON11NIVER.png" alt="Ahyeon 11/04">
                         <img id="NIVERasa" src="midia/ASA17NIVER.png" alt="Asa 17/04">
@@ -296,55 +301,143 @@ Vocês podem mandar uma mensagem para os fãs brasileiros?</section>
         </div>
 
         <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                const imagens = document.querySelectorAll('#DIVniver img');
-                const mesAtual = new Date().getMonth() + 1; // mês atual (1 a 12)
-                let encontrouAniversariante = false;
-            
-                imagens.forEach(img => {
-                    const alt = img.alt.trim(); // Ex: "Rami 17/10"
-                    const partes = alt.split(" ");
-                    if (partes.length === 2) {
-                        const data = partes[1].split("/");
-                        const mesAniversario = parseInt(data[1]);
-            
-                        if (mesAniversario === mesAtual) {
-                            img.style.display = "block";
-                            encontrouAniversariante = true;
-                        } else {
-                            img.style.display = "none";
-                        }
-                    } else {
-                        img.style.display = "none";
+
+
+
+
+//CONFIGURAÇÃO DO ANIVERSÁRIO
+document.addEventListener("DOMContentLoaded", function () {
+    const imagens = document.querySelectorAll('#DIVniver img');
+    const mesAtual = new Date().getMonth() + 1; // mês atual (1 a 12)
+    let encontrouAniversariante = false;
+
+    const nivernome = [
+        { nome: "Ahyeon", url: "url('midia/BABYMONSTERS_PERFIL_BG_AHYEON3.jpg')" },
+        { nome: "Asa", url: "url('midia/BABYMONSTERS_PERFIL_BG_ASA.png')" },
+        { nome: "Chiquita", url: "url('midia/BABYMONSTERS_PERFIL_BG_CHIQUITA.png')" },
+        { nome: "Parita", url: "url('midia/BABYMONSTERS_PERFIL_BG_PHARITA.png')" },
+        { nome: "Rami", url: "url('midia/BABYMONSTERS_PERFIL_BG_RAMI.png')" },
+        { nome: "Rora", url: "url('midia/BABYMONSTERS_PERFIL_BG_RORA.png')" },
+        { nome: "Ruka", url: "url('midia/BABYMONSTERS_PERFIL_BG_RUKA.png')" }
+    ];
+
+
+    //configuração do aniversariante do dia
+    const hoje = new Date();
+    const diaAtual = hoje.getDate();
+    const mesHoje = hoje.getMonth() + 1;
+    const diamesHoje = `${diaAtual}/${mesHoje}`;
+    let encontrouAniversarianteDoDia = false;
+
+
+    imagens.forEach(img => {
+        const alt = img.alt.trim(); // Ex: "Nome 17/10"
+        const partes = alt.split(" ");
+        if (partes.length === 2) {
+            const nomeAniversariante = partes[0];
+            const dataAniversario = partes[1];
+
+            if (dataAniversario === /* "11/04" */diamesHoje) {
+                const aniversarianteDoDia = nivernome.find(item => item.nome.toLowerCase() === nomeAniversariante.toLowerCase());
+                const secNiver = document.getElementById("SECniver");
+                const divNiver = document.getElementById("DIVniver");
+
+                if (aniversarianteDoDia) {
+                    if (secNiver && divNiver) {
+                     
+                        secNiver.style.backgroundImage = aniversarianteDoDia.url;
+                        
+                        //atera o texto h4
+
+                        //ativando h4
+
+                        document.getElementById("felizniver").style.display = "block";
+
+                        //fim ativando h4
+
+                            const mensagemAniversarioDiv = document.getElementById("felizniver");
+                            if (mensagemAniversarioDiv) {
+                                mensagemAniversarioDiv.innerHTML = `<h4 id="felizniver"> Feliz aniversário, ${nomeAniversariante}! Esse é o seu dia mais FELIZ!!!</h4>`;
+                            
+                            //fim do atera o texto h4
+
+                           /*  img.style.display = "none"; */
+                            /* encontrouAniversarianteDoDia = true; */
+}
+
+
+
+
+                        img.style.display = "block"; // Esconde a imagem original do aniversariante do dia
+                      /*   encontrouAniversarianteDoDia = true; */
                     }
-                });
-            
-                // Só exibe a section se encontrou aniversariante
-                if (encontrouAniversariante) {
-                    document.getElementById("SECniver").style.display = "block";
                 }
-            });
-            
-            // CALCULA IDADE
-            function calcularEAtualizarIdade() {
-                const dataNascimentoTexto = document.getElementById('dataNascimento').textContent;
-                const [dia, mes, ano] = dataNascimentoTexto.split('/').map(Number);
-                const dataNascimento = new Date(ano, mes - 1, dia);
-            
-                const hoje = new Date();
-                let idade = hoje.getFullYear() - dataNascimento.getFullYear();
-                const mesAtual = hoje.getMonth();
-                const diaAtual = hoje.getDate();
-            
-                if (mesAtual < dataNascimento.getMonth() || 
-                   (mesAtual === dataNascimento.getMonth() && diaAtual < dataNascimento.getDate())) {
-                    idade--;
-                }
-            
-                document.getElementById('idade').textContent = idade;
             }
-            
-            window.onload = calcularEAtualizarIdade;
+        }
+    });
+
+    //fim da configuração do aniversariante do dia
+
+
+    imagens.forEach(img => {
+        const alt = img.alt.trim(); // Ex: "Rami 17/10"
+        const partes = alt.split(" ");
+        if (partes.length === 2) {
+            const mesAniversario = parseInt(partes[1].split("/")[1]);
+
+            if (mesAniversario === mesAtual && !encontrouAniversarianteDoDia) {
+                img.style.display = "block";
+                encontrouAniversariante = true;
+                
+            } else if (!encontrouAniversarianteDoDia) {
+                img.style.display = "none";
+            }
+        } else {
+            if (!encontrouAniversarianteDoDia) {
+                img.style.display = "none";
+            }
+        }
+    });
+
+    // Só exibe a section se encontrou aniversariante
+    if (encontrouAniversariante || encontrouAniversarianteDoDia) {
+        document.getElementById("SECniver").style.display = "block";
+    }
+});
+
+// CALCULA IDADE
+function calcularEAtualizarIdade() {
+    const elementoDataNascimento = document.getElementById('dataNascimento');
+    const elementoIdade = document.getElementById('idade');
+
+    if (elementoDataNascimento && elementoIdade) {
+        const dataNascimentoTexto = elementoDataNascimento.textContent;
+        const [dia, mes, ano] = dataNascimentoTexto.split('/').map(Number);
+        const dataNascimento = new Date(ano, mes - 1, dia);
+
+        const hoje = new Date();
+        let idade = hoje.getFullYear() - dataNascimento.getFullYear();
+        const mesAtual = hoje.getMonth();
+        const diaAtual = hoje.getDate();
+
+        if (mesAtual < dataNascimento.getMonth() ||
+            (mesAtual === dataNascimento.getMonth() && diaAtual < dataNascimento.getDate())) {
+            idade--;
+        }
+
+        elementoIdade.textContent = idade;
+    } else {
+        console.error("Erro: Elementos com IDs 'dataNascimento' ou 'idade' não foram encontrados no HTML.");
+    }
+}
+
+window.onload = calcularEAtualizarIdade;
+
+//FIM DA CONFIGURAÇÃO DO ANIVERSÁRIO
+
+               
+
+                 
             </script>
             
 
@@ -352,13 +445,7 @@ Vocês podem mandar uma mensagem para os fãs brasileiros?</section>
 
         <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script> <!-- NECESSÁRIO PARA RODAR O CARROCEL -->
         <script src="script/babymonster.js"></script>
-        <script>
-            const homeButton = document.querySelector('nav a:first-child'); // Primeiro botão, que é "HOME"
-
-
-
-
-        </script>
+       
 
 
         
@@ -395,7 +482,7 @@ Vocês podem mandar uma mensagem para os fãs brasileiros?</section>
             <p>Site Oficial: <a href="https://www.ygfamily.com/en/artists/babymonster/main" target="_blank">YG Entertainment</a></p>
             
             <p>Site Oficial JAPONÊS: <a href="https://yg-babymonster-official.jp/" target="_blank">BABYMONSTER</a></p>
-            <P>SITE CRIADO POR: C. A. L. PINHEIRO.</P>
+            <P>SITE CRIADO POR: C. A. L. PINHEIRO -. locura</P>
 
 
         </h5>
