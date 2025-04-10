@@ -128,12 +128,12 @@ soundButton.addEventListener('click', () => {
                 });
             });
         });
-        
+
 // FIM DA CAIXA DE EXPLICAÇÃO
 
 
 
-        //SCRIPT DO CARROCEL
+        //SCRIPT DO CARROCEL pag HOME
 
     
         const swiper = new Swiper('.js-banner-swiper', {
