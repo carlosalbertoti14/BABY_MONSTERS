@@ -294,7 +294,7 @@ document.addEventListener('touchstart', function (e) {
       y: touch.pageY
     };
     ultimaPosYScroll = window.scrollY;
-    acumuladorY = 0; // Zera o rastro ao iniciar novo toque
+    acumuladorY = 0;
   }
 });
 
@@ -304,10 +304,13 @@ window.addEventListener('scroll', function () {
   const novaPosYScroll = window.scrollY;
   const delta = novaPosYScroll - ultimaPosYScroll;
 
-  if (Math.abs(delta) > 10) { // Menor valor para mais fluidez
+  // Só age se a rolagem foi significativa
+  if (Math.abs(delta) > 5) {
     ultimaPosYScroll = novaPosYScroll;
 
-    acumuladorY -= 20; // Faz as estrelas subirem progressivamente
+    // Ajusta suavemente a direção: sobe ou desce dependendo da rolagem
+    const fatorSuavidade = 1; // pode ajustar pra mais ou menos sensível
+    acumuladorY += delta * fatorSuavidade;
 
     const x = posicaoInicialToque.x;
     const y = posicaoInicialToque.y + acumuladorY;
@@ -315,6 +318,7 @@ window.addEventListener('scroll', function () {
     criarTrilhaMagica(x, y);
   }
 });
+
 
 
 
