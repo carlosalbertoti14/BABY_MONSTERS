@@ -327,48 +327,125 @@
         </div>
 
 
-        <script>   
+<!-- CLIQUE E ARRASTAR MÁGICO COM SOM -->
 
-          //CLIQUE MAGICO .GIF
+<script>
 
-          document.addEventListener('click', function(event) {
-            const cliqueX = event.pageX;
-            const cliqueY = event.pageY;
+    //******INICIOM DA CONFIGURAÇÃO DO MAUSE MAGICO****
+    // ============================
+    // CLIQUE MÁGICO (.GIF + SOM)
+    // ============================
+  
+    document.addEventListener('click', function (event) {
+      const cliqueX = event.pageX;
+      const cliqueY = event.pageY;
+  
+      // Caminho aleatório para forçar reload do GIF
+      const caminhoGif = "midia/clique_magico.gif?rand=" + Date.now();
+  
+      // Cria imagem
+      const gifElement = document.createElement('img');
+      gifElement.src = caminhoGif;
+      gifElement.style.position = 'absolute';
+      gifElement.style.zIndex = '9999';
+      gifElement.style.pointerEvents = 'none';
+  
+      document.body.appendChild(gifElement);
+  
+      // Posiciona e remove depois de um tempo
+      gifElement.onload = function () {
+        const offsetX = gifElement.offsetWidth / 2;
+        const offsetY = gifElement.offsetHeight / 2;
+  
+        gifElement.style.left = `${cliqueX - offsetX}px`;
+        gifElement.style.top = `${cliqueY - offsetY}px`;
+  
+        setTimeout(() => gifElement.remove(), 1500);
+      };
+  
+      gifElement.onerror = function () {
+        console.error("Erro ao carregar o GIF:", caminhoGif);
+      };
+  
+      // Toca o som do clique
+      const somClique = new Audio("sons/CLIQUE.mp3");
+      somClique.play().catch((e) => {
+        console.warn("Erro ao tocar som de clique:", e);
+      });
+    });
+  
+  
+    // ============================
+    // ARRASTAR MÁGICO (.GIF + SOM)
+    // ============================
+  
+    let ultimoSomArrastar = null;
+let podeTocarSomArrastar = false;
 
-            // Adiciona um número aleatório para forçar novo carregamento
-            const caminhoGif = "midia/clique_magico.gif?rand=" + Date.now();
+// Ativa o som de arrastar após qualquer toque ou clique
+document.addEventListener('click', () => { podeTocarSomArrastar = true; });
+document.addEventListener('touchstart', () => { podeTocarSomArrastar = true; });
 
-            const gifElement = document.createElement('img');
-            gifElement.src = caminhoGif;
-            gifElement.style.position = 'absolute';
-            gifElement.style.zIndex = '9999';
-            gifElement.style.pointerEvents = 'none';
+function criarTrilhaMagica(x, y) {
+  const caminhoGif = "midia/clique_magico.gif?rand=" + Date.now();
 
-            document.body.appendChild(gifElement);
+  const gifElement = document.createElement('img');
+  gifElement.src = caminhoGif;
+  gifElement.style.position = 'absolute';
+  gifElement.style.zIndex = '9999';
+  gifElement.style.pointerEvents = 'none';
+  gifElement.style.width = '100px';
+  gifElement.style.height = '100px';
 
-            gifElement.onload = function() {
-                const offsetX = gifElement.offsetWidth / 2;
-                const offsetY = gifElement.offsetHeight / 2;
+  document.body.appendChild(gifElement);
 
-                gifElement.style.left = `${cliqueX - offsetX}px`;
-                gifElement.style.top = `${cliqueY - offsetY}px`;
+  // Toca o som apenas se permitido e se o som anterior terminou
+  if (podeTocarSomArrastar && (!ultimoSomArrastar || ultimoSomArrastar.ended)) {
+    ultimoSomArrastar = new Audio("sons/ARRASTAR.mp3");
+    ultimoSomArrastar.play().catch((e) => {
+      console.warn("Erro ao tocar som de arrastar:", e);
+    });
+  }
 
-                setTimeout(function() {
-                gifElement.remove();
-                }, 1500); // Duração da animação
-            };
+  gifElement.onload = function () {
+    const offsetX = gifElement.offsetWidth / 2;
+    const offsetY = gifElement.offsetHeight / 2;
 
-            gifElement.onerror = function() {
-                console.error("Erro ao carregar o GIF:", caminhoGif);
-            };
-            });
+    gifElement.style.left = `${x - offsetX}px`;
+    gifElement.style.top = `${y - offsetY}px`;
 
+    setTimeout(() => gifElement.remove(), 1000);
+  };
 
-          //FIN CLIQUE MAGICO .GIF
+  gifElement.onerror = function () {
+    console.error("Erro ao carregar o GIF:", caminhoGif);
+  };
+}
 
+// Mouse
+let ultimaPosicao = 0;
+document.addEventListener('mousemove', function (e) {
+  const distanciaMinima = 30;
+  const atual = e.pageY + e.pageX;
 
+  if (Math.abs(atual - ultimaPosicao) > distanciaMinima) {
+    ultimaPosicao = atual;
+    criarTrilhaMagica(e.pageX, e.pageY);
+  }
+});
 
-        </script>
+// Touch
+document.addEventListener('touchmove', function (e) {
+  if (e.touches.length > 0) {
+    const touch = e.touches[0];
+    criarTrilhaMagica(touch.pageX, touch.pageY);
+  }
+});
+
+//******FIM DA CONFIGURAÇÃO DO MAUSE MAGICO****
+
+  </script>
+  
 
 
 
