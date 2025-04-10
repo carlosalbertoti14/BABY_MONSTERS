@@ -348,7 +348,10 @@ document.addEventListener('mousemove', function (e) {
 let ultimoSomArrastarMobile = null;
 let podeTocarSomArrastarMobile = false;
 let primeiroToque = null;
-const distanciaMinima = 10; // Defina a distância mínima em pixels
+const distanciaMinima = 20; // Distância mínima para ativar o efeito
+let podeCriarGif = true;
+const intervaloMinimoGif = 200; // Intervalo mínimo em milissegundos (0.2 segundos)
+let ultimoTempoCriacaoGif = 0;
 
 // Ativa o som de arrastar após qualquer toque e guarda a posição inicial
 document.addEventListener('touchstart', (e) => {
@@ -362,7 +365,15 @@ document.addEventListener('touchstart', (e) => {
 });
 
 function criarTrilhaMagicaMobile(clientX, clientY) {
-  const caminhoGif = "midia/clique_magico.gif?rand=" + Date.now();
+  const agora = Date.now();
+  if (!podeCriarGif || (agora - ultimoTempoCriacaoGif < intervaloMinimoGif)) {
+    return; // Impede a criação se o intervalo mínimo não foi atingido
+  }
+  podeCriarGif = false;
+  ultimoTempoCriacaoGif = agora;
+  setTimeout(() => { podeCriarGif = true; }, intervaloMinimoGif);
+
+  const caminhoGif = "midia/clique_magico.gif?rand=" + agora;
 
   const gifElement = document.createElement('img');
   gifElement.src = caminhoGif;
@@ -404,10 +415,9 @@ document.addEventListener('touchmove', function (e) {
     const deltaX = Math.abs(touch.clientX - primeiroToque.clientX);
     const deltaY = Math.abs(touch.clientY - primeiroToque.clientY);
 
-    // Verifica se o movimento é maior que a distância mínima em algum dos eixos
     if (deltaX > distanciaMinima || deltaY > distanciaMinima) {
       criarTrilhaMagicaMobile(touch.clientX, touch.clientY);
-      primeiroToque = { clientX: touch.clientX, clientY: touch.clientY }; // Atualiza a posição inicial
+      primeiroToque = { clientX: touch.clientX, clientY: touch.clientY };
     }
   }
 });
@@ -421,11 +431,7 @@ document.addEventListener('touchcancel', () => {
   primeiroToque = null;
 });
 
-
-
 //******FIM DA CONFIGURAÇÃO DO MAUSE MAGICO (MOBILE)****
-
-
     
 
 //******FIM DA CONFIGURAÇÃO DO MAUSE MAGICO****
