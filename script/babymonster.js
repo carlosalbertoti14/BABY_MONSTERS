@@ -182,57 +182,49 @@ const video = document.getElementById('intro-video');
 
 
     //******INICIOM DA CONFIGURAÇÃO DO MAUSE MAGICO****
-    // ============================
-    // CLIQUE MÁGICO (.GIF + SOM)
-    // ============================
-  
-    document.addEventListener('click', function (event) {
-      const cliqueX = event.pageX;
-      const cliqueY = event.pageY;
-  
-      // Caminho aleatório para forçar reload do GIF
-      const caminhoGif = "midia/clique_magico.gif?rand=" + Date.now();
-  
-      // Cria imagem
-      const gifElement = document.createElement('img');
-      gifElement.src = caminhoGif;
-      gifElement.style.position = 'absolute';
-      gifElement.style.zIndex = '9999';
-      gifElement.style.pointerEvents = 'none';
-  
-      document.body.appendChild(gifElement);
-  
-      // Posiciona e remove depois de um tempo
-      gifElement.onload = function () {
-        const offsetX = gifElement.offsetWidth / 2;
-        const offsetY = gifElement.offsetHeight / 2;
-  
-        gifElement.style.left = `${cliqueX - offsetX}px`;
-        gifElement.style.top = `${cliqueY - offsetY}px`;
-  
-        setTimeout(() => gifElement.remove(), 1500);
-      };
-  
-      gifElement.onerror = function () {
-        console.error("Erro ao carregar o GIF:", caminhoGif);
-      };
-  
-      // Toca o som do clique
-      const somClique = new Audio("sons/CLIQUE.mp3");
-      somClique.play().catch((e) => {
-        console.warn("Erro ao tocar som de clique:", e);
-      });
-    });
-  
-  
 // ============================
-// ARRASTAR MÁGICO (.GIF + SOM)
+// CLIQUE MÁGICO (.GIF + SOM)
 // ============================
+document.addEventListener('click', function (event) {
+  const cliqueX = event.pageX;
+  const cliqueY = event.pageY;
 
+  const caminhoGif = "midia/clique_magico.gif?rand=" + Date.now();
+
+  const gifElement = document.createElement('img');
+  gifElement.src = caminhoGif;
+  gifElement.style.position = 'absolute';
+  gifElement.style.zIndex = '9999';
+  gifElement.style.pointerEvents = 'none';
+
+  document.body.appendChild(gifElement);
+
+  gifElement.onload = function () {
+    const offsetX = gifElement.offsetWidth / 2;
+    const offsetY = gifElement.offsetHeight / 2;
+
+    gifElement.style.left = `${cliqueX - offsetX}px`;
+    gifElement.style.top = `${cliqueY - offsetY}px`;
+
+    setTimeout(() => gifElement.remove(), 1500);
+  };
+
+  gifElement.onerror = function () {
+    console.error("Erro ao carregar o GIF:", caminhoGif);
+  };
+
+  const somClique = new Audio("sons/CLIQUE.mp3");
+  somClique.play().catch((e) => {
+    console.warn("Erro ao tocar som de clique:", e);
+  });
+});
+
+// ============================
+// ARRASTAR MÁGICO (DESKTOP)
+// ============================
 let ultimoSomArrastar = null;
 let podeTocarSomArrastar = false;
 
-// Ativa o som após interação
 document.addEventListener('click', () => { podeTocarSomArrastar = true; });
 document.addEventListener('touchstart', () => { podeTocarSomArrastar = true; });
 
@@ -259,8 +251,10 @@ function criarTrilhaMagica(x, y) {
   gifElement.onload = function () {
     const offsetX = gifElement.offsetWidth / 2;
     const offsetY = gifElement.offsetHeight / 2;
+
     gifElement.style.left = `${x - offsetX}px`;
     gifElement.style.top = `${y - offsetY}px`;
+
     setTimeout(() => gifElement.remove(), 1000);
   };
 
@@ -269,49 +263,54 @@ function criarTrilhaMagica(x, y) {
   };
 }
 
-// =============== DESKTOP (mouse) ===============
-let ultimaPosicaoMouse = 0;
-document.addEventListener('mousemove', function (e) {
-  const distanciaMinima = 30;
-  const atual = e.pageY + e.pageX;
-  if (Math.abs(atual - ultimaPosicaoMouse) > distanciaMinima) {
-    ultimaPosicaoMouse = atual;
-    criarTrilhaMagica(e.pageX, e.pageY);
-  }
-});
+// ===== DESKTOP - MOUSEMOVE =====
+if (!('ontouchstart' in window)) {
+  let ultimaPosicao = 0;
+  document.addEventListener('mousemove', function (e) {
+    const distanciaMinima = 30;
+    const atual = e.pageY + e.pageX;
 
-// =============== MOBILE (scroll mágico em ponto fixo do dedo) ===============
-let toqueInicialX = null;
-let toqueInicialY = null;
-let scrollAnterior = window.scrollY;
-
-document.addEventListener('touchstart', function (e) {
-  if (e.touches.length > 0) {
-    const touch = e.touches[0];
-    toqueInicialX = touch.pageX;
-    toqueInicialY = touch.pageY;
-    scrollAnterior = window.scrollY;
-  }
-});
-
-let acumuladorY = 0; // Acumula a rolagem até passar o limite
-const intervaloY = 30; // distância mínima acumulada para soltar nova estrela
-
-window.addEventListener('scroll', () => {
-  if (toqueInicialX !== null && toqueInicialY !== null) {
-    const deltaY = window.scrollY - scrollAnterior;
-    scrollAnterior = window.scrollY;
-
-    acumuladorY += deltaY;
-
-    if (Math.abs(acumuladorY) >= intervaloY) {
-      const direcao = acumuladorY > 0 ? 1 : -1;
-      const novaY = toqueInicialY + acumuladorY;
-      criarTrilhaMagica(toqueInicialX, novaY);
-      acumuladorY = 0; // zera acumulador pra próxima estrela
+    if (Math.abs(atual - ultimaPosicao) > distanciaMinima) {
+      ultimaPosicao = atual;
+      criarTrilhaMagica(e.pageX, e.pageY);
     }
-  }
-});
+  });
+}
+
+// ============================
+// ARRASTAR MÁGICO (MOBILE)
+// ============================
+if ('ontouchstart' in window) {
+  let toqueInicial = null;
+  let ultimaPosY = window.scrollY;
+
+  document.addEventListener('touchstart', function (e) {
+    if (e.touches.length > 0) {
+      const touch = e.touches[0];
+      toqueInicial = {
+        x: touch.pageX,
+        y: touch.pageY,
+        scrollY: window.scrollY
+      };
+    }
+  });
+
+  window.addEventListener('scroll', function () {
+    if (!toqueInicial) return;
+
+    const novaScrollY = window.scrollY;
+    const delta = Math.abs(novaScrollY - ultimaPosY);
+
+    if (delta > 20) { // evitar spam
+      ultimaPosY = novaScrollY;
+
+      const offsetY = novaScrollY - toqueInicial.scrollY;
+      const y = toqueInicial.y + offsetY;
+      criarTrilhaMagica(toqueInicial.x, y);
+    }
+  });
+}
+
 
 
 
