@@ -232,7 +232,7 @@ const video = document.getElementById('intro-video');
 let ultimoSomArrastar = null;
 let podeTocarSomArrastar = false;
 
-// Ativa o som após qualquer toque ou clique
+// Ativa o som após interação
 document.addEventListener('click', () => { podeTocarSomArrastar = true; });
 document.addEventListener('touchstart', () => { podeTocarSomArrastar = true; });
 
@@ -249,7 +249,6 @@ function criarTrilhaMagica(x, y) {
 
   document.body.appendChild(gifElement);
 
-  // Som
   if (podeTocarSomArrastar && (!ultimoSomArrastar || ultimoSomArrastar.ended)) {
     ultimoSomArrastar = new Audio("sons/ARRASTAR.mp3");
     ultimoSomArrastar.play().catch((e) => {
@@ -281,7 +280,7 @@ document.addEventListener('mousemove', function (e) {
   }
 });
 
-// =============== MOBILE (touch com rolagem mágica) ===============
+// =============== MOBILE (scroll mágico em ponto fixo do dedo) ===============
 let toqueInicialX = null;
 let toqueInicialY = null;
 let scrollAnterior = window.scrollY;
@@ -295,19 +294,25 @@ document.addEventListener('touchstart', function (e) {
   }
 });
 
-// Durante a rolagem (cascata mágica baseada na direção do scroll)
+let acumuladorY = 0; // Acumula a rolagem até passar o limite
+const intervaloY = 30; // distância mínima acumulada para soltar nova estrela
+
 window.addEventListener('scroll', () => {
   if (toqueInicialX !== null && toqueInicialY !== null) {
-    const deslocamentoScroll = window.scrollY - scrollAnterior;
+    const deltaY = window.scrollY - scrollAnterior;
     scrollAnterior = window.scrollY;
 
-    // Apenas reage se o scroll for significativo
-    if (Math.abs(deslocamentoScroll) > 5) {
-      const novaY = toqueInicialY + deslocamentoScroll * 0.5; // 0.5 suaviza o movimento
+    acumuladorY += deltaY;
+
+    if (Math.abs(acumuladorY) >= intervaloY) {
+      const direcao = acumuladorY > 0 ? 1 : -1;
+      const novaY = toqueInicialY + acumuladorY;
       criarTrilhaMagica(toqueInicialX, novaY);
+      acumuladorY = 0; // zera acumulador pra próxima estrela
     }
   }
 });
+
 
 
 
