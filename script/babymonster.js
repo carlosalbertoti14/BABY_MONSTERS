@@ -277,88 +277,73 @@ if (!('ontouchstart' in window)) {
   });
 }
 
-// ============================
-// ARRASTAR MÁGICO (MOBILE)
-// ============================
-
 
 // ============================
-// ARRASTAR MÁGICO - MOBILE
+// ARRASTAR MÁGICO NO MOBILE
+// (com GIFs fixos que acompanham o conteúdo da tela)
 // ============================
 
-let podeTocarSomArrastar = false;
-let ultimoSomArrastar = null;
 
-document.addEventListener('click', () => { podeTocarSomArrastar = true; });
-document.addEventListener('touchstart', () => { podeTocarSomArrastar = true; });
 
-let pontoInicialX = null;
-let pontoInicialY = null;
-let fatorSuavidade = 0.8; // velocidade do movimento (ajustável)
+// Guarda a posição inicial do toque
+let posicaoInicialToque = null;
 
-// Detecta o ponto inicial do toque
+// Guarda a última posição de rolagem da tela
+let ultimaPosYScroll = window.scrollY;
+
+// Acumula o quanto a rolagem mudou desde o toque
+let acumuladorY = 0;
+
+// Quando o usuário toca na tela
 document.addEventListener('touchstart', function (e) {
   if (e.touches.length > 0) {
     const touch = e.touches[0];
-    pontoInicialX = touch.pageX;
-    pontoInicialY = touch.pageY;
+
+    // Salva a posição inicial do dedo na tela
+    posicaoInicialToque = {
+      x: touch.pageX,
+      y: touch.pageY
+    };
+
+    // Salva a posição atual da rolagem
+    ultimaPosYScroll = window.scrollY;
+
+    // Zera o acumulador de rolagem
+    acumuladorY = 0;
   }
 });
 
-// Detecta rolagem da tela
-let ultimaPosY = window.scrollY;
-window.addEventListener('scroll', () => {
-  if (pontoInicialX !== null && pontoInicialY !== null) {
-    const novaPosY = window.scrollY;
-    const delta = novaPosY - ultimaPosY;
+// Quando a tela é rolada
+window.addEventListener('scroll', function () {
+  // Se não houve toque, não faz nada
+  if (!posicaoInicialToque) return;
 
-    if (Math.abs(delta) > 5) {
-      // Move o ponto inicial com a rolagem
-      pontoInicialY += delta * fatorSuavidade;
+  // Pega a nova posição da rolagem
+  const novaPosYScroll = window.scrollY;
 
-      // Cria o efeito mágico nesse ponto
-      criarTrilhaMagica(pontoInicialX, pontoInicialY);
+  // Calcula quanto rolou desde a última verificação
+  const delta = novaPosYScroll - ultimaPosYScroll;
 
-      // Toca som se estiver liberado e não estiver tocando
-      if (podeTocarSomArrastar && (!ultimoSomArrastar || ultimoSomArrastar.ended)) {
-        ultimoSomArrastar = new Audio("sons/ARRASTAR.mp3");
-        ultimoSomArrastar.play().catch((e) => {
-          console.warn("Erro ao tocar som de arrastar:", e);
-        });
-      }
-    }
+  // Só continua se a rolagem foi significativa
+  if (Math.abs(delta) > 5) {
+    // Atualiza a última posição de rolagem
+    ultimaPosYScroll = novaPosYScroll;
 
-    ultimaPosY = novaPosY;
+    // Define um fator de suavidade para o movimento do efeito
+    const fatorSuavidade = 1; // ajuste esse valor para ficar mais lento ou mais rápido
+
+    // Atualiza o acumulador com base na rolagem
+    acumuladorY += delta * fatorSuavidade;
+
+    // Calcula a posição onde o efeito deve aparecer
+    const x = posicaoInicialToque.x;
+    const y = posicaoInicialToque.y + acumuladorY;
+
+    // Cria o efeito na nova posição
+    criarTrilhaMagica(x, y);
   }
 });
 
-function criarTrilhaMagica(x, y) {
-  const caminhoGif = "midia/clique_magico.gif?rand=" + Date.now();
-
-  const gifElement = document.createElement('img');
-  gifElement.src = caminhoGif;
-  gifElement.style.position = 'absolute';
-  gifElement.style.zIndex = '9999';
-  gifElement.style.pointerEvents = 'none';
-  gifElement.style.width = '100px';
-  gifElement.style.height = '100px';
-
-  document.body.appendChild(gifElement);
-
-  gifElement.onload = function () {
-    const offsetX = gifElement.offsetWidth / 2;
-    const offsetY = gifElement.offsetHeight / 2;
-
-    gifElement.style.left = `${x - offsetX}px`;
-    gifElement.style.top = `${y - offsetY}px`;
-
-    setTimeout(() => gifElement.remove(), 1000);
-  };
-
-  gifElement.onerror = function () {
-    console.error("Erro ao carregar o GIF:", caminhoGif);
-  };
-}
 
 
 
