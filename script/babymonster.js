@@ -345,28 +345,18 @@ document.addEventListener('mousemove', function (e) {
 
 // ** Código para Mobile **
 
-let ultimoSomArrastar = null;
-let podeTocarSomArrastar = false;
-let touchStartX = null;
-let touchStartY = null;
-let isMoving = false; // Flag para indicar se o movimento começou
+let ultimoSomArrastarMobile = null;
+let podeTocarSomArrastarMobile = false;
 
-// Ativa o som de arrastar após o início do movimento
-document.addEventListener('touchstart', (e) => {
-  podeTocarSomArrastar = true;
-  isMoving = false; // Reseta a flag a cada novo toque
-  if (e.touches.length > 0) {
-    touchStartX = e.touches[0].pageX;
-    touchStartY = e.touches[0].pageY;
-  }
-});
+// Ativa o som de arrastar após qualquer toque
+document.addEventListener('touchstart', () => { podeTocarSomArrastarMobile = true; });
 
-function criarTrilhaMagica(x, y) {
+function criarTrilhaMagicaMobile(clientX, clientY) { // Usamos clientX e clientY
   const caminhoGif = "midia/clique_magico.gif?rand=" + Date.now();
 
   const gifElement = document.createElement('img');
   gifElement.src = caminhoGif;
-  gifElement.style.position = 'fixed';
+  gifElement.style.position = 'fixed'; // Usamos 'fixed' para ficar na tela
   gifElement.style.zIndex = '9999';
   gifElement.style.pointerEvents = 'none';
   gifElement.style.width = '100px';
@@ -375,9 +365,9 @@ function criarTrilhaMagica(x, y) {
   document.body.appendChild(gifElement);
 
   // Toca o som apenas se permitido e se o som anterior terminou
-  if (podeTocarSomArrastar && (!ultimoSomArrastar || ultimoSomArrastar.ended)) {
-    ultimoSomArrastar = new Audio("sons/ARRASTAR.mp3");
-    ultimoSomArrastar.play().catch((e) => {
+  if (podeTocarSomArrastarMobile && (!ultimoSomArrastarMobile || ultimoSomArrastarMobile.ended)) {
+    ultimoSomArrastarMobile = new Audio("sons/ARRASTAR.mp3");
+    ultimoSomArrastarMobile.play().catch((e) => {
       console.warn("Erro ao tocar som de arrastar (mobile):", e);
     });
   }
@@ -386,8 +376,8 @@ function criarTrilhaMagica(x, y) {
     const offsetX = gifElement.offsetWidth / 2;
     const offsetY = gifElement.offsetHeight / 2;
 
-    gifElement.style.left = `${x - offsetX}px`;
-    gifElement.style.top = `${y - offsetY}px`;
+    gifElement.style.left = `${clientX - offsetX}px`; // Usamos clientX
+    gifElement.style.top = `${clientY - offsetY}px`;   // Usamos clientY
 
     setTimeout(() => gifElement.remove(), 1000);
   };
@@ -397,32 +387,15 @@ function criarTrilhaMagica(x, y) {
   };
 }
 
+// Touch
 document.addEventListener('touchmove', function (e) {
   if (e.touches.length > 0) {
     const touch = e.touches[0];
-    const deltaX = Math.abs(touch.pageX - touchStartX);
-    const deltaY = Math.abs(touch.pageY - touchStartY);
-
-    // Define uma pequena tolerância para considerar o movimento como iniciado
-    const movimentoMinimo = 5;
-
-    if (!isMoving && (deltaX > movimentoMinimo || deltaY > movimentoMinimo)) {
-      isMoving = true; // O movimento foi detectado
-    }
-
-    if (isMoving) {
-      // Se o movimento horizontal for maior, trata como movimento no eixo X
-      if (deltaX >= deltaY) {
-        criarTrilhaMagica(touch.pageX, window.innerHeight / 2); // Centraliza verticalmente
-      } else { // Caso contrário, trata como scroll Y
-        criarTrilhaMagica(window.innerWidth / 2, touch.clientY); // Centraliza horizontalmente
-      }
-    }
+    criarTrilhaMagicaMobile(touch.clientX, touch.clientY); // Passamos clientX e clientY
   }
 });
 
 //******FIM DA CONFIGURAÇÃO DO MAUSE MAGICO (MOBILE)****
-
 
 //******FIM DA CONFIGURAÇÃO DO MAUSE MAGICO (MOBILE)****
 
