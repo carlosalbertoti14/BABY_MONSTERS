@@ -374,7 +374,7 @@ function criarTrilhaMagicaMobile(x, y) {
 
   gifElement.onload = function () {
     const offsetX = gifElement.offsetWidth / 2;
-    const offsetY = gifElement.offsetHeight / 2;
+    const offsetY = gifElement.offsetHeight / 4;
 
     gifElement.style.left = `${x - offsetX}px`;
     gifElement.style.top = `${y - offsetY}px`;
