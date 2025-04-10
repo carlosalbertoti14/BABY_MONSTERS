@@ -280,6 +280,7 @@ if (!('ontouchstart' in window)) {
 // ============================
 // ARRASTAR MÁGICO (MOBILE)
 // ============================
+
 if ('ontouchstart' in window) {
   let toqueInicial = null;
   let ultimaPosY = window.scrollY;
@@ -301,15 +302,16 @@ if ('ontouchstart' in window) {
     const novaScrollY = window.scrollY;
     const delta = Math.abs(novaScrollY - ultimaPosY);
 
-    if (delta > 20) { // evitar spam
+    if (delta > 20) { // evitar spam de gifs
       ultimaPosY = novaScrollY;
 
-      const offsetY = novaScrollY - toqueInicial.scrollY;
+      const offsetY = toqueInicial.scrollY - novaScrollY; // <- Inversão aqui
       const y = toqueInicial.y + offsetY;
       criarTrilhaMagica(toqueInicial.x, y);
     }
   });
 }
+
 
 
 
