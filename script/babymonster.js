@@ -281,36 +281,37 @@ if (!('ontouchstart' in window)) {
 // ARRASTAR MÁGICO (MOBILE)
 // ============================
 
-if ('ontouchstart' in window) {
-  let toqueInicial = null;
-  let ultimaPosY = window.scrollY;
 
-  document.addEventListener('touchstart', function (e) {
-    if (e.touches.length > 0) {
-      const touch = e.touches[0];
-      toqueInicial = {
-        x: touch.pageX,
-        y: touch.pageY,
-        scrollY: window.scrollY
-      };
-    }
-  });
+let posicaoInicialToque = null;
+let ultimaPosYScroll = window.scrollY;
 
-  window.addEventListener('scroll', function () {
-    if (!toqueInicial) return;
+document.addEventListener('touchstart', function (e) {
+  if (e.touches.length > 0) {
+    const touch = e.touches[0];
+    posicaoInicialToque = {
+      x: touch.pageX,
+      y: touch.pageY
+    };
+    ultimaPosYScroll = window.scrollY;
+  }
+});
 
-    const novaScrollY = window.scrollY;
-    const delta = Math.abs(novaScrollY - ultimaPosY);
+window.addEventListener('scroll', function () {
+  if (!posicaoInicialToque) return;
 
-    if (delta > 20) { // evitar spam de gifs
-      ultimaPosY = novaScrollY;
+  const novaPosYScroll = window.scrollY;
+  const delta = novaPosYScroll - ultimaPosYScroll;
 
-      const offsetY = toqueInicial.scrollY - novaScrollY; // <- Inversão aqui
-      const y = toqueInicial.y + offsetY;
-      criarTrilhaMagica(toqueInicial.x, y);
-    }
-  });
-}
+  if (Math.abs(delta) > 20) { // Distância mínima para evitar excesso de GIFs
+    ultimaPosYScroll = novaPosYScroll;
+
+    // Como estamos rolando, o efeito deve seguir a rolagem (cascata invertida)
+    const novoY = posicaoInicialToque.y - (novaPosYScroll - ultimaPosYScroll);
+
+    criarTrilhaMagica(posicaoInicialToque.x, novoY);
+  }
+});
+
 
 
 
