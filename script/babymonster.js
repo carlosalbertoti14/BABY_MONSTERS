@@ -225,60 +225,65 @@ const video = document.getElementById('intro-video');
     });
   
   
-    // ============================
-    // ARRASTAR MÁGICO (.GIF + SOM)
-    // ============================
-  
-    let ultimoSomArrastar = null;
-    let podeTocarSomArrastar = false;
-    let ultimaPosY = window.scrollY;
+// ============================
+// ARRASTAR MÁGICO (.GIF + SOM)
+// ============================
+
+let ultimoSomArrastar = null;
+let podeTocarSomArrastar = false;
+let ultimaPosY = window.scrollY;
+let posicaoToqueX = null; // Posição X do dedo
+
+// Ativa som após qualquer interação
+document.addEventListener('click', () => { podeTocarSomArrastar = true; });
+document.addEventListener('touchstart', (e) => {
+  podeTocarSomArrastar = true;
+  if (e.touches.length > 0) {
+    posicaoToqueX = e.touches[0].clientX;
+  }
+});
+document.addEventListener('touchmove', (e) => {
+  if (e.touches.length > 0) {
+    posicaoToqueX = e.touches[0].clientX;
+  }
+});
+document.addEventListener('touchend', () => {
+  posicaoToqueX = null; // Reseta quando o toque termina
+});
+
+function criarTrilhaScroll(x) {
+  const caminhoGif = "midia/clique_magico.gif?rand=" + Date.now();
+
+  const gifElement = document.createElement('img');
+  gifElement.src = caminhoGif;
+  gifElement.style.position = 'absolute';
+  gifElement.style.zIndex = '9999';
+  gifElement.style.pointerEvents = 'none';
+  gifElement.style.width = '100px';
+  gifElement.style.height = '100px';
+
+  const y = window.scrollY + 50 + Math.random() * 100;
+  gifElement.style.left = `${x}px`;
+  gifElement.style.top = `${y}px`;
+
+  document.body.appendChild(gifElement);
+
+  setTimeout(() => gifElement.remove(), 1000);
+
+  // Toca som (uma vez por scroll)
+  if (podeTocarSomArrastar && (!ultimoSomArrastar || ultimoSomArrastar.ended)) {
+    ultimoSomArrastar = new Audio("sons/ARRASTAR.mp3");
+    ultimoSomArrastar.play().catch(e => console.warn("Erro ao tocar som:", e));
+  }
+}
+
+// Detecta rolagem
+window.addEventListener('scroll', () => {
+  const novaPosY = window
+
+
     
-    // Ativa som após qualquer interação
-    document.addEventListener('click', () => { podeTocarSomArrastar = true; });
-    document.addEventListener('touchstart', () => { podeTocarSomArrastar = true; });
-    
-    function criarTrilhaScroll(x) {
-      const caminhoGif = "midia/clique_magico.gif?rand=" + Date.now();
-    
-      const gifElement = document.createElement('img');
-      gifElement.src = caminhoGif;
-      gifElement.style.position = 'absolute';
-      gifElement.style.zIndex = '9999';
-      gifElement.style.pointerEvents = 'none';
-      gifElement.style.width = '100px';
-      gifElement.style.height = '100px';
-    
-      // Adiciona na posição horizontal do dedo, e vertical no topo visível da tela (efeito cascata)
-      const y = window.scrollY + 50 + Math.random() * 100; // varia altura um pouco pra dar um efeito legal
-      gifElement.style.left = `${x}px`;
-      gifElement.style.top = `${y}px`;
-    
-      document.body.appendChild(gifElement);
-    
-      // Toca som se o anterior tiver terminado
-      if (podeTocarSomArrastar && (!ultimoSomArrastar || ultimoSomArrastar.ended)) {
-        ultimoSomArrastar = new Audio("sons/ARRASTAR.mp3");
-        ultimoSomArrastar.play().catch((e) => console.warn("Erro ao tocar som:", e));
-      }
-    
-      setTimeout(() => gifElement.remove(), 1000);
-    }
-    
-    // Detecta rolagem no celular (ou em qualquer lugar)
-    window.addEventListener('scroll', () => {
-      const novaPosY = window.scrollY;
-      const delta = Math.abs(novaPosY - ultimaPosY);
-    
-      if (delta > 20) { // Evita excesso de gifs
-        ultimaPosY = novaPosY;
-    
-        // Cria efeito em várias posições horizontais diferentes (tipo chuvisco mágico)
-        for (let i = 0; i < 3; i++) {
-          const posX = Math.random() * window.innerWidth;
-          criarTrilhaScroll(posX);
-        }
-      }
-    });
+
     
 
 //******FIM DA CONFIGURAÇÃO DO MAUSE MAGICO****
