@@ -374,7 +374,7 @@ function criarTrilhaMagicaMobile(x, y) {
 
   gifElement.onload = function () {
     const offsetX = gifElement.offsetWidth / 2;
-    const offsetY = gifElement.offsetHeight;
+    const offsetY = gifElement.offsetHeight / 2;
 
     gifElement.style.left = `${x - offsetX}px`;
     gifElement.style.top = `${y - offsetY}px`;
@@ -391,7 +391,7 @@ function criarTrilhaMagicaMobile(x, y) {
 document.addEventListener('touchmove', function (e) {
   if (e.touches.length > 0) {
     const touch = e.touches[0];
-    criarTrilhaMagicaMobile(touch.pageX, touch.pageY);
+    criarTrilhaMagicaMobile(touch.pageX, touch.clientY); // <---- AQUI A MUDANÇA!
   }
 });
 
