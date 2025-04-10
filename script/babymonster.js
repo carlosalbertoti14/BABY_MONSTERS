@@ -231,27 +231,24 @@ const video = document.getElementById('intro-video');
 
 let ultimoSomArrastar = null;
 let podeTocarSomArrastar = false;
-let ultimaPosY = window.scrollY;
-let posicaoToqueX = null; // Posição X do dedo
+let posicaoFixaX = null; // posição horizontal fixa do toque
 
-// Ativa som após qualquer interação
+// Ativa o som após qualquer interação
 document.addEventListener('click', () => { podeTocarSomArrastar = true; });
 document.addEventListener('touchstart', (e) => {
   podeTocarSomArrastar = true;
+
+  // Captura a posição X do primeiro toque e fixa
   if (e.touches.length > 0) {
-    posicaoToqueX = e.touches[0].clientX;
+    posicaoFixaX = e.touches[0].pageX;
   }
-});
-document.addEventListener('touchmove', (e) => {
-  if (e.touches.length > 0) {
-    posicaoToqueX = e.touches[0].clientX;
-  }
-});
-document.addEventListener('touchend', () => {
-  posicaoToqueX = null; // Reseta quando o toque termina
 });
 
-function criarTrilhaScroll(x) {
+document.addEventListener('touchend', () => {
+  posicaoFixaX = null; // Reseta a posição quando o toque termina
+});
+
+function criarTrilhaMagica(x, y) {
   const caminhoGif = "midia/clique_magico.gif?rand=" + Date.now();
 
   const gifElement = document.createElement('img');
@@ -262,25 +259,57 @@ function criarTrilhaScroll(x) {
   gifElement.style.width = '100px';
   gifElement.style.height = '100px';
 
-  const y = window.scrollY + 50 + Math.random() * 100;
-  gifElement.style.left = `${x}px`;
-  gifElement.style.top = `${y}px`;
-
   document.body.appendChild(gifElement);
 
-  setTimeout(() => gifElement.remove(), 1000);
-
-  // Toca som (uma vez por scroll)
+  // Som
   if (podeTocarSomArrastar && (!ultimoSomArrastar || ultimoSomArrastar.ended)) {
     ultimoSomArrastar = new Audio("sons/ARRASTAR.mp3");
-    ultimoSomArrastar.play().catch(e => console.warn("Erro ao tocar som:", e));
+    ultimoSomArrastar.play().catch((e) => {
+      console.warn("Erro ao tocar som de arrastar:", e);
+    });
   }
+
+  gifElement.onload = function () {
+    const offsetX = gifElement.offsetWidth / 2;
+    const offsetY = gifElement.offsetHeight / 2;
+
+    gifElement.style.left = `${x - offsetX}px`;
+    gifElement.style.top = `${y - offsetY}px`;
+
+    setTimeout(() => gifElement.remove(), 1000);
+  };
+
+  gifElement.onerror = function () {
+    console.error("Erro ao carregar o GIF:", caminhoGif);
+  };
 }
 
-// Detecta rolagem
-window.addEventListener('scroll', () => {
-  const novaPosY = window
+// Mouse (normal)
+let ultimaPosicao = 0;
+document.addEventListener('mousemove', function (e) {
+  const distanciaMinima = 30;
+  const atual = e.pageY + e.pageX;
 
+  if (Math.abs(atual - ultimaPosicao) > distanciaMinima) {
+    ultimaPosicao = atual;
+    criarTrilhaMagica(e.pageX, e.pageY);
+  }
+});
+
+// Touch (com ponto fixo X)
+let ultimaScrollY = window.scrollY;
+
+document.addEventListener('touchmove', function (e) {
+  const novoScrollY = window.scrollY;
+  const deltaY = Math.abs(novoScrollY - ultimaScrollY);
+
+  if (posicaoFixaX !== null && deltaY > 20) { // Apenas se houver movimento e toque fixado
+    ultimaScrollY = novoScrollY;
+
+    const y = window.scrollY + 50 + Math.random() * 80; // Altura relativa à tela com variação
+    criarTrilhaMagica(posicaoFixaX, y);
+  }
+});
 
     
 
