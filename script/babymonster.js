@@ -345,11 +345,8 @@ document.addEventListener('mousemove', function (e) {
 
 // ** Código para Mobile **
 
-
 let ultimoSomArrastarMobile = null;
 let podeTocarSomArrastarMobile = false;
-const trilhaMagicaMobile = []; // Array para guardar os elementos GIF da trilha
-const velocidadeDeslocamento = 5; // Ajuste a velocidade do deslocamento dos GIFs antigos
 
 // Ativa o som de arrastar após qualquer toque
 document.addEventListener('touchstart', () => { podeTocarSomArrastarMobile = true; });
@@ -364,11 +361,8 @@ function criarTrilhaMagicaMobile(x, y) {
   gifElement.style.pointerEvents = 'none';
   gifElement.style.width = '100px';
   gifElement.style.height = '100px';
-  gifElement.style.left = `${x - gifElement.offsetWidth / 2}px`;
-  gifElement.style.top = `${y - gifElement.offsetHeight / 2}px`;
 
   document.body.appendChild(gifElement);
-  trilhaMagicaMobile.push(gifElement); // Adiciona o novo GIF ao array da trilha
 
   // Toca o som apenas se permitido e se o som anterior terminou
   if (podeTocarSomArrastarMobile && (!ultimoSomArrastarMobile || ultimoSomArrastarMobile.ended)) {
@@ -378,62 +372,32 @@ function criarTrilhaMagicaMobile(x, y) {
     });
   }
 
+  gifElement.onload = function () {
+    const offsetX = gifElement.offsetWidth / 2;
+    const offsetY = gifElement.offsetHeight / 2;
+
+    gifElement.style.left = `${x - offsetX}px`;
+    gifElement.style.top = `${y - offsetY}px`;
+
+    setTimeout(() => gifElement.remove(), 1000);
+  };
+
   gifElement.onerror = function () {
     console.error("Erro ao carregar o GIF (mobile):", caminhoGif);
   };
 }
 
-let posicaoYAnterior = null;
-
+// Touch
 document.addEventListener('touchmove', function (e) {
   if (e.touches.length > 0) {
     const touch = e.touches[0];
-    const touchX = touch.pageX;
-    const touchY = touch.pageY;
-
-    criarTrilhaMagicaMobile(touchX, touchY);
-
-    // Atualiza a posição dos GIFs antigos
-    if (posicaoYAnterior !== null) {
-      const deltaY = touchY - posicaoYAnterior;
-
-      trilhaMagicaMobile.forEach(gif => {
-        const currentTop = parseInt(gif.style.top) || 0;
-        gif.style.top = `${currentTop - deltaY * velocidadeDeslocamento}px`;
-
-        // Opcional: Remova os GIFs que saem da tela para otimizar a performance
-        const limiteSuperior = -gif.offsetHeight;
-        const limiteInferior = window.innerHeight + gif.offsetHeight;
-        if (currentTop < limiteSuperior || currentTop > limiteInferior) {
-          gif.remove();
-          const index = trilhaMagicaMobile.indexOf(gif);
-          if (index > -1) {
-            trilhaMagicaMobile.splice(index, 1);
-          }
-        }
-      });
-    }
-    posicaoYAnterior = touchY;
-  } else {
-    posicaoYAnterior = null; // Reseta a posição quando não há toque
+    criarTrilhaMagicaMobile(touch.pageX, touch.pageY);
   }
 });
 
-document.addEventListener('touchend', () => {
-  posicaoYAnterior = null; // Reseta a posição quando o toque termina
-  // Opcional: Limpar a trilha completamente ao soltar o dedo
-  // trilhaMagicaMobile.forEach(gif => gif.remove());
-  // trilhaMagicaMobile.length = 0;
-});
-
-document.addEventListener('touchcancel', () => {
-  posicaoYAnterior = null; // Reseta a posição em caso de cancelamento do toque
-  // Opcional: Limpar a trilha completamente em caso de cancelamento
-  // trilhaMagicaMobile.forEach(gif => gif.remove());
-  // trilhaMagicaMobile.length = 0;
-});
-
 //******FIM DA CONFIGURAÇÃO DO MAUSE MAGICO (MOBILE)****
+
+
     
 
 //******FIM DA CONFIGURAÇÃO DO MAUSE MAGICO****
