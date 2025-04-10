@@ -231,26 +231,10 @@ const video = document.getElementById('intro-video');
 
 let ultimoSomArrastar = null;
 let podeTocarSomArrastar = false;
-let posicaoFixaX = null;
-let ultimaTouchY = null;
-let direcao = 1; // 1 = baixo, -1 = cima
 
-// Ativa som após qualquer interação
+// Ativa o som após qualquer toque ou clique
 document.addEventListener('click', () => { podeTocarSomArrastar = true; });
-document.addEventListener('touchstart', (e) => {
-  podeTocarSomArrastar = true;
-
-  if (e.touches.length > 0) {
-    const touch = e.touches[0];
-    posicaoFixaX = touch.pageX;
-    ultimaTouchY = touch.pageY;
-  }
-});
-
-document.addEventListener('touchend', () => {
-  posicaoFixaX = null;
-  ultimaTouchY = null;
-});
+document.addEventListener('touchstart', () => { podeTocarSomArrastar = true; });
 
 function criarTrilhaMagica(x, y) {
   const caminhoGif = "midia/clique_magico.gif?rand=" + Date.now();
@@ -265,7 +249,7 @@ function criarTrilhaMagica(x, y) {
 
   document.body.appendChild(gifElement);
 
-  // Toca som (se anterior terminou)
+  // Som
   if (podeTocarSomArrastar && (!ultimoSomArrastar || ultimoSomArrastar.ended)) {
     ultimoSomArrastar = new Audio("sons/ARRASTAR.mp3");
     ultimoSomArrastar.play().catch((e) => {
@@ -276,10 +260,8 @@ function criarTrilhaMagica(x, y) {
   gifElement.onload = function () {
     const offsetX = gifElement.offsetWidth / 2;
     const offsetY = gifElement.offsetHeight / 2;
-
     gifElement.style.left = `${x - offsetX}px`;
     gifElement.style.top = `${y - offsetY}px`;
-
     setTimeout(() => gifElement.remove(), 1000);
   };
 
@@ -288,36 +270,45 @@ function criarTrilhaMagica(x, y) {
   };
 }
 
-// === DESKTOP: Mouse move ===
+// =============== DESKTOP (mouse) ===============
 let ultimaPosicaoMouse = 0;
 document.addEventListener('mousemove', function (e) {
   const distanciaMinima = 30;
   const atual = e.pageY + e.pageX;
-
   if (Math.abs(atual - ultimaPosicaoMouse) > distanciaMinima) {
     ultimaPosicaoMouse = atual;
     criarTrilhaMagica(e.pageX, e.pageY);
   }
 });
 
-// === CELULAR: Touch move ===
-document.addEventListener('touchmove', function (e) {
-  if (e.touches.length > 0 && posicaoFixaX !== null && ultimaTouchY !== null) {
+// =============== MOBILE (touch com rolagem mágica) ===============
+let toqueInicialX = null;
+let toqueInicialY = null;
+let scrollAnterior = window.scrollY;
+
+document.addEventListener('touchstart', function (e) {
+  if (e.touches.length > 0) {
     const touch = e.touches[0];
-    const deltaY = touch.pageY - ultimaTouchY;
+    toqueInicialX = touch.pageX;
+    toqueInicialY = touch.pageY;
+    scrollAnterior = window.scrollY;
+  }
+});
 
-    if (Math.abs(deltaY) > 25) {
-      direcao = deltaY > 0 ? 1 : -1;
+// Durante a rolagem (cascata mágica baseada na direção do scroll)
+window.addEventListener('scroll', () => {
+  if (toqueInicialX !== null && toqueInicialY !== null) {
+    const deslocamentoScroll = window.scrollY - scrollAnterior;
+    scrollAnterior = window.scrollY;
 
-      // Ponto fixo no X, direção vertical baseada no gesto
-      const y = ultimaTouchY + direcao * 50 + Math.random() * 30;
-
-      criarTrilhaMagica(posicaoFixaX, y);
-
-      ultimaTouchY = touch.pageY;
+    // Apenas reage se o scroll for significativo
+    if (Math.abs(deslocamentoScroll) > 5) {
+      const novaY = toqueInicialY + deslocamentoScroll * 0.5; // 0.5 suaviza o movimento
+      criarTrilhaMagica(toqueInicialX, novaY);
     }
   }
 });
+
 
 
     
