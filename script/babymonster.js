@@ -284,6 +284,7 @@ if (!('ontouchstart' in window)) {
 
 let posicaoInicialToque = null;
 let ultimaPosYScroll = window.scrollY;
+let acumuladorY = 0;
 
 document.addEventListener('touchstart', function (e) {
   if (e.touches.length > 0) {
@@ -293,6 +294,7 @@ document.addEventListener('touchstart', function (e) {
       y: touch.pageY
     };
     ultimaPosYScroll = window.scrollY;
+    acumuladorY = 0; // Zera o rastro ao iniciar novo toque
   }
 });
 
@@ -302,13 +304,15 @@ window.addEventListener('scroll', function () {
   const novaPosYScroll = window.scrollY;
   const delta = novaPosYScroll - ultimaPosYScroll;
 
-  if (Math.abs(delta) > 20) { // Distância mínima para evitar excesso de GIFs
+  if (Math.abs(delta) > 10) { // Menor valor para mais fluidez
     ultimaPosYScroll = novaPosYScroll;
 
-    // Como estamos rolando, o efeito deve seguir a rolagem (cascata invertida)
-    const novoY = posicaoInicialToque.y - (novaPosYScroll - ultimaPosYScroll);
+    acumuladorY -= 20; // Faz as estrelas subirem progressivamente
 
-    criarTrilhaMagica(posicaoInicialToque.x, novoY);
+    const x = posicaoInicialToque.x;
+    const y = posicaoInicialToque.y + acumuladorY;
+
+    criarTrilhaMagica(x, y);
   }
 });
 
