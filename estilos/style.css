@@ -310,7 +310,7 @@ div#felizniver {
 
 div#felizniver img{
     display: block;
-    z-index: 1000;
+  /*   z-index: 1000; */
    
 
 
@@ -332,12 +332,17 @@ div#DIVniver {
     padding-bottom: 0px;      /* Espaço no fundo para não colar a última img */
 }
 
+div#DIVniver a {
+    display: block; /* Faz o link ocupar a largura total */
+    text-align: right; /* Alinha o conteúdo (a imagem) à direita */
+}
+
 div#DIVniver img {
     display: none;
     width: 80%;                /* Ocupa 80% da largura da div, se ajusta em telas menores */
-    max-width: 300px;          /* Mas nunca passa de 300px */
+    max-width: 600px;          /* Mas nunca passa de 300px */
     padding: 5px 0px 5px 5px;
-    z-index: 200;
+   /*  z-index: 200; */
    /*  box-shadow: 5px 5px 15px rgba(22, 22, 22, 0.5); */
 }
 
