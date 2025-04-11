@@ -40,6 +40,8 @@ h3{
     text-align: center;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.575);
     font-weight: bolder;
+    
+    
 
 
 }
@@ -47,10 +49,21 @@ h3{
 h4{
     color: var(--cor1);
     text-align: center;
-    text-shadow: 2px 2px 4px rgb(0, 0, 0);
+   /*  text-shadow: 3px 3px 6px black; */
     font-weight: bolder;
+   /*  -webkit-text-stroke: 2px black; /* Largura e cor do traçado */ 
 
+    text-shadow:
+    -1px -1px 0 black,
+    1px -1px 0 black,
+    -1px 1px 0 black,
+    1px 1px 0 black,
+    -2px -2px 0 black,
+    2px -2px 0 black,
+    -2px 2px 0 black,
+    2px 2px 0 black;
 }
+
 
 h5{
     color: var(--cor4);
@@ -281,6 +294,7 @@ transition: opacity 0.5s ease-in-out; /* Adiciona uma transição suave para a o
 section#SECniver {
     display: none;
     background-image: url(../midia/ANIVERSÁRIO_BG.jpg);
+    background-position: center;
     background-repeat: no-repeat;
     background-color: black;
     width: 100%;     
@@ -297,6 +311,7 @@ div#felizniver {
 div#felizniver img{
     display: block;
     z-index: 1000;
+   
 
 
 }
@@ -532,6 +547,9 @@ div#menu > nav a {
 
         
     }
+
+
+
 }
 
 
