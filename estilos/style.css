@@ -292,6 +292,12 @@ section#SECniver {
 div#felizniver {
     display: none;
 
+}
+
+div#felizniver img{
+    display: block;
+    z-index: 1000;
+
 
 }
 

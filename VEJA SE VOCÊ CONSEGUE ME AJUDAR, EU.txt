@@ -125,12 +125,6 @@ JS
 
 ...AGORA EU QUERIA QUE você deixasse o código exatamente como esta, mas só acrescentasse um teste condicional. QUANDO FOSSE O DIA e o Mês REAL DO ANIVERSARIO DE UMA DAS INTEGRANTES, QUE SUBISTITUISSE O  background-image: url(../midia/ANIVERSÁRIO_BG.jpg);  PELA IMAGEM DA INTEGRANTE QUE FAÇA ANO NO DIA, E COLOCASSE ESCRITO NA div#DIVniver {<h2> Feliz aniversário "$fulano" esse é seu maior dia!"</h2>..
 
-section#SECniver {
-        background-image: url(../midia/ANIVERSÁRIO_BG.jpg);
-
-
-gostaria que ficasse desse formato, corrija alguns pontos para mim por favor;
-
 //CONFIGURAÇÃO DO ANIVERSÁRIO
 document.addEventListener("DOMContentLoaded", function () {
             const imagens = document.querySelectorAll('#DIVniver img');
@@ -138,13 +132,13 @@ document.addEventListener("DOMContentLoaded", function () {
             let encontrouAniversariante = false;
 
             const nivernome = [
-                { nome: "Ahyeon", url: "url('../midia/BABYMONSTERS_PERFIL_BG_AHYEON3.jpg')" },
-                { nome: "Asa", url: "url('../midia/BABYMONSTERS_PERFIL_BG_ASA.png')" },
-                { nome: "Chiquita", url: "url('../midia/BABYMONSTERS_PERFIL_BG_CHIQUITA.png')" },
-                { nome: "Parita", url: "url('../midia/BABYMONSTERS_PERFIL_BG_PHARITA.png')" },
-                { nome: "Rami", url: "url('../midia/BABYMONSTERS_PERFIL_BG_RAMI.png')" },
-                { nome: "Rora", url: "url('../midia/BABYMONSTERS_PERFIL_BG_RORA.png')" },
-                { nome: "Ruka", url: "url('../midia/BABYMONSTERS_PERFIL_BG_RUKA.png')" }
+                { nome: "Ahyeon", url: "url('midia/BABYMONSTERS_PERFIL_BG_AHYEON3.jpg')" },
+                { nome: "Asa", url: "url('midia/BABYMONSTERS_PERFIL_BG_ASA.png')" },
+                { nome: "Chiquita", url: "url('midia/BABYMONSTERS_PERFIL_BG_CHIQUITA.png')" },
+                { nome: "Parita", url: "url('midia/BABYMONSTERS_PERFIL_BG_PHARITA.png')" },
+                { nome: "Rami", url: "url('midia/BABYMONSTERS_PERFIL_BG_RAMI.png')" },
+                { nome: "Rora", url: "url('midia/BABYMONSTERS_PERFIL_BG_RORA.png')" },
+                { nome: "Ruka", url: "url('midia/BABYMONSTERS_PERFIL_BG_RUKA.png')" }
             ];
 
 
@@ -174,15 +168,16 @@ document.addEventListener("DOMContentLoaded", function () {
                         const secNiver = document.getElementById("SECniver");
                         const divNiver = document.getElementById("DIVniver");
 
-/*                         alert(`Data Aniversário: ${dataAniversario}\nDia/Mês Hoje: ${diamesHoje}\nAniversariante do Dia: ${JSON.stringify(aniversarianteDoDia)}\nDIV Niver: ${divNiver ? divNiver.id : 'Elemento não encontrado'}`); */
+/*                          alert(`Data Aniversário: ${dataAniversario}\nDia/Mês Hoje: ${diamesHoje}\nAniversariante do Dia: ${JSON.stringify(aniversarianteDoDia)}\nDIV Niver: ${divNiver ? divNiver.id : 'Elemento não encontrado'}`); */
 
                         if (aniversarianteDoDia) {
                             if (secNiver && divNiver) {
                                 secNiver.style.display = "block";
                                 secNiver.style.backgroundImage = aniversarianteDoDia.url;
-                                /* divNiver.innerHTML = `<h2> Feliz aniversário, ${nomeAniversariante}! Esse é o seu dia!</h2>`; */
+                                divNiver.innerHTML = `<h2> Feliz aniversário, ${nomeAniversariante}! Esse é o seu dia mais FELIZ!!!</h2>`;
                                 img.style.display = "block";
                                 encontrouAniversarianteDoDia = true;
+                                /* alert(aniversarianteDoDia.url) */
                             }
                         }
                     }
@@ -250,7 +245,29 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-
 ...quando me mandar o código, retire os espaços a esquerda, pois esta atrapalhando na hora de copiar e color. pois fica com quadradinhos brangos no lucar dos espaços.
 
-...ele encontra bem o aniversariante, só que o javascript não esta conseguindo alterar a imagem do bg secNiver.style.backgroundImage = ... SERÁ QUE O PROBLEMA ESTA NAS ASPAS?
+...ESTE MEU CÓDIGO AQUI ESTA FUNCONANDO PERFEITA MENTE SÓ QUE QUANDO ESSE CÓDIGO É EXECUTADO.. divNiver.innerHTML = `<h2> Feliz aniversário, ${nomeAniversariante}! Esse é o seu dia mais FELIZ!!!</h2>`;
+
+AS IMAGENS QUE DEVERIAM SER GERADAS POR;
+
+imagens.forEach(img => {
+                const alt = img.alt.trim(); // Ex: "Rami 17/10"
+                const partes = alt.split(" ");
+                if (partes.length === 2) {
+                    const mesAniversario = parseInt(partes[1].split("/")[1]);
+
+                    if (mesAniversario === mesAtual && !encontrouAniversarianteDoDia) {
+                        img.style.display = "block";
+                        encontrouAniversariante = true;
+                    } else if (!encontrouAniversarianteDoDia) {
+                        img.style.display = "none";
+                    }
+                } else {
+                    if (!encontrouAniversarianteDoDia) {
+                        img.style.display = "none";
+                    }
+                }
+            });
+
+...NÃO APARECEM!
