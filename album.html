@@ -54,9 +54,21 @@
                             <a href="PERFIL.html">PERFIL</a>
                             <a href="https://br.pinterest.com/search/pins/?q=%22BABYMONSTER%22%20GRUPO&rs=typed" id="fotos" target="_blank">FOTOS</a>
                             <a href="https://www.ygfamily.com/en/artists/babymonster/concert" target="_blank">EVENTOS</a>
-                            <a href="#">PRODUTOS</a>
+                            <a id="produtos" href="#">PRODUTOS</a>
                         </nav>
                     </div>
+
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                          var produtosLink = document.getElementById('produtos');
+                          produtosLink.addEventListener('click', function(event) {
+                            event.preventDefault(); // Impede o link de navegar
+                            alert('OS PRODUTOS AINDA NÃO ESTÃO DISPONÍVEIS!');
+                          });
+                        });
+                      </script>
+
+
                 </div>
            <!--  </div> -->
 
