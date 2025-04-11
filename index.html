@@ -141,12 +141,12 @@
 
                     <div id="DIVniver">
                         
-                        <img id="NIVERchiquita" src="midia/CHIQUITA17NIVER.png" alt="Chiquita 17/02">
-                        <img id="NIVERluka" src="midia/LUKA20NIVER.png" alt="Ruka 20/03">
-                        <img id="NIVERahyeon" src="midia/AHYEON11NIVER.png" alt="Ahyeon 11/04">
-                        <img id="NIVERasa" src="midia/ASA17NIVER.png" alt="Asa 17/04">
-                        <img id="NIVERrora" src="midia/RORA14NIVER.png" alt="Rora 14/08">
-                        <img id="NIVERpharita" src="midia/PHARITA26NIVER.png" alt="Pharita 26/08">
+                        <img id="NIVERchiquita" src="midia/CHIQUITA17NIVER.png" alt="Chiquita 17/2">
+                        <img id="NIVERluka" src="midia/LUKA20NIVER.png" alt="Ruka 20/3">
+                        <img id="NIVERahyeon" src="midia/AHYEON11NIVER.png" alt="Ahyeon 11/4">
+                        <img id="NIVERasa" src="midia/ASA17NIVER.png" alt="Asa 17/4">
+                        <img id="NIVERrora" src="midia/RORA14NIVER.png" alt="Rora 14/8">
+                        <img id="NIVERpharita" src="midia/PHARITA26NIVER.png" alt="Pharita 26/8">
                         <img id="NIVERrami" src="midia/RAMI17NIVER.png" alt="Rami 17/10">
 
 
@@ -340,7 +340,10 @@ document.addEventListener("DOMContentLoaded", function () {
             const nomeAniversariante = partes[0];
             const dataAniversario = partes[1];
 
-            if (dataAniversario === /* "20/03" */diamesHoje) {
+/*             alert(dataAniversario)
+            alert(diamesHoje) */
+
+            if (dataAniversario ===  diamesHoje) {
                 const aniversarianteDoDia = nivernome.find(item => item.nome.toLowerCase() === nomeAniversariante.toLowerCase());
                 const secNiver = document.getElementById("SECniver");
                 const divNiver = document.getElementById("DIVniver");
