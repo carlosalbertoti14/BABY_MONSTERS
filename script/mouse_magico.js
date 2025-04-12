@@ -103,7 +103,7 @@ document.addEventListener('click', function (event) {
   let primeiroToque = null;
   const distanciaMinimaMobile = 30; // Distância mínima para ativar o efeito - Renomeei para clareza
   let podeCriarGifMobile = true; // Renomeei para clareza
-  const intervaloMinimoGifMobile = 10; // Intervalo mínimo em milissegundos - Renomeei para clareza
+  const intervaloMinimoGifMobile = 50; // Intervalo mínimo em milissegundos - Renomeei para clareza
   let ultimoTempoCriacaoGifMobile = 0; // Renomeei para clareza
   
   // Ativa o som de arrastar após qualquer toque e guarda a posição inicial
@@ -120,50 +120,48 @@ document.addEventListener('click', function (event) {
   function criarTrilhaMagicaMobile(clientX, clientY) {
     const agora = Date.now();
     if (!podeCriarGifMobile || (agora - ultimoTempoCriacaoGifMobile < intervaloMinimoGifMobile)) {
-        return;
+        return; // Impede a criação se o intervalo mínimo não foi atingido
     }
     podeCriarGifMobile = false;
     ultimoTempoCriacaoGifMobile = agora;
     setTimeout(() => { podeCriarGifMobile = true; }, intervaloMinimoGifMobile);
-
+  
     const caminhoGif = "midia/clique_magico.gif?rand=" + agora;
-
+  
     const gifElement = document.createElement('img');
     gifElement.src = caminhoGif;
-    gifElement.style.position = 'fixed'; // Mantemos como fixed
+    gifElement.style.position = 'fixed';
     gifElement.style.zIndex = '9999';
     gifElement.style.pointerEvents = 'none';
-    gifElement.style.width = 'auto'; // Deixamos a largura automática
-    gifElement.style.height = 'auto'; // Deixamos a altura automática
-    gifElement.style.maxWidth = '100px'; // Definimos uma largura máxima para não ficar muito grande
-    gifElement.style.maxHeight = '100px'; // Definimos uma altura máxima também
-    gifElement.style.left = `${clientX - gifElement.offsetWidth / 2}px`;
-    gifElement.style.top = `${clientY - gifElement.offsetHeight / 2}px`;
-
+    gifElement.style.width = '100px';
+    gifElement.style.height = '100px';
+  
     document.body.appendChild(gifElement);
-
+  
     // Toca o som apenas se permitido e se o som anterior terminou
     if (podeTocarSomArrastarMobile && (!ultimoSomArrastarMobile || ultimoSomArrastarMobile.ended)) {
-        if (!somArrastarMuted) {
+        if (!somArrastarMuted) { // Verifica se o som de arrastar não está mudo
             ultimoSomArrastarMobile = new Audio("sons/ARRASTAR.mp3");
             ultimoSomArrastarMobile.play().catch((e) => {
                 console.warn("Erro ao tocar som de arrastar (mobile):", e);
             });
         }
     }
-
+  
     gifElement.onload = function () {
         const offsetX = gifElement.offsetWidth / 2;
         const offsetY = gifElement.offsetHeight / 2;
+  
         gifElement.style.left = `${clientX - offsetX}px`;
         gifElement.style.top = `${clientY - offsetY}px`;
+  
         setTimeout(() => gifElement.remove(), 1000);
     };
-
+  
     gifElement.onerror = function () {
         console.error("Erro ao carregar o GIF (mobile):", caminhoGif);
     };
-}
+  }
   
   // Touch
   document.addEventListener('touchmove', function (e) {
