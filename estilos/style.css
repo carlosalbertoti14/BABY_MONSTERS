@@ -113,6 +113,16 @@ picture img {
     
 }
 
+/**************************************CONFIGURAÇÃO DO CLIQUE MÁGICO**********************/
+
+.clique-magico-gif {
+    /* Outros estilos */
+    max-width: 100vw; /* Garante que a largura não exceda a largura da viewport */
+    max-height: 100vh; /* Garante que a altura não exceda a altura da viewport */
+}
+
+
+
 /***************CONFIGURAÇÃO DA CAIXA DE EXPLICAÇÃO*************/
 
 
@@ -408,6 +418,11 @@ body {
     width: 100%;
     background-attachment: fixed;
 
+
+    overflow-x: hidden; /* Esconde o que ultrapassa a largura da tela */
+    /* Se você ainda precisar de rolagem vertical: */
+    overflow-y: auto;
+
 }
 
 header {
@@ -690,6 +705,14 @@ ul > li > ul.show {
 li  a {
     text-decoration: none;
 }
+
+
+img#letra {
+    width: 25px;
+    height: 25px;
+}
+
+/*********************************FIM DA CONFIGURAÇÃO DA LISTA  */ 
 
 footer, footer a {
     text-align: center;
