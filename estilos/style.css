@@ -556,6 +556,7 @@ div#menu > nav a {
         display: flex;
         justify-content: space-around;
 
+        
     
     }
 
@@ -574,7 +575,22 @@ div#menu > nav a {
 
 
 
+
+    body{
+        
+        background-attachment: fixed;
+
+
+        overflow-x: hidden; /* Esconde o que ultrapassa a largura da tela */
+        /* Se você ainda precisar de rolagem vertical: */
+        overflow-y: auto;
+
+    }    
+
+
 }
+
+
 
 
 div#menu  > nav a:hover {
