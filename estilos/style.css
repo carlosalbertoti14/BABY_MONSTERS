@@ -113,13 +113,7 @@ picture img {
     
 }
 
-/**************************************CONFIGURAÇÃO DO CLIQUE MÁGICO**********************/
 
-.clique-magico-gif {
-    /* Outros estilos */
-    max-width: 100vw; /* Garante que a largura não exceda a largura da viewport */
-    max-height: 100vh; /* Garante que a altura não exceda a altura da viewport */
-}
 
 
 
@@ -408,6 +402,16 @@ img#substitute-image {
    z-index: -1;
 }
 
+
+/**************************************CONFIGURAÇÃO DO CLIQUE MÁGICO**********************/
+
+.clique-magico-gif {
+    /* Outros estilos */
+    max-width: 100vw; /* Garante que a largura não exceda a largura da viewport */
+    max-height: 100vh; /* Garante que a altura não exceda a altura da viewport */
+}
+
+/**************************************FIM DA CONFIGURAÇÃO DO CLIQUE MÁGICO**********************/
 
 
 body {

@@ -188,4 +188,4 @@ document.addEventListener('click', function (event) {
   
   //******FIM DA CONFIGURAÇÃO DO MAUSE MAGICO (MOBILE)****
   
-  //******FIM DA CONFIGURAÇÃO DO MAUSE MAGICO****
+  //******FIM DA CONFIGURAÇÃO DO MAUSE MAGICO***
