@@ -295,16 +295,29 @@ transition: opacity 0.5s ease-in-out; /* Adiciona uma transição suave para a o
 
 
 
-section#SECniver {
+  section#SECniver {
     display: none;
     background-image: url(../midia/ANIVERSÁRIO_BG.jpg);
     background-position: center;
     background-repeat: no-repeat;
-    background-color: black;
-    width: 100%;     
-    height: 670px;          /* Agora ocupa 100% da largura da tela */
-    max-width: 800px;          /* Mas nunca passa de 800px */
-    margin: 0 auto;            /* Centraliza horizontalmente */
+    background-color: black; /* Importante manter o background-color: black */
+    width: 100%;
+    height: 670px;
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative; /* Importante para posicionar o vídeo absolutamente dentro */
+}
+
+#fogosVideo {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    mix-blend-mode: screen;
+    pointer-events: none; /* Para não impedir cliques nos links abaixo */
 }
 
 div#felizniver {

@@ -50,12 +50,12 @@ document.addEventListener("DOMContentLoaded", function () {
                         document.getElementById("felizniver").style.display = "block";
 
                         //fim ativando h4
-
+                            
                             const mensagemAniversarioDiv = document.getElementById("felizniver");
                             if (mensagemAniversarioDiv) {
                                 mensagemAniversarioDiv.innerHTML = `<h4 id="felizniver"> Feliz aniversário, ${nomeAniversariante}! Hoje, é o seu dia mais FELIZ!!!</h4>`;
 
-
+                            fogosVideo.style.display = "block"; // <-------------------- ATIVA O VÍDEO AQUI
                             }
 
                         img.style.display = "block"; // Esconde a imagem original do aniversariante do dia
