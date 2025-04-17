@@ -352,6 +352,7 @@ div#DIVniver {
 div#DIVniver a {
     display: block; /* Faz o link ocupar a largura total */
     text-align: right; /* Alinha o conteúdo (a imagem) à direita */
+    z-index: 999;
 }
 
 div#DIVniver img {
