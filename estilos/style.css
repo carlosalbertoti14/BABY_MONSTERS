@@ -23,6 +23,11 @@
    text-decoration: none;
 }
 
+a {
+    text-decoration: none;
+    color: var(--cor1);
+}
+
 h1{
 
 }
@@ -125,12 +130,13 @@ span.infoboxshow {
     position: relative; /* Define o contêiner como relativo */
     color: var(--cor3);
     font-weight: bolder;
+    z-index: 100;
     
 }
 
     span.infoboxhiden {
     display: none; /* Esconde o parágrafo inicialmente */
-    position: absolute; /* Posiciona o parágrafo de forma absoluta */
+    position: fixed; /* Posiciona o parágrafo de forma absoluta */
     top: 0; /* Ajusta a posição do parágrafo */
     left: 0;
     color: white;
@@ -139,13 +145,15 @@ span.infoboxshow {
     border-radius: 10px;
     width: 300px;
     margin-left: -50px;
+    margin-top: -86px;
     font-weight: normal;
     text-align: start;
-    z-index: 100; /* Garante que o parágrafo apareça acima de outros elementos */
+    z-index:  99999; /* Garante que o parágrafo apareça acima de outros elementos */
 
 
 }
 
+div#ahyeon span a{color: rgb(26, 26, 238)}
 
 
 /*************** FIM DA CONFIGURAÇÃO DA CAIXA DE EXPLICAÇÃO*************/
@@ -797,7 +805,9 @@ p.brasil{
 }
 
 
-section#perfil{
+section#perfil div{
+    display: block;
+    z-index: 10;
    
 
 }
@@ -825,7 +835,7 @@ div.perfil {
     position: relative; /* Adicionado */
     /* margin: 10px; */
     box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.452);
-    z-index: 1;
+    z-index: 10;
     
 }
 
@@ -842,8 +852,8 @@ div#ahyeon, div#asa, div#chiquita, div#pharita, div#rami, div#rora, div#ruka{
     width: 95%; /* Ajuste a largura conforme necessário */
     /* Outros estilos como background-color, padding, etc. */
     text-align: left;
-    transform: translateX(-50%);
-    z-index: 1;
+   /*  transform: translateX(-50%); */
+    /* z-index: 5; */
 
 }
 
