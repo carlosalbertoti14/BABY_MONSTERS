@@ -25,7 +25,8 @@
 
 a {
     text-decoration: none;
-    color: var(--cor1);
+    color: var(--cor3);
+    font-weight: bolder;
 }
 
 h1{
