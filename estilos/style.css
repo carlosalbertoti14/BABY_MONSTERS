@@ -305,13 +305,13 @@ div.centrospan {
 }
 
 div.centrospan h2 {
-   color: white;
+   color: rgb(255, 255, 255);
    font-size: 2em;
 
 }
 
 div#vejatbm{
-    background-color: rgb(218, 136, 190);
+    background-color: rgba(10, 10, 10, 0.719);
     padding: 10px;
     border-radius: 10px;
     box-shadow: 5px 5px 7px black ;
@@ -908,7 +908,7 @@ p.brasil{
 
 section#perfil div{
     display: block;
-    z-index: 10;
+    z-index: 2;
    
 
 }
