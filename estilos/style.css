@@ -201,8 +201,8 @@ div.carrocel_bg {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 30px; /* Largura dos botões */
-    height: 30px; /* Altura dos botões */
+    width: 60px; /* Largura dos botões */
+    height: 60px; /* Altura dos botões */
     background-color: #ffffff8a; /* Cor de fundo dos botões */
     border-radius: 50%; /* Arredonda os cantos dos botões */
     color: #000; /* Cor do texto dos botões */
