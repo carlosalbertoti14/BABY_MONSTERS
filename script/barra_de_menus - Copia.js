@@ -17,8 +17,6 @@
             }
         });
 
-
-        /* inicio de conf do menu flutuante */
         function toggleMenu() {
     // Pega o elemento do menu flutuante pelo ID
     const dropdown = document.getElementById("myDropdown");
