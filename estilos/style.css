@@ -3,7 +3,7 @@
     --cor0: #eac5eb;
     --cor1: #e183dc;
     --cor2: #dc3ddc;
-    --cor3: #a82f9e;
+    --cor3: #c525b8;
     --cor4: #5c1a51;
     --cor5: #3d061d;
 
@@ -655,7 +655,7 @@ div#menu  > nav {
 }
 
 div#menu > nav a {
-    background-color: rgb(231, 37, 183);
+    background-color:var(--cor3);
     color: white;
     padding: 10px;
     /* width: auto; */ /* Mantém o ajuste da largura */
@@ -664,9 +664,12 @@ div#menu > nav a {
     text-decoration: none;
     text-align: center;
     min-width: 70px;
+    width: 100%;
+    margin-right: 5px;
 
 
 }
+
 
 
 
@@ -684,17 +687,18 @@ div#menu > nav a {
     }
 
 
-    div#menu  > nav a {
-      /*  width: auto;  *//* Mantém o ajuste da largura */
-       min-width: 40px;
-        padding: 5px 10px 5px 10px; /* Reduz o espaçamento */
-       /*  margin-left: 1px; */
-        font-size: 0.8em; /* Reduz o tamanho da fonte */
-     
-        /* text-align: center; */
+div#menu > nav a {
+    /* ... suas propriedades existentes ... */
+    min-width: 40px;
+    padding: 5px 5px 5px 5px;
+    font-size: 0.8em;
+    text-align: center;
+    display: inline-block; /* Importante para que height e padding funcionem como esperado */
 
-        
-    }
+    /* Alinhamento Vertical */
+    height: 30px; /* Defina uma altura fixa para o link */
+    line-height: 30px; /* Faça o line-height igual à altura */
+}
 
 
 
@@ -755,11 +759,12 @@ div#menu  > nav a:hover {
     position: relative; /* Essencial para posicionar o dropdown-menu em relação a ele */
     display: inline-block; /* Permite que ele se ajuste ao conteúdo */
     /* Você pode ajustar a margin-left aqui se quiser mais espaço entre "K-POP" e o ícone ☰ */
-    margin-left: 20px; /* Exemplo de espaçamento */
+    margin-left: 0px; /* Exemplo de espaçamento */
 }
 
 .menu-icon {
-    margin-right: 10px;
+    height: 30px;
+    margin-right: 5px;
     font-size: 25px; /* Tamanho do ícone */
     cursor: pointer;
     user-select: none;
