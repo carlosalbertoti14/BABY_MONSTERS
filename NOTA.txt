@@ -1,0 +1,237 @@
+VEJA ESSE É MEU SITE DE K-POP BABYMONSTER, ESSA PARTE É DE DISCOGRAFIA.
+
+
+CAPA DO ALBUM midia/
+OBS: NÃO ALTERE ESTRUTURA NEM CSS POIS JÁ ESTA TUDO PRONTO!
+
+ATUALIZE MANTENDO A MESMA ESTRUTURA PARA O NOVO ALBUM CHOOM
+
+                                    <p><strong>1 - "MONSTER"</strong></p>
+
+                                    <ul>
+                                        <li>
+
+                                            <abbr title="ASSISTIR NO YOUTUBE">
+                                                <a href="https://www.youtube.com/watch?v=0p29a9RQM1k" class="linkyt" target="_blank">
+                                                <img src="midia/YOUTUBE_LOGO_ORIGINAL.png" alt="YOUTUBE" class="youtube-icon">
+                                                <strong>"MONSTER"</strong>
+                                                </a>
+                                            </abbr>
+                                        
+                                        </li>
+                                        <li>
+                                            <abbr title="VER NO CIFRACLUB">
+                                                <a href="https://www.cifraclub.com.br/babymonster/monsters-intro/letra/" class="linkyt" target="_blank">
+                                                    <img id="letra" src="midia/LISTA_LOGO_ORIGINAL.png" alt="YOUTUBE" class="youtube-icon">
+                                                    <strong> "LETRA"</strong> - TRADUÇÃO
+                                                </a>
+                                            </abbr>
+                                        </li>
+                                    </ul>
+                                        
+                            </li>
+                        
+                            <li>
+                                
+                                <p><strong>2 - "SHEESH"</strong></p>
+                                <ul>
+                                    <li>
+                                        <abbr title="ASSISTIR NO YOUTUBE">
+                                            <a href="https://www.youtube.com/watch?v=2wA_b6YHjqQ" class="linkyt" target="_blank">
+                                                <img src="midia/YOUTUBE_LOGO_ORIGINAL.png" alt="YOUTUBE" class="youtube-icon">
+                                                    "SHEESH"</strong> - MOVIE
+                                            </a>
+                                        </abbr>
+                                    </li>
+                                    <li>
+                                        <abbr title="ASSISTIR NO YOUTUBE">
+                                            <a href="https://www.youtube.com/watch?v=kOanBE5Wg24" class="linkyt" target="_blank">
+                                                <img src="midia/YOUTUBE_LOGO_ORIGINAL.png" alt="YOUTUBE" class="youtube-icon">
+                                                <strong> "SHEESH"</strong> - PERFORMANCE VIDEO
+                                            </a>
+                                        </abbr>
+                                    </li>
+                                    <li>
+                                        <abbr title="VER NO CIFRACLUB">
+                                            <a href="https://www.cifraclub.com.br/babymonster/sheesh/letra/" class="linkyt" target="_blank">
+                                                <img id="letra" src="midia/LISTA_LOGO_ORIGINAL.png" alt="YOUTUBE" class="youtube-icon">
+                                                <strong> "LETRA"</strong> - TRADUÇÃO
+                                            </a>
+                                        </abbr>
+                                    </li>
+                                </ul>
+                            </li>
+                        
+                            <li>
+                                
+                                <p><strong>3 - "LIKE THAT"</strong></p>
+                                <ul>
+                                    <li>
+                                        <abbr title="ASSISTIR NO YOUTUBE">
+                                            <a href="https://www.youtube.com/watch?v=M8r3x4Re8-I&list=RDM8r3x4Re8-I&start_radio=1" class="linkyt" target="_blank">
+                                                <img src="midia/YOUTUBE_LOGO_ORIGINAL.png" alt="YOUTUBE" class="youtube-icon">
+                                                <strong> "LIKE THAT"</strong> - EXCLUSIVE PERFORMANCE VIDEO
+                                            </a>
+                                        </abbr>
+                                    </li>
+                                    <li>
+                                        <abbr title="ASSISTIR NO YOUTUBE">
+                                            <a href="https://www.youtube.com/watch?v=gnJOBNz1q0A" class="linkyt" target="_blank">
+                                                <img src="midia/YOUTUBE_LOGO_ORIGINAL.png" alt="YOUTUBE" class="youtube-icon">
+                                                <strong> "LIKE THAT"</strong> - DANCE PERFORMANCE VIDEO
+                                            </a>
+                                        </abbr>
+                                    </li>
+                                    <li>
+                                        <abbr title="VER NO CIFRACLUB">
+                                            <a href="https://www.cifraclub.com.br/babymonster/like-that/letra/" class="linkyt" target="_blank">
+                                                <img id="letra" src="midia/LISTA_LOGO_ORIGINAL.png" alt="YOUTUBE" class="youtube-icon">
+                                                <strong> "LETRA"</strong> - TRADUÇÃO
+                                            </a>
+                                        </abbr>
+                                    </li>
+                                </ul>
+                            </li>
+                        
+                            <li>
+                                
+                                <p><strong>4 - "Stuck In The Middle"</strong></p>
+                                <ul>
+                                    <li>
+                                        <abbr title="ASSISTIR NO YOUTUBE">
+                                            <a href="https://www.youtube.com/watch?v=GsV1i0QHi-o" class="linkyt" target="_blank">
+                                                <img src="midia/YOUTUBE_LOGO_ORIGINAL.png" alt="YOUTUBE" class="youtube-icon">
+                                                <strong> "Stuck In The Middle"</strong> - MOVIE
+                                            </a>
+                                        </abbr>
+                                    </li>
+                                    <li>
+                                        <abbr title="ASSISTIR NO YOUTUBE">
+                                            <a href="https://www.youtube.com/watch?v=KaM7ZxoGQuE" class="linkyt" target="_blank">
+                                                <img src="midia/YOUTUBE_LOGO_ORIGINAL.png" alt="YOUTUBE" class="youtube-icon">
+                                                <strong> "Stuck In The Middle"</strong> - LIVE STAGE
+                                            </a>
+                                        </abbr>
+                                    </li>
+                                    <li>
+                                        <abbr title="ASSISTIR NO YOUTUBE">
+                                            <a href="https://www.youtube.com/watch?v=25bsCHikkh4" class="linkyt" target="_blank">
+                                                <img src="midia/YOUTUBE_LOGO_ORIGINAL.png" alt="YOUTUBE" class="youtube-icon">
+                                                <strong> "Stuck In The Middle"</strong> - SPECIAL STAGE
+                                            </a>
+                                        </abbr>
+                                    </li>
+                                    <li>
+                                        <abbr title="VER NO CIFRACLUB">
+                                            <a href="https://www.cifraclub.com.br/babymonster/stuck-in-the-middle/letra/" class="linkyt" target="_blank">
+                                                <img id="letra" src="midia/LISTA_LOGO_ORIGINAL.png" alt="YOUTUBE" class="youtube-icon">
+                                                <strong> "LETRA"</strong> - TRADUÇÃO
+                                            </a>
+                                        </abbr>
+                                    </li>
+                                </ul>
+                            </li>
+                        
+                            <li>
+                                
+                                <p><strong>5 - "BATTER UP"</strong></p>
+                                <ul>
+                                    <li>
+                                        <abbr title="ASSISTIR NO YOUTUBE">
+                                            <a href="https://www.youtube.com/watch?v=olDWm2veCrM" class="linkyt" target="_blank">
+                                                <img src="midia/YOUTUBE_LOGO_ORIGINAL.png" alt="YOUTUBE" class="youtube-icon">
+                                                <strong> "BATTER UP"</strong> - MOVIE
+                                            </a>
+                                        </abbr>
+                                    </li>
+                                    <li>
+                                        <abbr title="ASSISTIR NO YOUTUBE">
+                                            <a href="https://www.youtube.com/watch?v=B17yoLxkbPA" class="linkyt" target="_blank">
+                                                <img src="midia/YOUTUBE_LOGO_ORIGINAL.png" alt="YOUTUBE" class="youtube-icon">
+                                                <strong> "BATTER UP"</strong> - DANCE PERFORMANCE (DEBUT SPECIAL)
+                                            </a>
+                                        </abbr>
+                                    </li>
+                                    <li>
+                                        <abbr title="ASSISTIR NO YOUTUBE">
+                                            <a href="https://www.youtube.com/watch?v=FinTVHCeYBo" class="linkyt" target="_blank">
+                                                <img src="midia/YOUTUBE_LOGO_ORIGINAL.png" alt="YOUTUBE" class="youtube-icon">
+                                                <strong> "BATTER UP"</strong> - LIVE PERFORMANCE (Stadium Ver.)
+                                            </a>
+                                        </abbr>
+                                    </li>
+                                    <li>
+                                        <abbr title="VER NO CIFRACLUB">
+                                            <a href="https://www.cifraclub.com.br/babymonster/batter-up/letra/" class="linkyt" target="_blank">
+                                                <img id="letra" src="midia/LISTA_LOGO_ORIGINAL.png" alt="YOUTUBE" class="youtube-icon">
+                                                <strong> "LETRA"</strong> - TRADUÇÃO
+                                            </a>
+                                        </abbr>
+                                    </li>
+                                </ul>
+                            </li>
+                        
+                            <li>
+                                                                
+                                
+                                <p><strong>6 - "DREAM"</strong></p>
+
+                                <ul>
+                                    <li>
+
+                                            <abbr title="ASSISTIR NO YOUTUBE">
+                                                <a href="https://www.youtube.com/watch?v=ynOtYmpZxak" class="linkyt" target="_blank">
+                                                    <img src="midia/YOUTUBE_LOGO_ORIGINAL.png" alt="YOUTUBE" class="youtube-icon">
+                                                    <strong> "DREAM"</strong> - (PRE-DEBUT SONG)
+                                                </a>
+                                            </abbr>
+
+
+                                    </li>
+                                    <li>
+                                        <abbr title="VER NO CIFRACLUB">
+                                            <a href="https://www.cifraclub.com.br/babymonster/dream/letra/" class="linkyt" target="_blank">
+                                                <img id="letra" src="midia/LISTA_LOGO_ORIGINAL.png" alt="YOUTUBE" class="youtube-icon">
+                                                <strong> "LETRA"</strong> - TRADUÇÃO
+                                            </a>
+                                        </abbr>
+                                    </li>
+                                </ul>
+                            </li>
+                                    
+                            <li>
+                                                                
+                                
+                                <p><strong>7 - "Stuck In The Middle"</strong></p>
+
+                                <ul>
+                                    <li>
+                                            <abbr title="ASSISTIR NO YOUTUBE">
+                                                <a href="https://www.youtube.com/watch?v=yqaPWM3LTwM" class="linkyt" target="_blank">
+                                                    <img src="midia/YOUTUBE_LOGO_ORIGINAL.png" alt="YOUTUBE" class="youtube-icon">
+                                                    <strong>7 - "Stuck In The Middle"</strong> - REMIX (SOMENTE ÁUDIO)
+                                                </a></abbr>
+                                    </li>
+                                    <li>
+                                        <abbr title="VER NO CIFRACLUB">
+                                            <a href="https://www.cifraclub.com.br/babymonster/stuck-in-the-middle-remix/letra/" class="linkyt" target="_blank">
+                                                <img id="letra" src="midia/LISTA_LOGO_ORIGINAL.png" alt="YOUTUBE" class="youtube-icon">
+                                                <strong> "LETRA"</strong> - TRADUÇÃO
+                                            </a>
+                                        </abbr>
+                                    </li>
+                                </ul>                               
+
+                                               
+                            </li>
+
+
+
+
+
+                        </ul>
+
+
+
+
+                    </DIV>
